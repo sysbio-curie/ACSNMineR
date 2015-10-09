@@ -1,3 +1,4 @@
+#!/bin/R
 ####### ACSN enrichment analysis
 
 enrichment<-function(Genes=NULL,
@@ -27,21 +28,39 @@ enrichment<-function(Genes=NULL,
     }
     
   }
-  else if (is.numeric(universe)){
+  else if(is.numeric(universe)){
     size = universe
   }
   else{
     stop("Invalid universe input: must be 'HUGO','ACSN', or numeric")
   }
+  ### Checking that gene list is unique
+  Genes<-unique(Genes)
+  Genes_size<-length(Genes)  
+  ### If ACSN universe, restrict Genes to the ones in ACSN?
+  
+  
   ### get from list how many are in each sub-compartment
   result<-data.frame()
   ### what would be the expected?
   for(map in maps){
-    modules<-map[,1]
+    keep<-map[,2]>=min_module_size
+    modules<-map[keep,1]
     if(statistical_test == "fisher"){
-      
+      p.values<-apply(map[keep,],margin = 1, FUN = function(z){
+        short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
+        Genes_in_module<-length(Genes %in% short_z)
+        fisher.test(x = matrix(c(Genes_in_module,
+                                 z[2]-Genes_in_module,
+                                 Genes_size - Genes_in_module,
+                                 universe - z[2]
+                                 nrow = 2)))$p.value
+        
+      })
+      result<-rbind(result,cbind(modules,p.values))
     }
   }
+  return(result)
 }
 
 represent_enrichment<-function(enrichment){
