@@ -21,7 +21,8 @@ enrichment<-function(Genes=NULL,
     for(lt in maps){
       ### extract modules of size >= module_size
       
-      genes<-unique(lapply(X = maps, FUN = function(z){z[,-(1:2)]}))
+      genes<-unique(c(genes,as.character(lt[,-c(1,2)])))
+      print(head(genes))
       genes<-genes[genes != ""]
       size <- length(genes)
       print(size)
@@ -47,16 +48,18 @@ enrichment<-function(Genes=NULL,
     keep<-map[,2]>=min_module_size
     modules<-map[keep,1]
     if(statistical_test == "fisher"){
-      p.values<-apply(map[keep,],margin = 1, FUN = function(z){
+      p.values<-apply(map[keep,],MARGIN = 1, FUN = function(z){
         short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
+        num<-as.numeric(as.character(z[2]))
         Genes_in_module<-length(Genes %in% short_z)
         fisher.test(x = matrix(c(Genes_in_module,
-                                 z[2]-Genes_in_module,
+                                 num-Genes_in_module,
                                  Genes_size - Genes_in_module,
-                                 universe - z[2]
-                                 nrow = 2)))$p.value
+                                 size - num),
+                                 nrow = 2))$p.value
         
       })
+      print(head(p.values))
       result<-rbind(result,cbind(modules,p.values))
     }
   }
