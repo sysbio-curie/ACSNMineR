@@ -29,11 +29,13 @@ enrichment<-function(Genes=NULL,
     }
     
   }
-  else if(is.numeric(universe)){
-    size = universe
+  else if(is.character(universe)){
+    size = length(unique(universe))
+    ### Change maps so that they only have gene names from universe
+    
   }
   else{
-    stop("Invalid universe input: must be 'HUGO','ACSN', or numeric")
+    stop("Invalid universe input: must be 'HUGO','ACSN', or a gene list")
   }
   ### Checking that gene list is unique
   Genes<-unique(Genes)
@@ -71,13 +73,23 @@ represent_enrichment<-function(enrichment){
 }
 
 format_from_gmt<-function(path = ""){
-  gmt<-read.csv(path,header = FALSE, sep = "\t")
+  max_length<-max(sapply(X=readLines(path),FUN = function(z){
+    z2<-gsub("\t","",z)
+    return(nchar(z)-nchar(z2))
+  }))
+  gmt<-read.csv(path,header = FALSE, 
+                sep = "\t",fill = TRUE,
+                col.names = sapply(X = 1:max_length,
+                                   FUN = function(z){
+                                     paste("V",z,sep="")
+                                   }))
+  
   result<-t(apply(gmt,1,FUN = function(z){
-          pos<-grep(pattern = "\\*",x = z)
-          res<-z
-          res[pos]<-""
-          return(res)
-          }))
+    pos<-grep(pattern = "\\*",x = z)
+    res<-z
+    res[pos]<-""
+    return(res)
+  }))
   result[,2]<-apply(result[,-(1:2)], 1, FUN = function(z) sum(z!=""))
   return(result)
 }
