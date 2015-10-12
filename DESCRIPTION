@@ -1,12 +1,12 @@
-Package: ACSN_Enrichment
+Package: ACSNEnrichment
 Type: Package
 Title: Gene enrichment analysis from ACSN maps or gmt files
 Version: 0.9
 Date: 2015-10-06
 Author: Eric BONNET, Paul DEVEAU
 Maintainer: Eric BONNET <eric.bonnet@curie.fr>; Paul DEVEAU <paul.deveau@curie.fr>
-Description: More about what it does (maybe more than one line)
-Depends: R (>= 3.1.0), 
-Suggests:   ggplot2,
+Description: Compute and represent gene set enrichment from your data based on pre-saved maps from ACSN or user imported maps. The gene set enrichment can be run with hypergeometric test or Fisher exact test, and can use multiple corrections. Visualization of data can be done either by barplots or heatmaps. 
+Depends: R (>= 3.1.0)
+Suggests: ggplot2, gridExtra
 License: GPL-2
 LazyData: true
