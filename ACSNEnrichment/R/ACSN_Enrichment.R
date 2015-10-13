@@ -5,7 +5,7 @@
 #' @title Gene enrichment analysis from ACSN maps or gmt files
 #' @description Compute and represent gene set enrichment from your data based on pre-saved maps from ACSN or user imported maps. The gene set enrichment can be run with hypergeometric test or Fisher exact test, 
 #' and can use multiple corrections. Visualization of data can be done either by barplots or heatmaps.
-#' @author Eric Bonnet <eric.bonnet at curie.fr>, Paul Deveau <paul.deveau at curie.fr!>
+#' @author Eric Bonnet <eric.bonnet at curie.fr>, Paul Deveau <paul.deveau at curie.fr>
 
 #' Gene set enrichment analysis
 #' @param Genes Character vector of genes that should be tested for enrichment
@@ -17,16 +17,11 @@
 #' @param threshold : maximal p-value (corrected if correction is enabled) that will be displayed
 #' @export
 enrichment<-function(Genes=NULL,
-                     maps = list(Apoptosis = ACSN_apop_formatted,
-                                 CellCycle = ACSN_cellcyc_formatted,
-                                 DNA_repair = ACSN_dnarep_formatted,
-                                 EMT_motility = ACSN_emtmotil_formatted,
-                                 ACSN_master = ACSN_master_formatted,
-                                 Survival = ACSN_survival_formatted), 
-                     correction_multitest = FALSE,
+                     maps = ACSN_maps, 
+                     correction_multitest = "BH",
                      statistical_test = "fisher",
                      min_module_size = 5,
-                     universe = "HUGO",
+                     universe = "ACSN",
                      threshold = 1){
   ### Checking maps
   if(is.data.frame(maps)){
@@ -202,16 +197,11 @@ enrichment<-function(Genes=NULL,
 #' @export
 
 multisample_enrichment<-function(Genes_by_sample=NULL,
-                                 maps = list(ACSN_apop_formatted,
-                                             ACSN_cellcyc_formatted,
-                                             ACSN_dnarep_formatted,
-                                             ACSN_emtmotil_formatted,
-                                             ACSN_master_formatted,
-                                             ACSN_survival_formatted), 
-                                 correction_multitest = FALSE,
+                                 maps = ACSN_maps, 
+                                 correction_multitest = "BH",
                                  statistical_test = "fisher",
                                  min_module_size = 5,
-                                 universe = "HUGO",
+                                 universe = "ACSN",
                                  individual_threshold = 1,
                                  cohort_threshold = 1){
   
@@ -320,26 +310,90 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
       
       ### check if there is a need to add NAs for modules which are not present in all datasets
       all_equal<-TRUE
-      modules<-enrichment[[1]]$module
+      modules<-as.character(enrichment[[1]]$module)
       for(sample in enrichment){
-        if(!isTRUE(all.equal.character(target = modules,current = sample$module))){
+        if(!setequal(modules,as.character(sample$module))){
           all_equal<-FALSE
           modules<-unique(c(modules,sample$module))
         }
       }
-      
-      
+      tracker<-0
       if(all_equal){
-        dataset<-cbind(modules,)  
         
+        for(sample in enrichment){ ### Modules are present in all samples
+          tracker<-tracker+1
+          if("p.value.corrected" %in% colnames(sample)){
+            dataset<-rbind(dataset, cbind(modules,sample_names[tracker],sample$p.value.corrected))
+          }
+          else if("p.value" %in% colnames(sample)){
+            dataset<-rbind(dataset, cbind(modules,sample_names[tracker],sample$p.value))
+          }
+          else{
+            warning(paste("Element", sample_names[tracker],"has no p.value column"))
+            return(NA)
+          }
+        }
+        colnames(dataset)<-c("module","sample_name","p.values")
+      }
+      else{ ###need to fill with NAs
+        ### Not functional yet
+        
+        for(sample in enrichment){
+          tracker<-tracker + 1
+          print(head(modules))
+          print(head(as.character(sample$module)))
+          test<-modules %in% as.character(sample$module)
+          print(test)
+          restricted_modules<-as.character(modules[test])
+          print(restricted_modules)
+          position_modules<-as.numeric(sapply(X = restricted_modules,FUN = function(z){
+            which(sample$module ==z)
+          }))
+          complement<-as.character(modules[!test])
+          if("p.value.corrected" %in% colnames(sample)){ ### 
+            print(cbind(module = complement, 
+                        sample_name = sample_names[tracker],
+                        p.values = NA))
+            spare_dataset<-rbind(cbind(module = restricted_modules, sample_name = sample_names[tracker], 
+                                       p.values = sample$p.value.corrected[position_modules]),
+                                 cbind(module = complement, 
+                                       sample_name = sample_names[tracker],
+                                       p.values = NA))
+            colnames(spare_dataset)<-c("module","sample_name","p.values")
+            dataset<-rbind(dataset, spare_dataset)
+          }
+          else if("p.value" %in% colnames(sample)){ ### 
+            spare_dataset<-rbind(cbind(restricted_modules, sample_names[tracker], sample$p.value[position_modules]),
+                                 cbind(complement_modules, sample_names[tracker],NA))
+            colnames(spare_dataset)<-c("module","sample_name","p.values")
+            dataset<-rbind(dataset, spare_dataset)
+          } else{
+            warning(paste("Element", sample_names[tracker],"has no p.value column"))
+            return(NA)
+          }
+        }
+      }
+      ### Plot heatmap
+      q<-ggplot2::ggplot(dataset,
+                         aes_string(x= "sample_name",
+                                    y = "module", 
+                                    fill = "p.values"))+ggplot2::xlab("")+ ggplot2::ylab("Modules") + ggplot2::geom_tile()
+      if(scale == "log"){
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log")
       }
       else{
-        
+        q<-q+ ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value)
       }
-      
     }
     else{ ### barplot with grid
+      plot<-c()
+      names_sample<-names(enrichment)
+      for(s in 1:length(enrichment)){
+        plot<-c(plot,represent_enrichment(enrichment[[s]], plot = "bar" , scale = scale, 
+                                          sample_name = names_sample[s]))
+      }
       
+      return(gridExtra::grid.arrange(plot),nrow = nrow)
       
     }
     
@@ -383,6 +437,6 @@ format_from_gmt<-function(path = ""){
   
   
   result[,2]<-apply(result[,-(1:2)], 1, FUN = function(z) sum(z!=""))
-
+  
   return(result)
 }
