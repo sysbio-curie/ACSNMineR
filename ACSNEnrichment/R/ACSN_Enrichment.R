@@ -15,7 +15,7 @@
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN"( identical to "map_defined"), or a character vector of genes.
 #' @param threshold : maximal p-value (corrected if correction is enabled) that will be displayed
-#' @example enrichment(genes_test,min_module_size = 10, threshold = 0.05, maps = list(cellcycle = ACSN_cellcyc_formatted))
+#' @examples enrichment(genes_test,min_module_size = 10, threshold = 0.05, maps = list(cellcycle = ACSN_cellcyc_formatted))
 #' @export
 enrichment<-function(Genes=NULL,
                      maps = ACSN_maps, 
@@ -259,7 +259,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
 #'@param high Color to be used in heatmap mode corresponding to highest value
 #'@param nrow Number of rows of the grid for display in bar mode.
 #'@param sample_name : used only is enrichment is a dataframe
-#'@example represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log")
+#'@examples represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log")
 #'@import ggplot2 gridExtra
 #'
 represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log", 
@@ -410,29 +410,20 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
     }
     else{ ### barplot with grid
       names_sample<-names(enrichment)
+      plot<-list()
       for(s in 1:length(enrichment)){
-        if(s==1){
-          plot<-represent_enrichment(enrichment[[s]], plot = "bar" , 
-                                     scale = scale, 
-                                     sample_name = names_sample[s])
-        }
-        else{
-          plot<-c(plot,represent_enrichment(enrichment[[s]], plot = "bar" , 
-                                            scale = scale, 
-                                            sample_name = names_sample[s]))
-        }
+        plot[[s]]<-represent_enrichment(enrichment[[s]], plot = "bar" , 
+                                        scale = scale, 
+                                        sample_name = names_sample[s])
         
-        print(plot[[s]])
       }
-      if(length(enrichment)%%nrow ==0){
-        ncol <- length(enrichment)/nrow
-      }
-      else{
-        ncol <- floor(length(enrichment)/nrow)+1
-      }
-      return(plot)
-      plots<-gridExtra::arrangeGrob(grobs = plot,nrow =  nrow)
-      
+#       if(length(plot)%%nrow ==0){
+#         ncol <- length(enrichment)/nrow
+#       }
+#       else{
+#         ncol <- floor(length(enrichment)/nrow)+1
+#       }
+      return(do.call(gridExtra::grid.arrange, c(plot, nrow=nrow)))
     }
     
   }

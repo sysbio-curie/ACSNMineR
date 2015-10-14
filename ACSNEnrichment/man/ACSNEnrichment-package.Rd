@@ -1,24 +1,24 @@
-\name{ACSN_Enrichment-package}
-\alias{ACSN_Enrichment-package}
-\alias{ACSN_Enrichment}
+\name{ACSNEnrichment-package}
+\alias{ACSNEnrichment-package}
+\alias{ACSNEnrichment}
 \docType{package}
-\title{
-\packageTitle{ACSN_Enrichment}
+\title{ACSNEnrichment}
+\packageTitle{ACSNEnrichment}
 }
 \description{
-\packageDescription{ACSN_Enrichment}
+\packageDescription{ACSNEnrichment}
 }
 \details{
 
 The DESCRIPTION file:
-\packageDESCRIPTION{ACSN_Enrichment}
-\packageIndices{ACSN_Enrichment}
+\packageDESCRIPTION{ACSNEnrichment}
+\packageIndices{ACSNEnrichment}
 ~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
-\packageAuthor{ACSN_Enrichment}
+\packageAuthor{ACSNEnrichment}
 
-Maintainer: \packageMaintainer{ACSN_Enrichment}
+Maintainer: \packageMaintainer{ACSNEnrichment}
 }
 \references{
 ~~ Literature or other references for background information ~~
