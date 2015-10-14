@@ -13,15 +13,16 @@
 #' @param correction_multitest either FALSE, "bonferroni", "holm", "hochberg", "hommel", "BH", "fdr" (identical to BH), or "BY"
 #' @param statistical test one of "fisher", "hypergeom"
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
-#' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN", or a character vector of genes.
+#' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN"( identical to "map_defined"), or a character vector of genes.
 #' @param threshold : maximal p-value (corrected if correction is enabled) that will be displayed
+#' @example enrichment(genes_test,min_module_size = 10, threshold = 0.05, maps = list(cellcycle = ACSN_cellcyc_formatted))
 #' @export
 enrichment<-function(Genes=NULL,
                      maps = ACSN_maps, 
                      correction_multitest = "BH",
                      statistical_test = "fisher",
                      min_module_size = 5,
-                     universe = "ACSN",
+                     universe = "map_defined",
                      threshold = 1){
   ### Checking maps
   if(is.data.frame(maps)){
@@ -46,7 +47,7 @@ enrichment<-function(Genes=NULL,
     size = 39480
   }
   
-  else if(universe == "ACSN"){
+  else if(universe == "ACSN" | universe == "map_defined"){
     genesACSN<-character()
     iterator<-0
     for(lt in maps){
@@ -125,7 +126,7 @@ enrichment<-function(Genes=NULL,
     if(statistical_test == "fisher"){
       p.values<-apply(map,MARGIN = 1, FUN = function(z){
         short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
-        num<-as.numeric(as.character(z[2]))
+        num<-cnum(z[2])
         test<-Genes %in% short_z
         Gene_set<-paste(Genes[test],collapse = " ")
         Genes_in_module<-sum(test)
@@ -139,7 +140,7 @@ enrichment<-function(Genes=NULL,
     }else if(statistical_test == "hypergeom"){
       p.values<-apply(map,MARGIN = 1, FUN = function(z){
         short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
-        num<-as.numeric(as.character(z[2]))
+        num<-cnum(z[2])
         test<-Genes %in% short_z
         Genes_in_module<-sum(test)
         Gene_set<-paste(Genes[test],collapse = " ")
@@ -157,8 +158,11 @@ enrichment<-function(Genes=NULL,
     result<-rbind(result,cbind(modules,t(p.values)))
   }
   colnames(result)<-c("module","module_size","genes_in_module","p.value")
+  result$p.value<-cnum(result$p.value)
+  result$universe_size<-size
+  result$genes_in_universe<-Genes_size
   if(is.logical(correction_multitest)){
-    result<-result[as.numeric(as.character(result$p.value)) <= threshold,]
+    result<-result[cnum(result$p.value) <= threshold,]
     if(!correction_multitest){
       return(result)
     }
@@ -169,7 +173,7 @@ enrichment<-function(Genes=NULL,
   }
   else{
     if(correction_multitest %in% c("bonferroni", "holm", "hochberg", "hommel", "BH", "fdr", "BY")){
-      result$p.value.corrected<-p.adjust(as.numeric(as.character(result$p.value)),method = correction_multitest)
+      result$p.value.corrected<-p.adjust(cnum(result$p.value),method = correction_multitest)
       result<-result[result$p.value.corrected <= threshold,]
       return(result)
     }
@@ -191,7 +195,7 @@ enrichment<-function(Genes=NULL,
 #' @param correction_multitest either FALSE, "bonferroni", "holm", "hochberg", "hommel", "BH", "fdr" (identical to BH), or "BY"
 #' @param statistical test one of "fisher", "hypergeom"
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
-#' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN", or a character vector of genes.
+#' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN" (identical to "map_defined"), or a character vector of genes.
 #' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param cohort_threshold: if TRUE modules will be kept in all samples if at least one sample has p-value lower than threshold, otherwise the threshold is applied for each sample independently.
 #' @export
@@ -201,7 +205,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                  correction_multitest = "BH",
                                  statistical_test = "fisher",
                                  min_module_size = 5,
-                                 universe = "ACSN",
+                                 universe = "map_defined",
                                  individual_threshold = 1,
                                  cohort_threshold = 1){
   
@@ -255,6 +259,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
 #'@param high Color to be used in heatmap mode corresponding to highest value
 #'@param nrow Number of rows of the grid for display in bar mode.
 #'@param sample_name : used only is enrichment is a dataframe
+#'@example represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log")
 #'@import ggplot2 gridExtra
 #'
 represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log", 
@@ -275,7 +280,7 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
       return(NA)
     }
     enrichment$sample_name<-sample_name 
-    enrichment$p.values<-as.numeric(as.character(enrichment$p.values))
+    enrichment$p.values<-cnum(enrichment$p.values)
     if(plot == "heatmap"){
       
       q<-ggplot2::ggplot(enrichment,
@@ -297,7 +302,8 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         q<- q + ggplot2::scale_y_continuous(trans = "log")
       }
     }    
-    q<-q+ggplot2::theme_bw()+ggplot2::theme_bw()+ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 0))
+    q<-q+ggplot2::theme_minimal()+ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 0), axis.ticks = ggplot2::element_blank())
+    q<-q+ggplot2::geom_bar(stat = "identity")
   }
   else if(is.list(enrichment)){
     sample_names<-names(enrichment)
@@ -314,7 +320,7 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
       for(sample in enrichment){
         if(!setequal(modules,as.character(sample$module))){
           all_equal<-FALSE
-          modules<-unique(c(modules,sample$module))
+          modules<-unique(c(modules,as.character(sample$module)))
         }
       }
       tracker<-0
@@ -323,10 +329,10 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         for(sample in enrichment){ ### Modules are present in all samples
           tracker<-tracker+1
           if("p.value.corrected" %in% colnames(sample)){
-            dataset<-rbind(dataset, cbind(modules,sample_names[tracker],sample$p.value.corrected))
+            dataset<-rbind(dataset, cbind(modules,sample_names[tracker],cnum(sample$p.value.corrected)))
           }
           else if("p.value" %in% colnames(sample)){
-            dataset<-rbind(dataset, cbind(modules,sample_names[tracker],sample$p.value))
+            dataset<-rbind(dataset, cbind(modules,sample_names[tracker],cnum(sample$p.value)))
           }
           else{
             warning(paste("Element", sample_names[tracker],"has no p.value column"))
@@ -340,39 +346,55 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         
         for(sample in enrichment){
           tracker<-tracker + 1
-          print(head(modules))
-          print(head(as.character(sample$module)))
+
           test<-modules %in% as.character(sample$module)
-          print(test)
           restricted_modules<-as.character(modules[test])
-          print(restricted_modules)
           position_modules<-as.numeric(sapply(X = restricted_modules,FUN = function(z){
             which(sample$module ==z)
           }))
-          complement<-as.character(modules[!test])
-          if("p.value.corrected" %in% colnames(sample)){ ### 
-            print(cbind(module = complement, 
-                        sample_name = sample_names[tracker],
-                        p.values = NA))
-            spare_dataset<-rbind(cbind(module = restricted_modules, sample_name = sample_names[tracker], 
-                                       p.values = sample$p.value.corrected[position_modules]),
-                                 cbind(module = complement, 
-                                       sample_name = sample_names[tracker],
-                                       p.values = NA))
+          
+          if(sum(!test)>0){ ### complement only when necessary
+            complement<-as.character(modules[!test])
+            if("p.value.corrected" %in% colnames(sample)){ ### 
+             
+              spare_dataset<-rbind(cbind(module = restricted_modules, sample_name = sample_names[tracker], 
+                                         p.values = cnum(sample$p.value.corrected[position_modules])),
+                                   cbind(module = complement, 
+                                         sample_name = sample_names[tracker],
+                                         p.values = NA))
+
+            }
+            else if("p.value" %in% colnames(sample)){ ### 
+              spare_dataset<-rbind(cbind(restricted_modules, sample_names[tracker], cnum(sample$p.value[position_modules])),
+                                   cbind(complement_modules, sample_names[tracker],NA))
+
+            } else{
+              warning(paste("Element", sample_names[tracker],"has no p.value column"))
+              return(NA)
+            }
             colnames(spare_dataset)<-c("module","sample_name","p.values")
             dataset<-rbind(dataset, spare_dataset)
           }
-          else if("p.value" %in% colnames(sample)){ ### 
-            spare_dataset<-rbind(cbind(restricted_modules, sample_names[tracker], sample$p.value[position_modules]),
-                                 cbind(complement_modules, sample_names[tracker],NA))
+          else{ ### rbind dataframe with values
+            if("p.value.corrected" %in% colnames(sample)){ ### 
+             
+              spare_dataset<-cbind(module = restricted_modules, sample_name = sample_names[tracker], 
+                                         p.values = cnum(sample$p.value.corrected[position_modules]))
+                                
+            }
+            else if("p.value" %in% colnames(sample)){ ### 
+              spare_dataset<-cbind(restricted_modules, sample_names[tracker], cnum(sample$p.value[position_modules]))
+            } else{
+              warning(paste("Element", sample_names[tracker],"has no p.value column"))
+              return(NA)
+            }
             colnames(spare_dataset)<-c("module","sample_name","p.values")
             dataset<-rbind(dataset, spare_dataset)
-          } else{
-            warning(paste("Element", sample_names[tracker],"has no p.value column"))
-            return(NA)
+            
           }
         }
       }
+      dataset$p.values<-cnum(dataset$p.values)
       ### Plot heatmap
       q<-ggplot2::ggplot(dataset,
                          aes_string(x= "sample_name",
@@ -384,16 +406,32 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
       else{
         q<-q+ ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value)
       }
+      q<-q+ggplot2::theme_minimal()+ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 0), axis.ticks = ggplot2::element_blank())
     }
     else{ ### barplot with grid
-      plot<-c()
       names_sample<-names(enrichment)
       for(s in 1:length(enrichment)){
-        plot<-c(plot,represent_enrichment(enrichment[[s]], plot = "bar" , scale = scale, 
-                                          sample_name = names_sample[s]))
+        if(s==1){
+          plot<-represent_enrichment(enrichment[[s]], plot = "bar" , 
+                                     scale = scale, 
+                                     sample_name = names_sample[s])
+        }
+        else{
+          plot<-c(plot,represent_enrichment(enrichment[[s]], plot = "bar" , 
+                                            scale = scale, 
+                                            sample_name = names_sample[s]))
+        }
+        
+        print(plot[[s]])
       }
-      
-      return(gridExtra::grid.arrange(plot),nrow = nrow)
+      if(length(enrichment)%%nrow ==0){
+        ncol <- length(enrichment)/nrow
+      }
+      else{
+        ncol <- floor(length(enrichment)/nrow)+1
+      }
+      return(plot)
+      plots<-gridExtra::arrangeGrob(grobs = plot,nrow =  nrow)
       
     }
     
@@ -407,9 +445,14 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
   
 }
 
+#' Convert to numeric
+cnum<-function(x){
+  return(as.numeric(as.character(x)))
+}
 
-#### Import data from gmt files #### 
-#'@title Pre-processing data
+
+#' Import data from gmt files
+#' Convert gmt file to dataframe that can be used for anaysis
 #'@param path Path to the gmt file to be imported
 #'@export
 
