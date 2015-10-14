@@ -28,6 +28,7 @@ The gene set that was used for tests is the following:
 
 Gene set enrichment for a single set can be performed by calling:
 > enrichment(genes_test,min_module_size = 10, threshold = 0.05, maps = list(cellcycle = ACSN_cellcyc_formatted))
+
 Where:
 *min_module_size is the minimal size of a module to be taken into account
 *threshold is the maximal p-value that will be displayed in the results (all modules with p-values higher than threshold will be removed)
