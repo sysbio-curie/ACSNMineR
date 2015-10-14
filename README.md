@@ -8,6 +8,7 @@ This package is designed for an easy analysis of gene maps (either user imported
 Its aim is to allow a statistical analysis of statistically enriched or depleted pathways from a user imported gene list, as well as a graphic representation of results.
 
 This readme contains:
+
   [1. This description](#IIA)
 
   [2. Usage section](#IIB)
