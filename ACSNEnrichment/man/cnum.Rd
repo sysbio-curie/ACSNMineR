@@ -6,6 +6,9 @@
 \usage{
 cnum(x)
 }
+\arguments{
+\item{x}{A vector of numbers which is not in numeric format}
+}
 \description{
 Convert to numeric
 }

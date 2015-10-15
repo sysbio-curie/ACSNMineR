@@ -2,7 +2,8 @@
 % Please edit documentation in R/ACSN_Enrichment.R
 \name{format_from_gmt}
 \alias{format_from_gmt}
-\title{Pre-processing data}
+\title{Import data from gmt files
+Convert gmt file to dataframe that can be used for anaysis}
 \usage{
 format_from_gmt(path = "")
 }
@@ -10,6 +11,7 @@ format_from_gmt(path = "")
 \item{path}{Path to the gmt file to be imported}
 }
 \description{
-Pre-processing data
+Import data from gmt files
+Convert gmt file to dataframe that can be used for anaysis
 }
 

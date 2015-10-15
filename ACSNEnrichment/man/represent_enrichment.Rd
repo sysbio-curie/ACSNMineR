@@ -22,9 +22,15 @@ The name of the dataframe will be used as sample name.}
 
 \item{nrow}{Number of rows of the grid for display in bar mode.}
 
-\item{sample_name}{: used only is enrichment is a dataframe}
+\item{sample_name}{used only is enrichment is a dataframe}
+
+\item{na.value}{color for the missing values in the heatmap}
 }
 \description{
 Graphic representation of enrichment
+}
+\examples{
+represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,],
+SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log")
 }
 
