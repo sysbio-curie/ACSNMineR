@@ -1,7 +1,9 @@
 language: R
-sudo: 
-  - cd ./ACSNEnrichment
-  - required
+
+before install:
+  - cd ACSNEnrichment  
+  
+sudo: required
  
 warnings_are_errors: true
 
