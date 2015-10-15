@@ -115,6 +115,18 @@ enrichment<-function(Genes=NULL,
     stop("Invalid universe input: must be 'HUGO','ACSN', or a gene list")
   }
   
+  if(length(Genes)==0){
+    warning("No genes in universe.")
+    result<-data.frame()
+    result$module<-"master"
+    result$module_size<-size
+    result$genes_in_module<-0
+    result$p.value<-1
+    return(result)
+  }
+  
+  #### Begin calculation of p-values
+  
   ### get from list how many are in each sub-compartment
   result<-data.frame()
   ### what would be the expected?
@@ -126,9 +138,42 @@ enrichment<-function(Genes=NULL,
   for(map in maps){
     tracker <- tracker + 1
     modules<-map[,1:2]
+    
+    ### Calculate p-value for map as a whole if map is not ACSN_master
+    if(map_names[tracker]!="ACSN_master" & !is.data.frame(maps) & length(maps)>1){
+      mapgenes<-unique(as.character(map[,-c(1:2)]))
+      mapgenes<-mapgenes[mapgenes!=""]
+      mapsize<-length(mapgenes)
+      genes_in_mapgenes<-(Genes %in% mapgenes)
+      num<-sum( genes_in_mapgenes)
+      if(statistical_test == "fisher"){
+        p.values<-fisher.test(x= matrix(c(num,
+                                          mapsize-num,
+                                          Genes_size-num,
+                                          size - mapsize),
+                                        nrow = 2))$p.value
+        
+      }
+      else if(statistical_test == "hypergeom"){
+        p.values<-phyper(q = num,
+                         m = mapsize,
+                         n = size - mapsize,
+                         k = length(Genes),
+                         lower.tail = FALSE)
+      }
+      spare<-cbind(map_names[tracker],
+                   mapsize,
+                   paste(Genes[genes_in_mapgenes],collapse = " "),
+                   p.values)
+      colnames(spare)<-c("module","module_size","genes_in_module","p.value")
+      result<-rbind(result,spare)
+    }
+    
+    
     if(length(maps)>1){
       modules[,1]<-paste(map_names[tracker],modules[,1],sep=":")
     }
+    #### Calculation for modules
     if(statistical_test == "fisher"){
       p.values<-apply(map,MARGIN = 1, FUN = function(z){
         short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
@@ -161,9 +206,10 @@ enrichment<-function(Genes=NULL,
         
       })
     }
-    result<-rbind(result,cbind(modules,t(p.values)))
+    spare<-cbind(modules,t(p.values))
+    colnames(spare)<-c("module","module_size","genes_in_module","p.value")
+    result<-rbind(result,spare)
   }
-  colnames(result)<-c("module","module_size","genes_in_module","p.value")
   result$p.value<-cnum(result$p.value)
   result$universe_size<-size
   result$genes_in_universe<-Genes_size
@@ -356,7 +402,7 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         
         for(sample in enrichment){
           tracker<-tracker + 1
-
+          
           test<-modules %in% as.character(sample$module)
           restricted_modules<-as.character(modules[test])
           position_modules<-as.numeric(sapply(X = restricted_modules,FUN = function(z){
@@ -366,18 +412,18 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
           if(sum(!test)>0){ ### complement only when necessary
             complement<-as.character(modules[!test])
             if("p.value.corrected" %in% colnames(sample)){ ### 
-             
+              
               spare_dataset<-rbind(cbind(module = restricted_modules, sample_name = sample_names[tracker], 
                                          p.values = cnum(sample$p.value.corrected[position_modules])),
                                    cbind(module = complement, 
                                          sample_name = sample_names[tracker],
                                          p.values = NA))
-
+              
             }
             else if("p.value" %in% colnames(sample)){ ### 
               spare_dataset<-rbind(cbind(restricted_modules, sample_names[tracker], cnum(sample$p.value[position_modules])),
                                    cbind(complement, sample_names[tracker],NA))
-
+              
             } else{
               warning(paste("Element", sample_names[tracker],"has no p.value column"))
               return(NA)
@@ -387,10 +433,10 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
           }
           else{ ### rbind dataframe with values
             if("p.value.corrected" %in% colnames(sample)){ ### 
-             
+              
               spare_dataset<-cbind(module = restricted_modules, sample_name = sample_names[tracker], 
-                                         p.values = cnum(sample$p.value.corrected[position_modules]))
-                                
+                                   p.values = cnum(sample$p.value.corrected[position_modules]))
+              
             }
             else if("p.value" %in% colnames(sample)){ ### 
               spare_dataset<-cbind(restricted_modules, sample_names[tracker], cnum(sample$p.value[position_modules]))
@@ -427,12 +473,12 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
                                         sample_name = names_sample[s])
         
       }
-#       if(length(plot)%%nrow ==0){
-#         ncol <- length(enrichment)/nrow
-#       }
-#       else{
-#         ncol <- floor(length(enrichment)/nrow)+1
-#       }
+      #       if(length(plot)%%nrow ==0){
+      #         ncol <- length(enrichment)/nrow
+      #       }
+      #       else{
+      #         ncol <- floor(length(enrichment)/nrow)+1
+      #       }
       return(do.call(gridExtra::grid.arrange, c(plot, nrow=nrow)))
     }
     
