@@ -1,14 +1,20 @@
-language: R
+language: c
 
-before install:
-  - cd ACSNEnrichment  
-  
-sudo: required
- 
-warnings_are_errors: true
+before_install:
+  - cd ACSNEnrichment
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - ./travis-tool.sh bootstrap
 
-r_github_packages:
-  - jimhester/covr
+install:
+  - ./travis-tool.sh install_deps
 
-after_success:
-  - Rscript -e 'covr::codecov()'
+script: ./travis-tool.sh run_tests
+
+after_failure:
+  - ./travis-tool.sh dump_logs
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
