@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/sysbio-curie/ACSN_Enrichment.svg?branch=master)](https://travis-ci.org/sysbio-curie/ACSN_Enrichment)
 # <a name="I">ACSN Enrichment</a>
 
 
