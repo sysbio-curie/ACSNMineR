@@ -121,6 +121,9 @@ enrichment<-function(Genes=NULL,
     result$module<-"master"
     result$module_size<-size
     result$genes_in_module<-0
+    result$nb_genes_in_module<-0
+    result$universe_size<-size
+    result$nb_genes_in_universe<-0
     result$p.value<-1
     return(result)
   }
@@ -164,8 +167,11 @@ enrichment<-function(Genes=NULL,
       spare<-cbind(map_names[tracker],
                    mapsize,
                    paste(Genes[genes_in_mapgenes],collapse = " "),
+                   num,
                    p.values)
-      colnames(spare)<-c("module","module_size","genes_in_module","p.value")
+      
+      colnames(spare)<-c("module","module_size","genes_in_module",
+                         "nb_genes_in_module","p.value")
       result<-rbind(result,spare)
     }
     
@@ -181,7 +187,7 @@ enrichment<-function(Genes=NULL,
         test<-Genes %in% short_z
         Gene_set<-paste(Genes[test],collapse = " ")
         Genes_in_module<-sum(test)
-        return(c(Gene_set,fisher.test(x = matrix(c(Genes_in_module,
+        return(c(Gene_set,Genes_in_module,fisher.test(x = matrix(c(Genes_in_module,
                                                    num-Genes_in_module,
                                                    Genes_size - Genes_in_module,
                                                    size - num),
@@ -198,7 +204,7 @@ enrichment<-function(Genes=NULL,
         if(Genes_in_module > 0){ ### Correction for depletion: phyper tests for P[X<=x]
           Genes_in_module<-Genes_in_module-1 
         }
-        return(c(Gene_set,phyper(q = Genes_in_module,
+        return(c(Gene_set,Genes_in_module,phyper(q = Genes_in_module,
                                  m = num,
                                  n = size - num,
                                  k = length(Genes),
@@ -207,7 +213,8 @@ enrichment<-function(Genes=NULL,
       })
     }
     spare<-cbind(modules,t(p.values))
-    colnames(spare)<-c("module","module_size","genes_in_module","p.value")
+    colnames(spare)<-c("module","module_size","genes_in_module",
+                       "nb_genes_in_module","p.value")
     result<-rbind(result,spare)
   }
   result$p.value<-cnum(result$p.value)
@@ -215,26 +222,31 @@ enrichment<-function(Genes=NULL,
   result$genes_in_universe<-Genes_size
   if(is.logical(correction_multitest)){
     result<-result[cnum(result$p.value) <= threshold,]
-    if(!correction_multitest){
-      return(result)
-    }
-    else{
+    if(correction_multitest){
       warning("If multiple correction is wanted, please use one of the listed parameters.")
-      return(result)
     }
   }
   else{
     if(correction_multitest %in% c("bonferroni", "holm", "hochberg", "hommel", "BH", "fdr", "BY")){
       result$p.value.corrected<-p.adjust(cnum(result$p.value),method = correction_multitest)
       result<-result[result$p.value.corrected <= threshold,]
-      return(result)
     }
     else{
       result<-result[result$p.value <= threshold,]
       warning('correction multitest should be one of the following: "bonferroni", "holm", "hochberg", "hommel", "BH", "fdr", "BY"')
-      return(result)
     }
   }
+  ###adding missing info
+  result$universe_size<-size
+  result$nb_genes_in_universe<-length(Genes)
+  p.val.names<-colnames(result)[grepl(pattern = "p.value",x = colnames(result))]
+
+  ### re-ordering
+  result<-result[,c("module","module_size","nb_genes_in_module",
+                          "genes_in_module","universe_size",
+                          "nb_genes_in_universe",
+                          p.val.names)]
+  return(result)
 }
 
 ####### Multiplesample analysis / multiple cohorts analysis #######
