@@ -29,7 +29,7 @@ enrichment<-function(Genes=NULL,
                      statistical_test = "fisher",
                      min_module_size = 5,
                      universe = "map_defined",
-                     threshold = 1){
+                     threshold = 0.05){
   ### Checking maps
   if(is.data.frame(maps)){
     maps<-list(maps)
@@ -262,7 +262,7 @@ enrichment<-function(Genes=NULL,
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN" 
 #' (identical to "map_defined"), or a character vector of genes.
-#' @param individual_threshold maximal p-value (corrected if correction is enabled) that will be displayed
+#' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param cohort_threshold if TRUE modules will be kept in all samples if at least one sample has p-value lower than threshold, otherwise the threshold is applied for each sample independently.
 #' @export
 
@@ -272,8 +272,8 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                  statistical_test = "fisher",
                                  min_module_size = 5,
                                  universe = "map_defined",
-                                 individual_threshold = 1,
-                                 cohort_threshold = 1){
+                                 threshold = 0.05,
+                                 cohort_threshold = TRUE){
   
   if(cohort_threshold){
     result<-lapply(X = Genes_by_sample ,
