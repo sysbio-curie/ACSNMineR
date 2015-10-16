@@ -2,13 +2,12 @@
 % Please edit documentation in R/ACSN_Enrichment.R
 \name{multisample_enrichment}
 \alias{multisample_enrichment}
-\title{Enrichment analysis function}
+\title{Automated gene set analysis for multiple sets}
 \usage{
 multisample_enrichment(Genes_by_sample = NULL,
   maps = ACSNEnrichment::ACSN_maps, correction_multitest = "BH",
   statistical_test = "fisher", min_module_size = 5,
-  universe = "map_defined", individual_threshold = 1,
-  cohort_threshold = 1)
+  universe = "map_defined", threshold = 0.05, cohort_threshold = TRUE)
 }
 \arguments{
 \item{Genes_by_sample}{List of character vectors. Each list element name should be a sample name,
@@ -25,11 +24,16 @@ and each character vector the set of genes to test for the sample.}
 \item{universe}{Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN"
 (identical to "map_defined"), or a character vector of genes.}
 
-\item{individual_threshold}{maximal p-value (corrected if correction is enabled) that will be displayed}
+\item{threshold}{maximal p-value (corrected if correction is enabled) that will be displayed}
 
 \item{cohort_threshold}{if TRUE modules will be kept in all samples if at least one sample has p-value lower than threshold, otherwise the threshold is applied for each sample independently.}
 }
 \description{
-Allows gene set enrichment analysis
+Automated gene set analysis for multiple sets
+}
+\examples{
+multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
+maps = ACSNEnrichment::ACSN_maps$CellCycle,
+min_module_size = 15)
 }
 

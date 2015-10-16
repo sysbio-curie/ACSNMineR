@@ -6,7 +6,7 @@
 \usage{
 enrichment(Genes = NULL, maps = ACSNEnrichment::ACSN_maps,
   correction_multitest = "BH", statistical_test = "fisher",
-  min_module_size = 5, universe = "map_defined", threshold = 1)
+  min_module_size = 5, universe = "map_defined", threshold = 0.05)
 }
 \arguments{
 \item{Genes}{Character vector of genes that should be tested for enrichment}
