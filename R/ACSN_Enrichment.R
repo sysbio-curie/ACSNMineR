@@ -140,7 +140,7 @@ enrichment<-function(Genes=NULL,
     modules<-map[,1:2]
     
     ### Calculate p-value for map as a whole if map is not ACSN_master
-    if(map_names[tracker]!="ACSN_master" & !is.data.frame(maps) & length(maps)>1){
+    if(length(universe)>1 | (map_names[tracker]!="ACSN_master" & !is.data.frame(maps) & length(maps)>1)){
       mapgenes<-unique(as.character(map[,-c(1:2)]))
       mapgenes<-mapgenes[mapgenes!=""]
       mapsize<-length(mapgenes)
