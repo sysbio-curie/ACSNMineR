@@ -265,8 +265,8 @@ enrichment<-function(Genes=NULL,
 #' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param cohort_threshold if TRUE modules will be kept in all samples if at least one sample has p-value lower than threshold, otherwise the threshold is applied for each sample independently.
 #' @examples multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
-#' maps = ACSNEnrichment::ACSN_maps$CellCycle,
-#' min_module_size = 15)
+#' maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+#' min_module_size = 10)
 #' @export
 
 multisample_enrichment<-function(Genes_by_sample=NULL,
@@ -289,17 +289,17 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                 universe = universe,
                                 threshold =  1)
                    })
-    kept_genes<-character()
+    kept_modules<-character() 
     for(sample in result){
-      if(is.logical(correction_multitest)){
-        kept_genes<-unique(c(kept_genes,sample[sample$p.value<=cohort_threshold,1]))
+      if(is.logical(correction_multitest)){ 
+        kept_modules<-unique(c(kept_modules,sample[sample$p.value<=threshold,1]))
       }
       else{
-        kept_genes<-unique(c(kept_genes,sample[sample$p.value.corrected<=cohort_threshold,1]))
+        kept_modules<-unique(c(kept_modules,sample[sample$p.value.corrected<=threshold,1]))
       }
     }
     for(i in 1:length(result)){
-      result[[i]]<-result[[i]][result[[i]][,1] %in% kept_genes,]
+      result[[i]]<-result[[i]][result[[i]][,1] %in% kept_modules,]
     }
   }
   else{
@@ -311,7 +311,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                 statistical_test = statistical_test,
                                 min_module_size = min_module_size,
                                 universe = universe,
-                                threshold =  individual_threshold)
+                                threshold =  threshold)
                    })
     names(result)<-names(Genes_by_sample)
   }
@@ -331,7 +331,8 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
 #'@param na.value color for the missing values in the heatmap
 #'@examples represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
 #'SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log")
-#'@import ggplot2 gridExtra
+#'@import ggplot2 
+#'@importFrom gridExtra grid.arrange
 #'@export
 represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log", 
                                low = "steelblue" , high ="white",
@@ -355,7 +356,7 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
     if(plot == "heatmap"){
       
       q<-ggplot2::ggplot(enrichment,
-                         aes_string(x= "sample_name",
+                         ggplot2::aes_string(x= "sample_name",
                                     y = "module", 
                                     fill = "p.values"))+ggplot2::xlab("")+ ggplot2::ylab("Modules") + ggplot2::geom_tile()
       if(scale == "log"){

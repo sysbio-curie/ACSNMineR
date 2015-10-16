@@ -33,7 +33,7 @@ Automated gene set analysis for multiple sets
 }
 \examples{
 multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
-maps = ACSNEnrichment::ACSN_maps$CellCycle,
-min_module_size = 15)
+maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+min_module_size = 10)
 }
 
