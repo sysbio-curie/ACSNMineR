@@ -77,8 +77,16 @@ The result of this is:
 
 ####  <a name="IVB">Barplots</a> 
 ______
+A barplot can be achieved by using the following:
 > represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
     'SampleB = enrichment_test[3:10,]),
     plot = "bar", 
-    scale = "log")
+    scale = "log",
+    nrow = 1)
+
+Where:
+* enrichment is the result from the enrichment or multisample_enrichment function
+* scale can be set to either identity or log and will affect the gradient of colors
+* nrow is the number of rows that should be used to plot all barplots (default is 1)
+
 ![alt tag](https://github.com/sysbio-curie/ACSN_Enrichment/blob/master/Images/barplot.png)
