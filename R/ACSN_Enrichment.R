@@ -21,7 +21,8 @@
 #' @param threshold : maximal p-value (corrected if correction is enabled) that will be displayed
 #' @examples enrichment(genes_test,min_module_size = 10, 
 #'    threshold = 0.05,
-#'    maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle))
+#'    maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+#'    universe = "ACSN")
 #' @export
 enrichment<-function(Genes=NULL,
                      maps = ACSNEnrichment::ACSN_maps, 
@@ -30,6 +31,7 @@ enrichment<-function(Genes=NULL,
                      min_module_size = 5,
                      universe = "map_defined",
                      threshold = 0.05){
+  
   ### Checking maps
   if(is.data.frame(maps)){
     maps<-list(maps)
@@ -37,6 +39,14 @@ enrichment<-function(Genes=NULL,
   else if(!is.list(maps)){
     warning("maps should be a dataframe or a list of dataframes. Exiting")
     return(NA)
+  }
+  
+  if(universe == "ACSN"){
+    universe_was_ACSN<-TRUE
+  }
+  else{
+    universe_was_ACSN<-FALSE
+    
   }
   
   ### Checking that gene list is unique
@@ -62,30 +72,25 @@ enrichment<-function(Genes=NULL,
     }
     
     else if( universe == "map_defined"){
-      genesACSN<-character()
+      genesmap<-character()
       iterator<-0
-      for(lt in maps){
-        iterator<-iterator+1
-        ### extract modules of size >= module_size and get size of ACSN reduced by module size
-        result<-data.frame()
-        for(k in 1:dim(lt)[1]){
-          spare_genes<-as.character(lt[k,-c(1,2)])
-          S<-sum(spare_genes != "")
-          if( S>= min_module_size){
-            genesACSN<-unique(c(genesACSN,unique(spare_genes[spare_genes!=""])))
-            result<-rbind(result,cbind(lt[k,1],S,t(spare_genes)))          
-          }
-        }
-        size <- length(genesACSN)
-        maps[[iterator]]<-result
+      if(is.list(maps)){
+        genesmap<-unique(as.character(unlist(lapply(X = maps,FUN = function(z){
+          return(unique(as.character(z[,-(1:2)])))
+        }))))
       }
-      is_in_ACSN<-Genes %in% genesACSN
+      else{
+        genesmaps<-unique(as.character(maps[,-(1:2)]))
+      }
+      genesmap<-as.character(genesmap[genesmap!=""])
+      is_in_ACSN<-Genes %in% genesmap
       S<-sum(!is_in_ACSN)
+      print(is_in_ACSN)
       if(S > 0){ ### removing genes from list, that are not from ACSN
         warning(paste(S,"genes are not in ACSN modules and will be excluded from analysis"))
       }
       Genes<-Genes[is_in_ACSN]
-      
+      size <- length(genesmap)
     }
     else{
       stop("Invalid universe input: must be 'HUGO','ACSN','map_defined', or a gene list")
@@ -94,10 +99,8 @@ enrichment<-function(Genes=NULL,
     ### Length of universe can be changed if "ACSN"
     
   }  
-  if(length(universe > 1)){
-    
+  if(length(universe )> 1){
     ### Change maps so that they only have gene names from universe and remove modules which are too small
-    genesACSN<-character()
     i<-0
     genesACSN<-character()
     iterator<-0
@@ -121,7 +124,7 @@ enrichment<-function(Genes=NULL,
     is_in_ACSN<-Genes %in% genesACSN
     S<-sum(!is_in_ACSN)
     if(S > 0){ ### removing genes from list, that are not from ACSN
-      warning(paste(S,"genes are not in maps modules and will be excluded from analysis"))
+      warning(paste(S,"genes are not in universe and will be excluded from analysis"))
     }
     Genes<-Genes[is_in_ACSN]
     
@@ -155,7 +158,16 @@ enrichment<-function(Genes=NULL,
     modules<-map[,1:2]
     
     ### Calculate p-value for map as a whole if map is not ACSN_master
-    if(length(universe)>1 | (map_names[tracker]!="ACSN_master" & !is.data.frame(maps) & length(maps)>1)){
+    if(universe_was_ACSN & map_names[tracker]!="ACSN_master"){
+      compute_module_p.value<-TRUE
+    }
+    else if(length(universe)>1 | ( !is.data.frame(maps) & length(maps)>1 & map_names[tracker]!="ACSN_master")){
+      compute_module_p.value<-TRUE
+    }
+    else{
+      compute_module_p.value<-FALSE
+    }
+    if( compute_module_p.value ){
       mapgenes<-unique(as.character(map[,-c(1:2)]))
       mapgenes<-mapgenes[mapgenes!=""]
       mapsize<-length(mapgenes)
@@ -278,7 +290,8 @@ enrichment<-function(Genes=NULL,
 #' @param cohort_threshold if TRUE modules will be kept in all samples if at least one sample has p-value lower than threshold, otherwise the threshold is applied for each sample independently.
 #' @examples multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
 #' maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
-#' min_module_size = 10)
+#' min_module_size = 10,
+#' universe = ACSN)
 #' @export
 
 multisample_enrichment<-function(Genes_by_sample=NULL,
