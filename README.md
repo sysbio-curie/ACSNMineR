@@ -36,10 +36,10 @@ Gene set enrichment for a single set can be performed by calling:
     maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle))
 
 Where:
-*genes_test is a character vector to test
-*min_module_size is the minimal size of a module to be taken into account
-*threshold is the maximal p-value that will be displayed in the results (all modules with p-values higher than threshold will be removed)
-*maps is a list of maps -here we take the cell cycle map from ACSN-  imported through the format_from_gmt() function of the package
+* genes_test is a character vector to test
+* min_module_size is the minimal size of a module to be taken into account
+* threshold is the maximal p-value that will be displayed in the results (all modules with p-values higher than threshold will be removed)
+* maps is a list of maps -here we take the cell cycle map from ACSN-  imported through the format_from_gmt() function of the package
 
 Gene set enrichment for multiple sets/cohorts can be performed by calling:
 >multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
@@ -47,9 +47,10 @@ Gene set enrichment for multiple sets/cohorts can be performed by calling:
     min_module_size = 15)
 
 Where:
-*Genes_by_sample is a list of character vectors to test
-*min_module_size is the minimal size of a module to be taken into account
-*maps is a list of maps -here we take the cell cycle map from ACSN - imported through the format_from_gmt() function of the package
+
+* Genes_by_sample is a list of character vectors to test
+* min_module_size is the minimal size of a module to be taken into account
+* maps is a list of maps -here we take the cell cycle map from ACSN - imported through the format_from_gmt() function of the package
 
 
 ###  <a name="IIIB">Data visualization</a> 
@@ -66,6 +67,7 @@ Heatmaps for single sample or multiple sample representing p-values can be easil
     na.value = "grey")
 
 Where:
+
 * enrichment is the result from the enrichment or multisample_enrichment function
 * scale can be set to either identity or log and will affect the gradient of colors
 * low: the color for the low (significant) p-values 
