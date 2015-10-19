@@ -17,7 +17,7 @@
 #' @param statistical_test one of "fisher", "hypergeom"
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. 
-#' Can be either "HUGO","ACSN"( identical to "map_defined"), or a character vector of genes.
+#' Can be either "HUGO","ACSN","map_defined", or a character vector of genes.
 #' @param threshold : maximal p-value (corrected if correction is enabled) that will be displayed
 #' @examples enrichment(genes_test,min_module_size = 10, 
 #'    threshold = 0.05,
@@ -47,39 +47,54 @@ enrichment<-function(Genes=NULL,
   if(sum(statistical_test %in% c("fisher", "hypergeom"))==0){
     stop("statistical_test should be one of 'fisher' or 'hypergeom'")
   }
-  
-  if(universe == "HUGO"){
-    ###Total size of approved symbols, from http://www.genenames.org/cgi-bin/statistics, as of October 8th 2015
-    size = 39480
-  }
-  
-  else if(universe == "ACSN" | universe == "map_defined"){
-    genesACSN<-character()
-    iterator<-0
-    for(lt in maps){
-      iterator<-iterator+1
-      ### extract modules of size >= module_size and get size of ACSN reduced by module size
-      result<-data.frame()
-      for(k in 1:dim(lt)[1]){
-        spare_genes<-as.character(lt[k,-c(1,2)])
-        S<-sum(spare_genes != "")
-        if( S>= min_module_size){
-          genesACSN<-unique(c(genesACSN,unique(spare_genes[spare_genes!=""])))
-          result<-rbind(result,cbind(lt[k,1],S,t(spare_genes)))          
-        }
-      }
-      size <- length(genesACSN)
-      maps[[iterator]]<-result
+  ### If universe is ACSN: extract genes from ACSN and define it as universe
+  if(length(universe == 1)){
+    if(universe == "ACSN"){
+      genesACSN<-unique(unlist(lapply(X = ACSNEnrichment::ACSN_maps,FUN = function(z){
+        return(as.character(unique(z[,-(1:2)])))
+      })))
+
+      universe<-genesACSN[genesACSN!=""]
     }
-    is_in_ACSN<-Genes %in% genesACSN
-    S<-sum(!is_in_ACSN)
-    if(S > 0){ ### removing genes from list, that are not from ACSN
-      warning(paste(S,"genes are not in ACSN modules and will be excluded from analysis"))
+    else if(universe == "HUGO"){
+      ###Total size of approved symbols, from http://www.genenames.org/cgi-bin/statistics, as of October 8th 2015
+      size = 39480
     }
-    Genes<-Genes[is_in_ACSN]
     
-  }
-  else if(is.character(universe)){
+    else if( universe == "map_defined"){
+      genesACSN<-character()
+      iterator<-0
+      for(lt in maps){
+        iterator<-iterator+1
+        ### extract modules of size >= module_size and get size of ACSN reduced by module size
+        result<-data.frame()
+        for(k in 1:dim(lt)[1]){
+          spare_genes<-as.character(lt[k,-c(1,2)])
+          S<-sum(spare_genes != "")
+          if( S>= min_module_size){
+            genesACSN<-unique(c(genesACSN,unique(spare_genes[spare_genes!=""])))
+            result<-rbind(result,cbind(lt[k,1],S,t(spare_genes)))          
+          }
+        }
+        size <- length(genesACSN)
+        maps[[iterator]]<-result
+      }
+      is_in_ACSN<-Genes %in% genesACSN
+      S<-sum(!is_in_ACSN)
+      if(S > 0){ ### removing genes from list, that are not from ACSN
+        warning(paste(S,"genes are not in ACSN modules and will be excluded from analysis"))
+      }
+      Genes<-Genes[is_in_ACSN]
+      
+    }
+    else{
+      stop("Invalid universe input: must be 'HUGO','ACSN','map_defined', or a gene list")
+    }
+  
+    ### Length of universe can be changed if "ACSN"
+    
+  }  
+  if(length(universe > 1)){
     
     ### Change maps so that they only have gene names from universe and remove modules which are too small
     genesACSN<-character()
@@ -110,9 +125,6 @@ enrichment<-function(Genes=NULL,
     }
     Genes<-Genes[is_in_ACSN]
     
-  }
-  else{
-    stop("Invalid universe input: must be 'HUGO','ACSN', or a gene list")
   }
   
   if(length(Genes)==0){
@@ -188,10 +200,10 @@ enrichment<-function(Genes=NULL,
         Gene_set<-paste(Genes[test],collapse = " ")
         Genes_in_module<-sum(test)
         return(c(Gene_set,Genes_in_module,fisher.test(x = matrix(c(Genes_in_module,
-                                                   num-Genes_in_module,
-                                                   Genes_size - Genes_in_module,
-                                                   size - num),
-                                                 nrow = 2))$p.value))
+                                                                   num-Genes_in_module,
+                                                                   Genes_size - Genes_in_module,
+                                                                   size - num),
+                                                                 nrow = 2))$p.value))
         
       })
     }else if(statistical_test == "hypergeom"){
@@ -205,10 +217,10 @@ enrichment<-function(Genes=NULL,
           Genes_in_module<-Genes_in_module-1 
         }
         return(c(Gene_set,Genes_in_module,phyper(q = Genes_in_module,
-                                 m = num,
-                                 n = size - num,
-                                 k = length(Genes),
-                                 lower.tail = FALSE)))
+                                                 m = num,
+                                                 n = size - num,
+                                                 k = length(Genes),
+                                                 lower.tail = FALSE)))
         
       })
     }
@@ -240,12 +252,12 @@ enrichment<-function(Genes=NULL,
   result$universe_size<-size
   result$nb_genes_in_universe<-length(Genes)
   p.val.names<-colnames(result)[grepl(pattern = "p.value",x = colnames(result))]
-
+  
   ### re-ordering
   result<-result[,c("module","module_size","nb_genes_in_module",
-                          "genes_in_module","universe_size",
-                          "nb_genes_in_universe",
-                          p.val.names)]
+                    "genes_in_module","universe_size",
+                    "nb_genes_in_universe",
+                    p.val.names)]
   return(result)
 }
 
@@ -261,7 +273,7 @@ enrichment<-function(Genes=NULL,
 #' @param statistical_test one of "fisher", "hypergeom"
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN" 
-#' (identical to "map_defined"), or a character vector of genes.
+#' ,"map_defined", or a character vector of genes.
 #' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param cohort_threshold if TRUE modules will be kept in all samples if at least one sample has p-value lower than threshold, otherwise the threshold is applied for each sample independently.
 #' @examples multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
@@ -357,8 +369,8 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
       
       q<-ggplot2::ggplot(enrichment,
                          ggplot2::aes_string(x= "sample_name",
-                                    y = "module", 
-                                    fill = "p.values"))+ggplot2::xlab("")+ ggplot2::ylab("Modules") + ggplot2::geom_tile()
+                                             y = "module", 
+                                             fill = "p.values"))+ggplot2::xlab("")+ ggplot2::ylab("Modules") + ggplot2::geom_tile()
       if(scale == "log"){
         q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log")
       }

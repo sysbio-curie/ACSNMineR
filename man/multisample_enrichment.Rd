@@ -22,7 +22,7 @@ and each character vector the set of genes to test for the sample.}
 \item{min_module_size}{will remove from the analysis all modules which are (strictly) smaller than threshold}
 
 \item{universe}{Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN"
-(identical to "map_defined"), or a character vector of genes.}
+,"map_defined", or a character vector of genes.}
 
 \item{threshold}{maximal p-value (corrected if correction is enabled) that will be displayed}
 
