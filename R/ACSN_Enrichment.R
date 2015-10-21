@@ -450,7 +450,7 @@ enrichment<-function(Genes=NULL,
 #' @examples multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
 #' maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
 #' min_module_size = 10,
-#' universe = ACSN)
+#' universe = "ACSN")
 #' @export
 
 multisample_enrichment<-function(Genes_by_sample=NULL,
