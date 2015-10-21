@@ -75,8 +75,9 @@ enrichment<-function(Genes=NULL,
       genesACSN<-unique(unlist(lapply(X = ACSNEnrichment::ACSN_maps,FUN = function(z){
         return(as.character(unique(z[,-(1:2)])))
       })))
-
+      
       universe<-genesACSN[genesACSN!=""]
+      size<-length(genesACSN)
     }
     else if(universe == "HUGO"){
       ###Total size of approved symbols, from http://www.genenames.org/cgi-bin/statistics, as of October 8th 2015
@@ -108,11 +109,12 @@ enrichment<-function(Genes=NULL,
     else{
       stop("Invalid universe input: must be 'HUGO','ACSN','map_defined', or a gene list")
     }
-  
+    
     ### Length of universe can be changed if "ACSN"
     
   }
   if(length(universe )> 1){
+    
     ### Change maps so that they only have gene names from universe and remove modules which are too small
     i<-0
     genesACSN<-character()
@@ -131,7 +133,9 @@ enrichment<-function(Genes=NULL,
           result<-rbind(result,cbind(lt[k,1],S,t(spare_genes)))          
         }
       }
-      size <- length(genesACSN)
+      if(!universe_was_ACSN){
+        size <- length(genesACSN)
+      }
       maps[[iterator]]<-result
     }
     is_in_ACSN<-Genes %in% genesACSN
@@ -182,7 +186,7 @@ enrichment<-function(Genes=NULL,
     }
     if( compute_module_p.value ){ ###
       mapgenes<-unique(as.character(unlist(map[,-c(1:2)])))
-
+      
       mapsize<-length(mapgenes)
       genes_in_mapgenes<-(Genes %in% mapgenes)      
       num<-sum( genes_in_mapgenes)
@@ -191,87 +195,89 @@ enrichment<-function(Genes=NULL,
         
         if(statistical_test == "fisher"){
           p.values<-c(p.val.calc(num,
-                               mapsize-num,
-                               Genes_size-num,
-                               size - mapsize,
-                               "fisher",
-                               alternative
-                               ),
-                      alternative)
-        }
-        else{
-          p.values<-c(p.val.calc( num,
-                               mapsize,
-                               size - mapsize,
-                               length(Genes),
-                               "hypergeom",
-                               alternative
-            ),
-            alternative
-            ) 
-        }
-      }
-      else{ ### if both computations
-        if(statistical_test == "fisher"){
-          p.values<-cbind(c(p.val.calc(num,
                                  mapsize-num,
                                  Genes_size-num,
                                  size - mapsize,
                                  "fisher",
-                                 "greater"
+                                 alternative
           ),
-          "greater"),
-          c(p.val.calc(num,
-                       mapsize-num,
-                       Genes_size-num,
-                       size - mapsize,
-                       "fisher",
-                       "less"
-          ),
-          "less")
-          )
+          alternative)
         }
         else{
-          p.values<-rbind(c(p.val.calc( num,
+          p.values<-c(p.val.calc( num,
                                   mapsize,
                                   size - mapsize,
                                   length(Genes),
                                   "hypergeom",
-                                  'greater',
+                                  alternative
+          ),
+          alternative
+          ) 
+        }
+      }
+      else{ ### if both computations
+        if(statistical_test == "fisher"){
+          print("test")
+          p.values<-cbind(c(p.val.calc(num,
+                                       mapsize-num,
+                                       Genes_size-num,
+                                       size - mapsize,
+                                       "fisher",
+                                       "greater"
+                            ),
+                            "greater"),
+                          c(p.val.calc(num,
+                                       mapsize-num,
+                                       Genes_size-num,
+                                       size - mapsize,
+                                       "fisher",
+                                       "less"
+                            ),
+                            "less")
+          )
+        }
+        else{
+          p.values<-rbind(c(p.val.calc( num,
+                                        mapsize,
+                                        size - mapsize,
+                                        length(Genes),
+                                        "hypergeom",
+                                        'greater'
           ),
           'greater')
           ,c(p.val.calc( num,
-                          mapsize,
-                          size - mapsize,
-                          length(Genes),
-                          "hypergeom",
-                          'less',
+                         mapsize,
+                         size - mapsize,
+                         length(Genes),
+                         "hypergeom",
+                         'less'
           ),
           'less'
           )
           )
         }
       }
-#       if(statistical_test == "fisher"){
-#         p.values<-fisher.test(x= matrix(c(num,
-#                                           mapsize-num,
-#                                           Genes_size-num,
-#                                           size - mapsize),
-#                                         nrow = 2))$p.value
-#         
-#       }
-#       else if(statistical_test == "hypergeom"){
-#         p.values<-phyper(q = num,
-#                          m = mapsize,
-#                          n = size - mapsize,
-#                          k = length(Genes),
-#                          lower.tail = FALSE)
-#       }
+      #       if(statistical_test == "fisher"){
+      #         p.values<-fisher.test(x= matrix(c(num,
+      #                                           mapsize-num,
+      #                                           Genes_size-num,
+      #                                           size - mapsize),
+      #                                         nrow = 2))$p.value
+      #         
+      #       }
+      #       else if(statistical_test == "hypergeom"){
+      #         p.values<-phyper(q = num,
+      #                          m = mapsize,
+      #                          n = size - mapsize,
+      #                          k = length(Genes),
+      #                          lower.tail = FALSE)
+      #       }
+      
       spare<-cbind(map_names[tracker],
                    mapsize,
                    paste(Genes[genes_in_mapgenes],collapse = " "),
                    num,
-                   p.values)
+                   t(p.values))
       colnames(spare)<-c("module","module_size","genes_in_module",
                          "nb_genes_in_module","p.value","test")
       result<-rbind(result,spare)
@@ -282,7 +288,7 @@ enrichment<-function(Genes=NULL,
       modules[,1]<-paste(map_names[tracker],modules[,1],sep=":")
       map[,1]<-modules[,1]
     }
-
+    
     #### Calculation for modules
     if(statistical_test == "fisher"){
       if(alternative != "both"){
@@ -293,14 +299,14 @@ enrichment<-function(Genes=NULL,
           Gene_set<-paste(Genes[test],collapse = " ")
           Genes_in_module<-sum(test)
           return(t(c(Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                       num-Genes_in_module,
-                                                       Genes_size - Genes_in_module,
-                                                       size - num,
-                                                       statistical_test,
-                                                       alternative),alternative))
-                   )
+                                                         num-Genes_in_module,
+                                                         Genes_size - Genes_in_module,
+                                                         size - num,
+                                                         statistical_test,
+                                                         alternative),alternative))
+          )
         }
-      )
+        )
       }
       else{
         p.values<-apply(map,MARGIN = 1, FUN = function(z){
@@ -310,17 +316,17 @@ enrichment<-function(Genes=NULL,
           Gene_set<-paste(Genes[test],collapse = " ")
           Genes_in_module<-sum(test)
           return(cbind(t(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                       num-Genes_in_module,
-                                                       Genes_size - Genes_in_module,
-                                                       size - num,
-                                                       statistical_test,
-                                                       "greater"),"enrichment")),
+                                                                         num-Genes_in_module,
+                                                                         Genes_size - Genes_in_module,
+                                                                         size - num,
+                                                                         statistical_test,
+                                                                         "greater"),"enrichment")),
                        t(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                               num-Genes_in_module,
-                                                               Genes_size - Genes_in_module,
-                                                               size - num,
-                                                               statistical_test,
-                                                               "less"),"depletion"))))
+                                                                         num-Genes_in_module,
+                                                                         Genes_size - Genes_in_module,
+                                                                         size - num,
+                                                                         statistical_test,
+                                                                         "less"),"depletion"))))
         }
         )
       }
@@ -337,11 +343,11 @@ enrichment<-function(Genes=NULL,
           }
           
           return(c(Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                   num,
-                                                   size - num,
-                                                   length(Genes),
-                                                   statistical_test,
-                                                   alternative),
+                                                       num,
+                                                       size - num,
+                                                       length(Genes),
+                                                       statistical_test,
+                                                       alternative),
                    alternative))
           
         })
@@ -358,19 +364,19 @@ enrichment<-function(Genes=NULL,
           }
           
           return(rbind(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                       num,
-                                                       size - num,
-                                                       length(Genes),
-                                                       statistical_test,
-                                                       "greater"),
-                           "enrichment")),
-                   c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                           num,
-                                                           size - num,
-                                                           length(Genes),
-                                                           statistical_test,
-                                                           "less"),
-                       "depletion"))
+                                                                       num,
+                                                                       size - num,
+                                                                       length(Genes),
+                                                                       statistical_test,
+                                                                       "greater"),
+                         "enrichment")),
+                 c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
+                                                                 num,
+                                                                 size - num,
+                                                                 length(Genes),
+                                                                 statistical_test,
+                                                                 "less"),
+                   "depletion"))
           
         })
       }
@@ -404,7 +410,7 @@ enrichment<-function(Genes=NULL,
       warning('correction multitest should be one of the following: "bonferroni", "holm", "hochberg", "hommel", "BH", "fdr", "BY"')
     }
   }
-
+  
   ###adding missing info
   if(dim(result)[1]==0){
     warning("No modules under threshold")
@@ -503,13 +509,13 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
 #' @param y : second value
 #' @param z : third value
 #' @param a : fourth value
-#' @param stat_test
-#' @param alt
+#' @param stat_test : statistical test to be used
+#' @param alt : alternative: one of two-sided, greater, less or both
 #' 
 p.val.calc<-function(x,y,z,a,stat_test,alt){
   if(stat_test=="fisher"){
-      return(fisher.test(matrix(c(x,y,z,a),nrow = 2),
-                         alt = alt)$p.value)
+    return(fisher.test(matrix(c(x,y,z,a),nrow = 2),
+                       alt = alt)$p.value)
   }
   else{
     if(alt =="greater"){

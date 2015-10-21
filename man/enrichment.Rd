@@ -6,7 +6,8 @@
 \usage{
 enrichment(Genes = NULL, maps = ACSNEnrichment::ACSN_maps,
   correction_multitest = "BH", statistical_test = "fisher",
-  min_module_size = 5, universe = "map_defined", threshold = 0.05)
+  min_module_size = 5, universe = "map_defined", threshold = 0.05,
+  alternative = "greater")
 }
 \arguments{
 \item{Genes}{Character vector of genes that should be tested for enrichment}
@@ -24,6 +25,11 @@ Default: tests on all acsn maps.}
 Can be either "HUGO","ACSN","map_defined", or a character vector of genes.}
 
 \item{threshold}{: maximal p-value (corrected if correction is enabled) that will be displayed}
+
+\item{alternative}{One of "greater", "less", "both" or "two.sided"
+Greater will check for enrichment, less will check for depletion, and both will look for
+both and will keep track of the side,
+while two-sided (only for fisher test) checks if there is a difference .}
 }
 \description{
 Compute and represent gene set enrichment from your data based on pre-saved maps from ACSN or user imported maps.
@@ -33,6 +39,7 @@ and can use multiple corrections. Visualization of data can be done either by ba
 \examples{
 enrichment(genes_test,min_module_size = 10,
    threshold = 0.05,
-   maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle))
+   maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+   universe = "ACSN")
 }
 

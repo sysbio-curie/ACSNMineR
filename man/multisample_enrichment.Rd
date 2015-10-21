@@ -7,7 +7,8 @@
 multisample_enrichment(Genes_by_sample = NULL,
   maps = ACSNEnrichment::ACSN_maps, correction_multitest = "BH",
   statistical_test = "fisher", min_module_size = 5,
-  universe = "map_defined", threshold = 0.05, cohort_threshold = TRUE)
+  universe = "map_defined", threshold = 0.05, cohort_threshold = TRUE,
+  alternative = "greater")
 }
 \arguments{
 \item{Genes_by_sample}{List of character vectors. Each list element name should be a sample name,
@@ -26,7 +27,11 @@ and each character vector the set of genes to test for the sample.}
 
 \item{threshold}{maximal p-value (corrected if correction is enabled) that will be displayed}
 
-\item{cohort_threshold}{if TRUE modules will be kept in all samples if at least one sample has p-value lower than threshold, otherwise the threshold is applied for each sample independently.}
+\item{cohort_threshold}{if TRUE modules will be kept in all samples if at least one sample
+has p-value lower than threshold, otherwise the threshold is applied for each sample independently.}
+
+\item{alternative}{One of "greater", "less", "both", or "two.sided" (only for fisher test).
+Greater will check for enrichment, less will check for depletion, and both will look for both.}
 }
 \description{
 Automated gene set analysis for multiple sets
@@ -34,6 +39,7 @@ Automated gene set analysis for multiple sets
 \examples{
 multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
 maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
-min_module_size = 10)
+min_module_size = 10,
+universe = ACSN)
 }
 
