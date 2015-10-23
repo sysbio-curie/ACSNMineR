@@ -38,7 +38,7 @@ enrichment<-function(Genes=NULL,
                      alternative = "greater"){
   
   ### Checking maps
-  if(is.data.frame(maps)){
+  if(is.data.frame(maps) | is.matrix(maps)){
     maps<-list(maps)
   }
   else if(!is.list(maps)){
@@ -167,7 +167,11 @@ enrichment<-function(Genes=NULL,
   ### what would be the expected?
   tracker<-0
   map_names<-names(maps)
-  if(is.null(map_names) & length(maps)>1){
+  if(is.null(map_names)){
+    if(length(maps)>1){
+      message("Maps should be defined in this way: maps<-list(map1 = ... , map2 = ...)")
+      message("In the absence of names, will use letters")
+    }
     map_names<-paste("map",1:length(maps),sep = "_")
   }
   for(map in maps){
@@ -217,7 +221,6 @@ enrichment<-function(Genes=NULL,
       }
       else{ ### if both computations
         if(statistical_test == "fisher"){
-          print("test")
           p.values<-cbind(c(p.val.calc(num,
                                        mapsize-num,
                                        Genes_size-num,
@@ -257,21 +260,6 @@ enrichment<-function(Genes=NULL,
           )
         }
       }
-      #       if(statistical_test == "fisher"){
-      #         p.values<-fisher.test(x= matrix(c(num,
-      #                                           mapsize-num,
-      #                                           Genes_size-num,
-      #                                           size - mapsize),
-      #                                         nrow = 2))$p.value
-      #         
-      #       }
-      #       else if(statistical_test == "hypergeom"){
-      #         p.values<-phyper(q = num,
-      #                          m = mapsize,
-      #                          n = size - mapsize,
-      #                          k = length(Genes),
-      #                          lower.tail = FALSE)
-      #       }
       
       spare<-cbind(map_names[tracker],
                    mapsize,
