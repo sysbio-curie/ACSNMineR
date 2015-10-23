@@ -733,7 +733,7 @@ cnum<-function(x){
 
 format_from_gmt<-function(path = ""){
   
-  max_length<-max(sapply(X=readLines(path),FUN = function(z){
+  max_length<-max(sapply(X=readLines(path,warn = FALSE),FUN = function(z){
     z2<-gsub("\t","",z)
     return(nchar(z)-nchar(z2))
   }))
@@ -741,21 +741,27 @@ format_from_gmt<-function(path = ""){
   
   gmt<-read.csv(path,header = FALSE, 
                 sep = "\t",fill = TRUE,
-                col.names = sapply(X = 1:max_length,
-                                   FUN = function(z){
-                                     paste("V",z,sep="")
-                                   }))
-  
-  result<-t(apply(gmt,1,FUN = function(z){
-    pos<-grep(pattern = "\\*",x = z)
-    res<-z
-    res[pos]<-""
-    return(res)
-  }))
+                col.names = paste("V",1:max_length,sep="")
+  )
   
   
+  ### Filter out non-genes
+  if(is.null(dim(gmt))){ ### testing if gmt is single lign
+    pos<-grep(pattern = "\\*",x = gmt)
+    result<-gmt
+    result[pos]<-""
+    result<-as.data.frame(t(result))
+  }
+  else{
+    result<-t(apply(gmt,1,FUN = function(z){
+      pos<-grep(pattern = "\\*",x = z)
+      res<-z
+      res[pos]<-""
+      return(res)
+    }))
+  }
   result[,2]<-apply(result[,-(1:2)], 1, FUN = function(z) sum(z!=""))
-  
+    
   return(result)
 }
 
