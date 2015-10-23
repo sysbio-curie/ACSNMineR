@@ -42,8 +42,7 @@ enrichment<-function(Genes=NULL,
     maps<-list(maps)
   }
   else if(!is.list(maps)){
-    warning("maps should be a dataframe or a list of dataframes. Exiting")
-    return(NA)
+    stop("maps should be a dataframe or a list of dataframes. Exiting")
   }
   
   if(universe == "ACSN"){
@@ -68,6 +67,7 @@ enrichment<-function(Genes=NULL,
     warning("two-sided test only relevant for fisher test. \n Will perform both enrichment and under-representation tests.")
     alternative<-"both"
   }
+  result<-data.frame()
   
   ### If universe is ACSN: extract genes from ACSN and define it as universe
   if(length(universe == 1)){
@@ -75,7 +75,6 @@ enrichment<-function(Genes=NULL,
       genesACSN<-unique(unlist(lapply(X = ACSNEnrichment::ACSN_maps,FUN = function(z){
         return(as.character(unique(z[,-(1:2)])))
       })))
-      
       universe<-genesACSN[genesACSN!=""]
       size<-length(genesACSN)
     }
@@ -114,7 +113,6 @@ enrichment<-function(Genes=NULL,
     
   }
   if(length(universe )> 1){
-    
     ### Change maps so that they only have gene names from universe and remove modules which are too small
     i<-0
     genesACSN<-character()
@@ -122,21 +120,39 @@ enrichment<-function(Genes=NULL,
     for(lt in maps){
       iterator<-iterator+1
       ### extract modules of size >= module_size and get size of ACSN reduced by universe and module size
-      result<-data.frame()
-      for(k in 1:dim(lt)[1]){
-        spare_genes<-as.character(lt[k,-c(1,2)])
-        spare_genes[!(spare_genes %in% universe)]<- ""
-        test<-spare_genes != ""
-        S<-sum(test)
-        if( S>= min_module_size){
-          genesACSN<-unique(c(genesACSN,unique(spare_genes[test])))
-          result<-rbind(result,cbind(lt[k,1],S,t(spare_genes)))          
+      validmap<-data.frame()
+      
+      if(dim(lt)[1]>1){ ### map is a dataframe
+        for(k in 1:dim(lt)[1]){
+          spare_genes<-as.character(lt[k,-c(1,2)])
+          spare_genes[!(spare_genes %in% universe)]<- ""
+          test<-spare_genes != ""
+          S<-sum(test)
+          if( S>= min_module_size){
+            genesACSN<-unique(c(genesACSN,unique(spare_genes[test])))
+            validmap<-rbind(validmap,cbind(lt[k,1],S,t(spare_genes)))          
+          }
+        }
+      }
+      else{ #map is a single line
+        if(length(lt)>2){
+          spare_genes<-as.character(sapply(3:length(lt),FUN = function(z) as.character(lt[[z]])))
+          test<-spare_genes != ""
+          S<-sum(test)
+          if( S>= min_module_size){
+            genesACSN<-unique(c(genesACSN,unique(spare_genes[test])))
+            validmap<-rbind(validmap,cbind(lt[1],S,t(spare_genes)))
+            validmap[,2]<-as.integer(as.character(validmap[,2]))
+          }
+        }
+        else{
+          stop("Empty map, exiting")
         }
       }
       if(!universe_was_ACSN){
         size <- length(genesACSN)
       }
-      maps[[iterator]]<-result
+      maps[[iterator]]<-validmap
     }
     is_in_ACSN<-Genes %in% genesACSN
     S<-sum(!is_in_ACSN)
@@ -146,18 +162,9 @@ enrichment<-function(Genes=NULL,
     Genes<-Genes[is_in_ACSN]
     
   }
-  
   if(length(Genes)==0){
-    warning("No genes in universe.")
+    stop("No genes in universe.")
     result<-data.frame()
-    result$module<-"master"
-    result$module_size<-size
-    result$genes_in_module<-0
-    result$nb_genes_in_module<-0
-    result$universe_size<-size
-    result$nb_genes_in_universe<-0
-    result$p.value<-1
-    return(result)
   }
   
   #### Begin calculation of p-values
@@ -227,16 +234,16 @@ enrichment<-function(Genes=NULL,
                                        size - mapsize,
                                        "fisher",
                                        "greater"
-                            ),
-                            "greater"),
-                          c(p.val.calc(num,
-                                       mapsize-num,
-                                       Genes_size-num,
-                                       size - mapsize,
-                                       "fisher",
-                                       "less"
-                            ),
-                            "less")
+          ),
+          "greater"),
+          c(p.val.calc(num,
+                       mapsize-num,
+                       Genes_size-num,
+                       size - mapsize,
+                       "fisher",
+                       "less"
+          ),
+          "less")
           )
         }
         else{
@@ -260,7 +267,7 @@ enrichment<-function(Genes=NULL,
           )
         }
       }
-      
+
       spare<-cbind(map_names[tracker],
                    mapsize,
                    paste(Genes[genes_in_mapgenes],collapse = " "),
@@ -268,15 +275,16 @@ enrichment<-function(Genes=NULL,
                    t(p.values))
       colnames(spare)<-c("module","module_size","genes_in_module",
                          "nb_genes_in_module","p.value","test")
+
+
       result<-rbind(result,spare)
+      result$module_size<-as.integer(as.character(result$module_size))
     } #### End of module p-value
-    
     
     if(length(maps)>1){
       modules[,1]<-paste(map_names[tracker],modules[,1],sep=":")
       map[,1]<-modules[,1]
     }
-    
     #### Calculation for modules
     if(statistical_test == "fisher"){
       if(alternative != "both"){
@@ -725,9 +733,9 @@ format_from_gmt<-function(path = ""){
   
   Lines<-readLines(path,warn = FALSE)
   
-    
+  
   ### Filter out non-genes
-  if(length(Lines)==1){ ### testing if gmt is single lign
+  if(length(Lines)==1){ ### testing if gmt is single line
     gmt<-unlist(strsplit(x = Lines,split = "\t"))
     short_gmt<-gmt[-c(1,2)]
     pos<-grepl(pattern = "\\*",x = short_gmt)
@@ -756,7 +764,7 @@ format_from_gmt<-function(path = ""){
     result[,2]<-apply(result[,-(1:2)], 1, FUN = function(z) sum(z!=""))
     
   }
-    
+  
   return(result)
 }
 
