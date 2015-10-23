@@ -3,9 +3,14 @@ Type: Package
 Title: Gene enrichment analysis from ACSN maps or gmt files
 Version: 0.10.15
 Date: 2015-10-15
-Author: Eric BONNET, Paul DEVEAU
-Maintainer: Eric BONNET <eric.bonnet@curie.fr>; Paul DEVEAU <paul.deveau@curie.fr>
-Description: Compute and represent gene set enrichment from your data based on pre-saved maps from ACSN or user imported maps. The gene set enrichment can be run with hypergeometric test or Fisher exact test, and can use multiple corrections. Visualization of data can be done either by barplots or heatmaps. 
+Authors@R: c(person("Paul", "Deveau", role = c("aut", "cre"),
+		     email = "paul.deveau@curie.fr"),
+			 person("Eric", "Bonnet",role = "aut",
+			 email = "eric.bonnet@curie.fr"))
+Maintainer: Paul Deveau <paul.deveau@curie.fr>
+Description: Compute and represent gene set enrichment or depletion from your data based on pre-saved maps from ACSN or user imported maps.
+ The gene set enrichment can be run with hypergeometric test or Fisher exact test, and can use multiple corrections. 
+ Visualization of data can be done either by barplots or heatmaps. 
 Depends: R (>= 3.1.0),ggplot2, gridExtra
 Suggests: 
 License: GPL-2
