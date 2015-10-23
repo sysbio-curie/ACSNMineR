@@ -729,38 +729,45 @@ cnum<-function(x){
 #' Import data from gmt files
 #' Convert gmt file to dataframe that can be used for anaysis
 #'@param path Path to the gmt file to be imported
+#'@examples file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNEnrichment")
+#'format_from_gmt(file)
 #'@export
 
 format_from_gmt<-function(path = ""){
   
-  max_length<-max(sapply(X=readLines(path,warn = FALSE),FUN = function(z){
-    z2<-gsub("\t","",z)
-    return(nchar(z)-nchar(z2))
-  }))
+  Lines<-readLines(path,warn = FALSE)
   
-  
-  gmt<-read.csv(path,header = FALSE, 
-                sep = "\t",fill = TRUE,
-                col.names = paste("V",1:max_length,sep="")
-  )
-  
-  
+    
   ### Filter out non-genes
-  if(is.null(dim(gmt))){ ### testing if gmt is single lign
-    pos<-grep(pattern = "\\*",x = gmt)
-    result<-gmt
-    result[pos]<-""
+  if(length(Lines)==1){ ### testing if gmt is single lign
+    gmt<-unlist(strsplit(x = Lines,split = "\t"))
+    short_gmt<-gmt[-c(1,2)]
+    pos<-grepl(pattern = "\\*",x = short_gmt)
+    result<-c(gmt[c(1,2)],gmt[-c(1,2)][!pos])
+    result[2]<-length(result)-2
     result<-as.data.frame(t(result))
+    
+    
   }
   else{
+    max_length<-max(sapply(X=Lines,FUN = function(z){
+      z2<-gsub("\t","",z)
+      return(nchar(z)-nchar(z2))
+    }))  
+    gmt<-read.csv(path,header = FALSE, 
+                  sep = "\t",fill = TRUE,
+                  col.names = paste("V",1:max_length,sep="")
+    )
+    
     result<-t(apply(gmt,1,FUN = function(z){
-      pos<-grep(pattern = "\\*",x = z)
+      pos<-grepl(pattern = "\\*",x = z)
       res<-z
       res[pos]<-""
       return(res)
     }))
+    result[,2]<-apply(result[,-(1:2)], 1, FUN = function(z) sum(z!=""))
+    
   }
-  result[,2]<-apply(result[,-(1:2)], 1, FUN = function(z) sum(z!=""))
     
   return(result)
 }

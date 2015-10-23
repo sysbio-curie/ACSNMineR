@@ -14,4 +14,8 @@ format_from_gmt(path = "")
 Import data from gmt files
 Convert gmt file to dataframe that can be used for anaysis
 }
+\examples{
+file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNEnrichment")
+format_from_gmt(file)
+}
 
