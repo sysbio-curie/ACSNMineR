@@ -37,3 +37,4 @@ Icon
 .Rhistory
 ACSN_Enrichment.Rproj
 *.Rproj*
+.RData

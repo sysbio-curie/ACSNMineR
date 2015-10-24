@@ -1,8 +1,10 @@
 ---
 output:
   html_document:
-    highlight: tango
-    toc: yes
+    fig_caption: yes
+    highlight: pygments
+    self_contained: no
+    theme: spacelab
   word_document:
     highlight: tango
 ---
@@ -48,20 +50,34 @@ Let's use saved data from the package:
 file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNEnrichment")
 # Then import it
 gmt<-ACSNEnrichment::format_from_gmt(file)
+```
+```{r echo = FALSE}
 knitr::kable(gmt[,1:10])
 ```
 
-ACSN maps are built-in and can easily be accessed:
-```{r}
-# Available maps:
-knitr::kable(t(names(ACSNEnrichment::ACSN_maps)))
-#And accessing them:
-knitr::kable(head(ACSNEnrichment::ACSN_maps$CellCycle[,1:10]), row.names = FALSE)
+ACSN maps are built-in and can easily be accessed through ACSNEnrcihment::ACSN_maps:
+```{r eval = FALSE}
+# Name of available maps:
+names(ACSNEnrichment::ACSN_maps)
 
+````
+`````{r echo = FALSE}
+knitr::kable(names(ACSNEnrichment::ACSN_maps))
+````
+
+````{r eval = FALSE}
+#And accessing them:
+ACSNEnrichment::ACSN_maps$CellCycle
+````
+````{r echo = FALSE}
+knitr::kable(head(ACSNEnrichment::ACSN_maps$CellCycle[,1:10]), row.names = FALSE)
 ```
 
 The gene set that was used for tests is the following:
-```{r}
+````{r eval = FALSE}
+ACSNEnrichment::genes_test
+````
+```{r echo = FALSE}
 knitr::kable(ACSNEnrichment::genes_test)
 ```
 
@@ -73,6 +89,8 @@ Example<-ACSNEnrichment::enrichment(ACSNEnrichment::genes_test,
     min_module_size = 10, 
     threshold = 0.05,
     maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle))
+````
+```{r echo = FALSE}
 knitr::kable(Example,row.names = FALSE)
 ````
 
@@ -94,9 +112,18 @@ Example<-ACSNEnrichment::multisample_enrichment(Genes_by_sample = list(set1 = AC
     maps = ACSNEnrichment::ACSN_maps$CellCycle,
     min_module_size = 10,
     cohort_threshold = FALSE)
+````
+```{r eval = FALSE}
+print(Example[[1]])
+````
+```{r echo = FALSE}
 knitr::kable(Example[[1]],row.names = FALSE)
+````
+```{r eval = FALSE}
+print(Example[[2]])
+````
+```{r echo = FALSE}
 knitr::kable(Example[[2]],row.names = FALSE)
-
 
 ````
 
@@ -145,7 +172,7 @@ Where:
 ______
 
 A barplot can be achieved by using the following:
-````{r}
+````{r warning = FALSE}
 ACSNEnrichment::represent_enrichment(enrichment = list(SampleA = ACSNEnrichment::enrichment_test[1:10,], 
     SampleB = ACSNEnrichment::enrichment_test[3:10,]),
     plot = "bar", 
@@ -153,6 +180,7 @@ ACSNEnrichment::represent_enrichment(enrichment = list(SampleA = ACSNEnrichment:
     nrow = 1)
 
 ````
+
 Where:
 
 * enrichment is the result from the enrichment or multisample_enrichment function
