@@ -15,9 +15,10 @@ vignette: >
 ---
 # <a name="I">ACSN Enrichment</a>
 
-
 ##  <a name="IIA">Description </a>
 ACSNEnrichment is an R package, freely available.
+
+ACSN stands for Atlas of Cancer Signaling Networks, and shows gene interaction in pathways relevant to cancer.
 
 This package is designed for an easy analysis of gene maps (either user imported from gmt files or ACSN maps).
 Its aim is to allow a statistical analysis of statistically enriched or depleted pathways from a user imported gene list, as well as a graphic representation of results.
