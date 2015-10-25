@@ -12,6 +12,9 @@ Description: Compute and represent gene set enrichment or depletion from your da
  The gene set enrichment can be run with hypergeometric test or Fisher exact test, and can use multiple corrections. 
  Visualization of data can be done either by barplots or heatmaps. 
 Depends: R (>= 3.1.0),ggplot2, gridExtra
-Suggests: 
+Suggests: ,
+    knitr,
+    rmarkdown
 License: GPL-2
 LazyData: true
+VignetteBuilder: knitr

@@ -1,0 +1,16 @@
+---
+title: "Statistical tests"
+author: "Paul Deveau"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+      self_contained: no
+      fig_width: 7
+      fig_height: 7
+vignette: >
+  %\VignetteIndexEntry{Statistical tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+Several statistical tests and options are available for the computation of enrichment or depletion of pathways.
