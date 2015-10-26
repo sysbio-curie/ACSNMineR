@@ -25,11 +25,11 @@
 #' while two-sided (only for fisher test) checks if there is a difference .
 #' @examples enrichment(genes_test,min_module_size = 10, 
 #'    threshold = 0.05,
-#'    maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+#'    maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle),
 #'    universe = "ACSN")
 #' @export
 enrichment<-function(Genes=NULL,
-                     maps = ACSNEnrichment::ACSN_maps, 
+                     maps = ACSNMineR::ACSN_maps, 
                      correction_multitest = "BH",
                      statistical_test = "fisher",
                      min_module_size = 5,
@@ -72,7 +72,7 @@ enrichment<-function(Genes=NULL,
   ### If universe is ACSN: extract genes from ACSN and define it as universe
   if(length(universe == 1)){
     if(universe == "ACSN"){
-      genesACSN<-unique(unlist(lapply(X = ACSNEnrichment::ACSN_maps,FUN = function(z){
+      genesACSN<-unique(unlist(lapply(X = ACSNMineR::ACSN_maps,FUN = function(z){
         return(as.character(unique(z[,-(1:2)])))
       })))
       universe<-genesACSN[genesACSN!=""]
@@ -444,13 +444,13 @@ enrichment<-function(Genes=NULL,
 #' @param alternative One of "greater", "less", "both", or "two.sided" (only for fisher test).
 #' Greater will check for enrichment, less will check for depletion, and both will look for both.
 #' @examples multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
-#' maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+#' maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle),
 #' min_module_size = 10,
 #' universe = "ACSN")
 #' @export
 
 multisample_enrichment<-function(Genes_by_sample=NULL,
-                                 maps = ACSNEnrichment::ACSN_maps, 
+                                 maps = ACSNMineR::ACSN_maps, 
                                  correction_multitest = "BH",
                                  statistical_test = "fisher",
                                  min_module_size = 5,
@@ -725,7 +725,7 @@ cnum<-function(x){
 #' Import data from gmt files
 #' Convert gmt file to dataframe that can be used for anaysis
 #'@param path Path to the gmt file to be imported
-#'@examples file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNEnrichment")
+#'@examples file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNMineR")
 #'format_from_gmt(file)
 #'@export
 

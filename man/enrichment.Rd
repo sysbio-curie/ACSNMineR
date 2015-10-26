@@ -4,7 +4,7 @@
 \alias{enrichment}
 \title{Gene set enrichment analysis}
 \usage{
-enrichment(Genes = NULL, maps = ACSNEnrichment::ACSN_maps,
+enrichment(Genes = NULL, maps = ACSNMineR::ACSN_maps,
   correction_multitest = "BH", statistical_test = "fisher",
   min_module_size = 5, universe = "map_defined", threshold = 0.05,
   alternative = "greater")
@@ -39,7 +39,7 @@ and can use multiple corrections. Visualization of data can be done either by ba
 \examples{
 enrichment(genes_test,min_module_size = 10,
    threshold = 0.05,
-   maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+   maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle),
    universe = "ACSN")
 }
 

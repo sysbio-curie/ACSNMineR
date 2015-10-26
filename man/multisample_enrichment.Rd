@@ -4,11 +4,10 @@
 \alias{multisample_enrichment}
 \title{Automated gene set analysis for multiple sets}
 \usage{
-multisample_enrichment(Genes_by_sample = NULL,
-  maps = ACSNEnrichment::ACSN_maps, correction_multitest = "BH",
-  statistical_test = "fisher", min_module_size = 5,
-  universe = "map_defined", threshold = 0.05, cohort_threshold = TRUE,
-  alternative = "greater")
+multisample_enrichment(Genes_by_sample = NULL, maps = ACSNMineR::ACSN_maps,
+  correction_multitest = "BH", statistical_test = "fisher",
+  min_module_size = 5, universe = "map_defined", threshold = 0.05,
+  cohort_threshold = TRUE, alternative = "greater")
 }
 \arguments{
 \item{Genes_by_sample}{List of character vectors. Each list element name should be a sample name,
@@ -38,7 +37,7 @@ Automated gene set analysis for multiple sets
 }
 \examples{
 multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
-maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle),
+maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle),
 min_module_size = 10,
 universe = "ACSN")
 }

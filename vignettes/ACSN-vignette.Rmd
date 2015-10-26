@@ -16,7 +16,7 @@ vignette: >
 # <a name="I">ACSN Enrichment</a>
 
 ##  <a name="IIA">Description </a>
-ACSNEnrichment is an R package, freely available.
+ACSNMineR is an R package, freely available.
 
 ACSN stands for Atlas of Cancer Signaling Networks, and shows gene interaction in pathways relevant to cancer.
 
@@ -53,9 +53,9 @@ Let's use saved data from the package:
 
 ```{r gmt_example}
 # Retrieve path of the example gmt
-file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNEnrichment")
+file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNMineR")
 # Then import it
-gmt<-ACSNEnrichment::format_from_gmt(file)
+gmt<-ACSNMineR::format_from_gmt(file)
 ```
 ```{r gmt_display, echo = FALSE}
 knitr::kable(gmt[,1:10])
@@ -64,37 +64,37 @@ knitr::kable(gmt[,1:10])
 ACSN maps are built-in and can easily be accessed through ACSNEnrcihment::ACSN_maps:
 ```{r gmt_map_code, eval = FALSE}
 # Name of available maps:
-names(ACSNEnrichment::ACSN_maps)
+names(ACSNMineR::ACSN_maps)
 
 ````
 `````{r gmt_map_show, echo = FALSE}
-knitr::kable(names(ACSNEnrichment::ACSN_maps))
+knitr::kable(names(ACSNMineR::ACSN_maps))
 ````
 
 ````{r gmt_access_code, eval = FALSE}
 #And accessing them:
-ACSNEnrichment::ACSN_maps$CellCycle
+ACSNMineR::ACSN_maps$CellCycle
 ````
 ````{r gmt_access_display, echo = FALSE}
-knitr::kable(head(ACSNEnrichment::ACSN_maps$CellCycle[,1:10]), row.names = FALSE)
+knitr::kable(head(ACSNMineR::ACSN_maps$CellCycle[,1:10]), row.names = FALSE)
 ```
 
 The gene set that was used for tests is the following:
 ````{r test_genes,eval = FALSE}
-ACSNEnrichment::genes_test
+ACSNMineR::genes_test
 ````
 ```{r test_genes_show, echo = FALSE}
-knitr::kable(ACSNEnrichment::genes_test)
+knitr::kable(ACSNMineR::genes_test)
 ```
 
 #### <a name = "IIIA2"> Perform analysis </a>
 
 Gene set enrichment for a single set can be performed by calling:
 ````{r Analysis_code}
-Example<-ACSNEnrichment::enrichment(ACSNEnrichment::genes_test,
+Example<-ACSNMineR::enrichment(ACSNMineR::genes_test,
     min_module_size = 10, 
     threshold = 0.05,
-    maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle))
+    maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle))
 ````
 ```{r Analysis_show, echo = FALSE}
 knitr::kable(Example,row.names = FALSE)
@@ -113,9 +113,9 @@ Where:
 Gene set enrichment for multiple sets/cohorts can be performed by calling:
 
 ````{r multi_analysis_code}
-Example<-ACSNEnrichment::multisample_enrichment(Genes_by_sample = list(set1 = ACSNEnrichment::genes_test[-1],
-                                                              set2 = ACSNEnrichment::genes_test[-2]),
-    maps = ACSNEnrichment::ACSN_maps$CellCycle,
+Example<-ACSNMineR::multisample_enrichment(Genes_by_sample = list(set1 = ACSNMineR::genes_test[-1],
+                                                              set2 = ACSNMineR::genes_test[-2]),
+    maps = ACSNMineR::ACSN_maps$CellCycle,
     min_module_size = 10,
     cohort_threshold = FALSE)
 ````
@@ -153,9 +153,9 @@ ______
 Heatmaps for single sample or multiple sample representing p-values can be easily generated thanks to the represent_enrichment function.
 
 ````{r heatmap_plot}
-ACSNEnrichment::represent_enrichment(enrichment = list(
-    SampleA = ACSNEnrichment::enrichment_test[1:10,], 
-    SampleB = ACSNEnrichment::enrichment_test[3:10,]),
+ACSNMineR::represent_enrichment(enrichment = list(
+    SampleA = ACSNMineR::enrichment_test[1:10,], 
+    SampleB = ACSNMineR::enrichment_test[3:10,]),
     plot = "heatmap", 
     scale = "log",
     low = "steelblue" , high ="white",
@@ -180,9 +180,9 @@ ______
 
 A barplot can be achieved by using the following:
 ````{r barplot, warning = FALSE}
-ACSNEnrichment::represent_enrichment(enrichment = list(
-    SampleA = ACSNEnrichment::enrichment_test[1:10,], 
-    SampleB = ACSNEnrichment::enrichment_test[3:10,]),
+ACSNMineR::represent_enrichment(enrichment = list(
+    SampleA = ACSNMineR::enrichment_test[1:10,], 
+    SampleB = ACSNMineR::enrichment_test[3:10,]),
     plot = "bar", 
     scale = "log")
 
