@@ -2,8 +2,6 @@
 ####### ACSN enrichment analysis #######
 ####### Single sample analysis / single cohort analysis #######
 
-
-
 #' Gene set enrichment analysis
 #' 
 #' Compute and represent gene set enrichment from your data based on pre-saved maps from ACSN or user imported maps. 
@@ -28,6 +26,8 @@
 #'    maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle),
 #'    universe = "ACSN")
 #' @export
+#' @importFrom stats fisher.test p.adjust phyper
+#' @importFrom utils read.csv
 enrichment<-function(Genes=NULL,
                      maps = ACSNMineR::ACSN_maps, 
                      correction_multitest = "BH",
