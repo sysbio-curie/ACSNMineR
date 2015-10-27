@@ -1,5 +1,5 @@
 ####Buil Status:
-[![Build Status](https://travis-ci.org/sysbio-curie/ACSN_Enrichment.svg?branch=master)](https://travis-ci.org/sysbio-curie/ACSN_Enrichment)
+[![Build Status](https://travis-ci.org/sysbio-curie/ACSNMineR.svg?branch=master)](https://travis-ci.org/sysbio-curie/ACSN_Enrichment)
 ####CRAN Status and statistics : 
 [![CRAN version](http://www.r-pkg.org/badges/version/ACSNMineR)](http://www.r-pkg.org/badges/version/ACSNMineR)
 [![CRAN downloads weekly](http://cranlogs.r-pkg.org/badges/ACSNMineR)](http://cran.rstudio.com/web/packages/ACSNMineR/index.html)
