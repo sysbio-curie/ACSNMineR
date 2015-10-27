@@ -1,4 +1,4 @@
-####Buil Status:
+####Build Status:
 [![Build Status](https://travis-ci.org/sysbio-curie/ACSNMineR.svg?branch=master)](https://travis-ci.org/sysbio-curie/ACSN_Enrichment)
 ####CRAN Status and statistics : 
 [![CRAN version](http://www.r-pkg.org/badges/version/ACSNMineR)](http://www.r-pkg.org/badges/version/ACSNMineR)
