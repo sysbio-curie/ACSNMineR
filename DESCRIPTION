@@ -1,8 +1,8 @@
 Package: ACSNMineR
 Type: Package
 Title: Gene Enrichment Analysis from ACSN Maps or Gmt Files
-Version: 0.10.15
-Date: 2015-10-15
+Version: 0.15.11
+Date: 2015-11-3
 Authors@R: c(person("Paul", "Deveau", role = c("aut", "cre"),
 		     email = "paul.deveau@curie.fr"),
 			 person("Eric", "Bonnet",role = "aut",
