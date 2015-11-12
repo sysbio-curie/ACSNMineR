@@ -5,7 +5,7 @@
 [![CRAN downloads weekly](http://cranlogs.r-pkg.org/badges/ACSNMineR)](http://cran.rstudio.com/web/packages/ACSNMineR/index.html)
 [![CRAN total](http://cranlogs.r-pkg.org/badges/grand-total/ACSNMineR)](http://cran.rstudio.com/web/packagesACSNMineR/index.html)
 
-# <a name="I">ACSN Enrichment</a>
+# <a name="I">ACSNMineR</a>
 
 
 ##  <a name="IIA">Description </a>
