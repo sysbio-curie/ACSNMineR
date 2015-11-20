@@ -209,27 +209,22 @@ enrichment<-function(Genes=NULL,
         if(alternative != "both"){        
           
           if(statistical_test == "fisher"){
-            print(num)
-            print(mapsize-num)
-            print(Genes_size-num)
-            print(size - mapsize)
             p.values<-c(p.val.calc(num,
                                    mapsize-num,
-                                   Genes_size-num,
-                                   size - mapsize,
-                                   "fisher",
+                                   length(Genes),
+                                   size - length(Genes),
+                                   statistical_test,
                                    alternative
             ),
             alternative)
-            print(p.values)
-            print("___________")
+
           }
           else{
             p.values<-c(p.val.calc( num,
                                     mapsize,
                                     size - mapsize,
                                     length(Genes),
-                                    "hypergeom",
+                                    statistical_test,
                                     alternative
             ),
             alternative
@@ -240,16 +235,16 @@ enrichment<-function(Genes=NULL,
           if(statistical_test == "fisher"){
             p.values<-cbind(c(p.val.calc(num,
                                          mapsize-num,
-                                         Genes_size-num,
-                                         size - mapsize,
+                                         length(Genes),
+                                         size - length(Genes),
                                          "fisher",
                                          "greater"
             ),
             "greater"),
             c(p.val.calc(num,
                          mapsize-num,
-                         Genes_size-num,
-                         size - mapsize,
+                         Genes_size,
+                         size - Genes_size,
                          "fisher",
                          "less"
             ),
@@ -258,9 +253,9 @@ enrichment<-function(Genes=NULL,
           }
           else{
             p.values<-rbind(c(p.val.calc( num,
-                                          mapsize,
-                                          size - mapsize,
+                                          mapsize-num,
                                           length(Genes),
+                                          size - length(Genes),
                                           "hypergeom",
                                           'greater'
             ),
@@ -302,14 +297,14 @@ enrichment<-function(Genes=NULL,
             short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
             num<-cnum(z[2])
             test<-Genes %in% short_z
-            Gene_set<-paste(Genes[test],collapse = " ")
             Genes_in_module<-sum(test)
-            return(t(c(Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                           num-Genes_in_module,
-                                                           Genes_size - Genes_in_module,
-                                                           size - num,
-                                                           statistical_test,
-                                                           alternative),alternative))
+            Gene_set<-paste(Genes[test],collapse = " ")
+            return(t(c(Gene_set,Genes_in_module,p.val.calc(x = Genes_in_module,
+                                                           y = num-Genes_in_module,
+                                                           z = length(Genes),
+                                                           a = size - length(Genes),
+                                                           stat_test = statistical_test,
+                                                           alt = alternative),alternative))
             )
           }
           )
@@ -319,18 +314,18 @@ enrichment<-function(Genes=NULL,
             short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
             num<-cnum(z[2])
             test<-Genes %in% short_z
-            Gene_set<-paste(Genes[test],collapse = " ")
             Genes_in_module<-sum(test)
-            return(cbind(t(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                                           num-Genes_in_module,
-                                                                           Genes_size - Genes_in_module,
-                                                                           size - num,
+            Gene_set<-paste(Genes[test],collapse = " ")
+            return(cbind(t(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(x = Genes_in_module,
+                                                                           y = num-Genes_in_module,
+                                                                           z = length(Genes),
+                                                                           a = size - length(Genes),
                                                                            statistical_test,
-                                                                           "greater"),"enrichment")),
+                                                                           alternative = "greater"),"enrichment")),
                          t(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
                                                                            num-Genes_in_module,
-                                                                           Genes_size - Genes_in_module,
-                                                                           size - num,
+                                                                           length(Genes),
+                                                                           size - length(Genes),
                                                                            statistical_test,
                                                                            "less"),"depletion"))))
           }
@@ -523,7 +518,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
 p.val.calc<-function(x,y,z,a,stat_test,alt){
   if(stat_test=="fisher"){
     M<-matrix(c(x,y,z,a),nrow = 2)
-    FT<-fisher.test(M,alt)
+    FT<-fisher.test(M, alternative =alt)
     return(FT$p.value)
   }
   else{
