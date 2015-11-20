@@ -209,6 +209,10 @@ enrichment<-function(Genes=NULL,
         if(alternative != "both"){        
           
           if(statistical_test == "fisher"){
+            print(num)
+            print(mapsize-num)
+            print(Genes_size-num)
+            print(size - mapsize)
             p.values<-c(p.val.calc(num,
                                    mapsize-num,
                                    Genes_size-num,
@@ -217,6 +221,8 @@ enrichment<-function(Genes=NULL,
                                    alternative
             ),
             alternative)
+            print(p.values)
+            print("___________")
           }
           else{
             p.values<-c(p.val.calc( num,
@@ -516,8 +522,9 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
 #' 
 p.val.calc<-function(x,y,z,a,stat_test,alt){
   if(stat_test=="fisher"){
-    return(fisher.test(matrix(c(x,y,z,a),nrow = 2),
-                       alt = alt)$p.value)
+    M<-matrix(c(x,y,z,a),nrow = 2)
+    FT<-fisher.test(M,alt)
+    return(FT$p.value)
   }
   else{
     if(alt =="greater"){
