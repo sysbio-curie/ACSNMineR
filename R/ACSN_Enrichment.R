@@ -38,6 +38,9 @@ enrichment<-function(Genes=NULL,
                      alternative = "greater"){
   
   ### Checking maps
+  if(statistical_test=="hypergeom"){
+    warning("p-values can be unreliable with hypergeometric test if the number of genes in module is low (typically 0)")
+  }
   if(is.data.frame(maps) | is.matrix(maps)){
     maps<-list(maps)
   }
@@ -190,6 +193,9 @@ enrichment<-function(Genes=NULL,
       modules<-map[,1:2]
       
       ### Calculate p-value for map as a whole if map is not ACSN_master
+      ###########################
+      ### SHOULD WE COMPUTE P-VAL FOR WHOLE MAP?
+      ###########################
       if(universe_was_ACSN & map_names[tracker]!="ACSN_master"){
         compute_module_p.value<-TRUE
       }
@@ -199,71 +205,95 @@ enrichment<-function(Genes=NULL,
       else{
         compute_module_p.value<-FALSE
       }
+      
+      ########################
+      # BEGIN MAP TESTING
+      ########################
       if( compute_module_p.value ){ ###
         mapgenes<-unique(as.character(unlist(map[,-c(1:2)])))
         
         mapsize<-length(mapgenes)
         genes_in_mapgenes<-(Genes %in% mapgenes)      
-        num<-sum( genes_in_mapgenes)
+        Ngenes_in_mapgenes<-sum(genes_in_mapgenes)
         
-        if(alternative != "both"){        
-          
-          if(statistical_test == "fisher"){
-            p.values<-c(p.val.calc(num,
-                                   mapsize-num,
+        ########################
+        # BEGIN FISHER TESTING
+        ########################
+        if(statistical_test == "fisher"){
+          if(alternative != "both"){        
+            p.values<-c(p.val.calc(Ngenes_in_mapgenes,
+                                   mapsize-Ngenes_in_mapgenes,
                                    length(Genes),
                                    size - length(Genes),
-                                   statistical_test,
+                                   "fisher",
                                    alternative
             ),
             alternative)
-
+            
           }
-          else{
-            p.values<-c(p.val.calc( num,
-                                    mapsize,
-                                    size - mapsize,
-                                    length(Genes),
-                                    statistical_test,
-                                    alternative
-            ),
-            alternative
-            ) 
-          }
-        }
-        else{ ### if both computations
-          if(statistical_test == "fisher"){
-            p.values<-cbind(c(p.val.calc(num,
-                                         mapsize-num,
+          else{ ### if both computations
+            p.values<-cbind(c(p.val.calc(Ngenes_in_mapgenes,
+                                         mapsize-Ngenes_in_mapgenes,
                                          length(Genes),
                                          size - length(Genes),
                                          "fisher",
                                          "greater"
             ),
             "greater"),
-            c(p.val.calc(num,
-                         mapsize-num,
+            c(p.val.calc(Ngenes_in_mapgenes,
+                         mapsize-Ngenes_in_mapgenes,
                          Genes_size,
-                         size - Genes_size,
+                         size - length(Genes),
                          "fisher",
                          "less"
             ),
             "less")
             )
           }
+        }
+        ########################
+        # BEGIN HYPERGEOM TESTING
+        ########################
+        else{ ### Test is != from fisher
+          ### Ngcalc: Ngenes corrected or not for P[X<=k] (default for phyper, needs to be P[X<k] for p-value)
+          if(alternative == "less"){
+            Ngcalc<-Ngenes_in_mapgenes
+          }
           else{
-            p.values<-rbind(c(p.val.calc( num,
-                                          mapsize-num,
+            if(Ngenes_in_mapgenes>0){
+              Ngcalc<-Ngenes_in_mapgenes-1
+            }
+            else{
+              Ngcalc<-0
+            }
+          }
+          if(alternative != "both"){        
+            
+            p.values<-c(p.val.calc( Ngcalc,
+                                    length(Genes),
+                                    size - length(Genes),
+                                    mapsize,
+                                    "hypergeom",
+                                    alternative
+            ),
+            alternative
+            ) 
+          }
+          
+          else{ ### Testing both hypotheses
+            
+            p.values<-rbind(c(p.val.calc( Ngcalc,
                                           length(Genes),
                                           size - length(Genes),
+                                          mapsize,
                                           "hypergeom",
                                           'greater'
             ),
             'greater')
-            ,c(p.val.calc( num,
-                           mapsize,
-                           size - mapsize,
+            ,c(p.val.calc( Ngenes_in_mapgenes, ### for not using Ngcalc see def of Ngcalc
                            length(Genes),
+                           size - length(Genes),
+                           mapsize,
                            "hypergeom",
                            'less'
             ),
@@ -276,7 +306,7 @@ enrichment<-function(Genes=NULL,
         spare<-cbind(map_names[tracker],
                      mapsize,
                      paste(Genes[genes_in_mapgenes],collapse = " "),
-                     num,
+                     Ngenes_in_mapgenes,
                      t(p.values))
         colnames(spare)<-c("module","module_size","genes_in_module",
                            "nb_genes_in_module","p.value","test")
@@ -290,17 +320,21 @@ enrichment<-function(Genes=NULL,
         modules[,1]<-paste(map_names[tracker],modules[,1],sep=":")
         map[,1]<-modules[,1]
       }
-      #### Calculation for modules
+      ##########################
+      #### BEGIN MODULE TESTING
+      #########################
+      ### BEGIN FISHER TEST###
+      #########################
       if(statistical_test == "fisher"){
         if(alternative != "both"){
           p.values<-apply(map,MARGIN = 1, FUN = function(z){
             short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
-            num<-cnum(z[2])
+            Module_size<-cnum(z[2])
             test<-Genes %in% short_z
             Genes_in_module<-sum(test)
             Gene_set<-paste(Genes[test],collapse = " ")
             return(t(c(Gene_set,Genes_in_module,p.val.calc(x = Genes_in_module,
-                                                           y = num-Genes_in_module,
+                                                           y = Module_size-Genes_in_module,
                                                            z = length(Genes),
                                                            a = size - length(Genes),
                                                            stat_test = statistical_test,
@@ -312,18 +346,18 @@ enrichment<-function(Genes=NULL,
         else{
           p.values<-apply(map,MARGIN = 1, FUN = function(z){
             short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
-            num<-cnum(z[2])
+            Module_size<-cnum(z[2])
             test<-Genes %in% short_z
             Genes_in_module<-sum(test)
             Gene_set<-paste(Genes[test],collapse = " ")
             return(cbind(t(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(x = Genes_in_module,
-                                                                           y = num-Genes_in_module,
+                                                                           y = Module_size-Genes_in_module,
                                                                            z = length(Genes),
                                                                            a = size - length(Genes),
                                                                            statistical_test,
                                                                            alternative = "greater"),"enrichment")),
                          t(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                                           num-Genes_in_module,
+                                                                           Module_size-Genes_in_module,
                                                                            length(Genes),
                                                                            size - length(Genes),
                                                                            statistical_test,
@@ -331,68 +365,71 @@ enrichment<-function(Genes=NULL,
           }
           )
         }
+        #########################
+        ### BEGIN HYPERGEOM TEST#
+        #########################
       }else if(statistical_test == "hypergeom"){
-        if(alternative != "both"){
-          p.values<-apply(map,MARGIN = 1, FUN = function(z){
-            short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
-            num<-cnum(z[2])
-            test<-Genes %in% short_z
-            Genes_in_module<-sum(test)
-            Gene_set<-paste(Genes[test],collapse = " ")
+        p.values<-apply(map,MARGIN = 1, FUN = function(z){
+          short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
+          Module_size<-cnum(z[2])
+          test<-Genes %in% short_z
+          Genes_in_module<-sum(test)
+          Gene_set<-paste(Genes[test],collapse = " ")
+          if(alternative=="greater"){
             if(Genes_in_module > 0){ ### Correction for depletion: phyper tests for P[X<=x]
-              Genes_in_module<-Genes_in_module-1 
+              Genes_in_module_calc<-Genes_in_module-1 
             }
-            
-            return(c(Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                         num,
-                                                         size - num,
-                                                         length(Genes),
-                                                         statistical_test,
+            else{
+              Genes_in_module_calc<-0
+            }
+          }
+          else{
+            Genes_in_module_calc<-Genes_in_module
+          }
+          if(alternative != "both"){ ####
+            return(c(Gene_set,Genes_in_module,p.val.calc(x = Genes_in_module_calc,
+                                                         y = length(Genes),
+                                                         z =size - length(Genes),
+                                                         a = Module_size,
+                                                         "hypergeom",
                                                          alternative),
                      alternative))
-            
-          })
-        }
-        else{ 
-          p.values<-apply(map,MARGIN = 1, FUN = function(z){
-            short_z<-z[z!=""][-c(1,2)] ### remove empty slots, module name and length
-            num<-cnum(z[2])
-            test<-Genes %in% short_z
-            Genes_in_module<-sum(test)
-            Gene_set<-paste(Genes[test],collapse = " ")
-            if(Genes_in_module > 0){ ### Correction for depletion: phyper tests for P[X<=x]
-              Genes_in_module<-Genes_in_module-1 
-            }
-            
-            return(rbind(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                                         num,
-                                                                         size - num,
-                                                                         length(Genes),
-                                                                         statistical_test,
+          }
+          else{ #### p-value for both lower and higher tail
+            return(rbind(c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(x = Genes_in_module_calc,
+                                                                         y = length(Genes),
+                                                                         z = size - length(Genes),
+                                                                         a = Module_size,
+                                                                         "hypergeom",
                                                                          "greater"),
                            "enrichment")),
-                   c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(Genes_in_module,
-                                                                   num,
-                                                                   size - num,
-                                                                   length(Genes),
-                                                                   statistical_test,
+                   c(z[1],z[2],Gene_set,Genes_in_module,p.val.calc(x= Genes_in_module,
+                                                                   y=length(Genes),
+                                                                   z=size - length(Genes),
+                                                                   a=Module_size,
+                                                                   "hypergeom",
                                                                    "less"),
                      "depletion"))
             
-          })
-        }
-      }
-      if(alternative!="both"){
-        spare<-cbind(modules,t(p.values))
-      }
-      else{
-        spare<-rbind(t(p.values)[,1:6],t(p.values)[,7:12])
-      }
-      colnames(spare)<-c("module","module_size","genes_in_module",
-                         "nb_genes_in_module","p.value","test")
-      result<-rbind(result,spare)
+          }
+        }) ### end of phyper apply function
+      } ### end of statistical test
     }
-  }
+    ##################
+    #END HYPERGEOM ###
+    #BEGIN Data formating#
+    ##################
+    if(alternative!="both"){
+      spare<-cbind(modules,t(p.values))
+    }
+    else{
+      spare<-rbind(t(p.values)[,1:6],t(p.values)[,7:12])
+    }
+    colnames(spare)<-c("module","module_size","genes_in_module",
+                       "nb_genes_in_module","p.value","test")
+    result<-rbind(result,spare)
+  } ### end of maps
+  
   result$p.value<-cnum(result$p.value)
   result$universe_size<-size
   result$genes_in_universe<-Genes_size
@@ -464,7 +501,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                  threshold = 0.05,
                                  cohort_threshold = TRUE,
                                  alternative = "greater"){
-  ### Compute universe once and for all to gain time!
+  ### TO-DO : restrict genes to universe to gain computation time
   
   if(cohort_threshold){
     result<-lapply(X = Genes_by_sample ,
