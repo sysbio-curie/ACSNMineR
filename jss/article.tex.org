@@ -5,9 +5,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% almost as usual
-\author{Paul Deveau\\Institut Curie\\PSL Research University\\INSERM U900\\Mines-ParisTech \And 
-        Eric Bonnet\\Institut Curie\\PSL Research University\\INSERM U900\\Mines-ParisTech}
-\title{Calculating module enrichment and visualizing data on large-scale molecular maps with the R packages \pkg{ACSNMineR} and \pkg{RNaviCell}}
+\author{Achim Zeileis\\Universit\"at Innsbruck \And 
+        Second Author\\Plus Affiliation}
+\title{A Capitalized Title: Something about a Package \pkg{foo}}
 
 %% for pretty printing and a nice hypersummary also set:
 \Plainauthor{Achim Zeileis, Second Author} %% comma-separated
@@ -34,12 +34,13 @@
 %% The address of (at least) one author should be given
 %% in the following format:
 \Address{
-  Eric Bonnet\\
-  Computational Systems Biology of Cancer\\
-  Institut Curie\\
-  26, rue d'Ulm\\
-  75248 Paris\\
-  E-mail: \email{eric.bonnet@curie.fr}\\
+  Achim Zeileis\\
+  Department of Statistics and Mathematics\\
+  Faculty of Economics and Statistics\\
+  Universit\"at Innsbruck\\
+  6020 Innsbruck, Austria\\
+  E-mail: \email{Achim.Zeileis@uibk.ac.at}\\
+  URL: \url{http://eeecon.uibk.ac.at/~zeileis/}
 }
 %% It is also possible to add a telephone and fax number
 %% before the e-mail in the following format:
