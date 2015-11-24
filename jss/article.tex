@@ -75,12 +75,38 @@ vs disease) and then try to see if known biological pathways are enriched with
 this list of genes. 
 
 We have recently released the Atlas of Cancer Signalling Network (ACSN), a
-web-based database which
-describes signaling and regulatory molecular processes that occur in
-a healthy mammalian cell but that are frequently deregulated during
-cancerogenesis. ACSN is  
+web-based database which describes signaling and regulatory molecular processes
+that occur in a healthy mammalian cell but that are frequently deregulated
+during cancerogenesis \citep{kuperstein2013navicell}.  The ACSN atlas aims to
+be a comprehensive description of cancer-related mechanisms retrieved from the
+most recent literature. The web interface for ACSN is using the NaviCell
+technology, a software framework dedicated to web-based visualization and
+navigation for biological pathway maps \citep{kuperstein2013navicell}. This
+environment is providing an easy navigation of maps through the use of the
+Google Maps JavaScript library, a community interface with a web blog system,
+and a comprehensive module for visualization and analysis of high-throughput
+data \citep{bonnet2015navicell}.
 
-\bibliographystyle{jss}
+
+
+In this article, we describe two software packages related to ACSN analysis and
+data visualization for the popular R statistical enrironment \citep{mainRref,
+vance2009data}. The package \pkg{ACSNMineR} is designed for the calculation of
+gene enrichment and depletion in ACSN maps, while \pkg{RNaviCell} is dedicated
+to data visualization on ACSN maps. Both packages are available on the
+Comprehensive R Archive Network
+(\url{https://cran.r-project.org/web/packages/ACSNMineR/} and
+\url{https://cran.r-project.org/web/packages/RNaviCell/}), and on the GitHub
+repository (\url{https://github.com/sysbio-curie/ACSNMineR} and
+\url{https://github.com/sysbio-curie/RNaviCell}). 
+
+
+
+
+
+
+
+%\bibliographystyle{jss}
 \bibliography{biblio}
 
 \end{document}
