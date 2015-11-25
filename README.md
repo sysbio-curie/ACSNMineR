@@ -66,7 +66,7 @@ Results from the enrichment analysis function can be transformed to images thank
 ______
 Heatmaps for single sample or multiple sample representing p-values can be easily generated thanks to the represent_enrichment function.
 > represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
-    'SampleB = enrichment_test[3:10,]),
+    SampleB = enrichment_test[3:10,]),
     plot = "heatmap", 
     scale = "log",
     low = "steelblue" , high ="white",
