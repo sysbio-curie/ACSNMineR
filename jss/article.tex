@@ -88,7 +88,6 @@ and a comprehensive module for visualization and analysis of high-throughput
 data \citep{bonnet2015navicell}.
 
 
-
 In this article, we describe two software packages related to ACSN analysis and
 data visualization for the popular R statistical enrironment \citep{mainRref,
 vance2009data}. The package \pkg{ACSNMineR} is designed for the calculation of
@@ -98,11 +97,27 @@ Comprehensive R Archive Network
 (\url{https://cran.r-project.org/web/packages/ACSNMineR/} and
 \url{https://cran.r-project.org/web/packages/RNaviCell/}), and on the GitHub
 repository (\url{https://github.com/sysbio-curie/ACSNMineR} and
-\url{https://github.com/sysbio-curie/RNaviCell}). 
+\url{https://github.com/sysbio-curie/RNaviCell}). For the remainder of this
+article, we describe the organization of each package and illustrate their
+capacities with several concrete examples demonstrating their capabilities. 
+
+\section[Package organization]{Packages organization}
+
+\subsection{ACSNMineR}
+Currently, ACSN maps covers signaling pathways involved in DNA repair, cell cycle,
+cell survival, cell death, epithelial-to-mesenchymal transition (EMT) and cell
+motility. The information included in ACSN is organized in three hierarchical
+levels: a global map, which is composed of five individual maps, themselves
+composed of many functional modules covering individual pathways. Each map in
+ACSN covers hundreds of molecular players, biochemical reactions and causal
+relationships between the molecular players and cellular phenotypes. ACSN
+represents a large-scale biochemical reaction network of 4,826 reactions
+involving 2,371 proteins, and is continuously updated and expanded. 
+We have included the three hierarchical levels in the \pkg{ACSNMineR} package,
+in order to be able to calculate enrichments at all three levels. 
 
 
-
-
+\subsection{RNaviCell}
 
 
 
