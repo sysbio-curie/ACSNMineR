@@ -105,16 +105,71 @@ capacities with several concrete examples demonstrating their capabilities.
 
 \subsection{ACSNMineR}
 Currently, ACSN maps covers signaling pathways involved in DNA repair, cell
-cycle, cell survival, cell death, epithelial-to-mesenchymal transition (EMT)
-and cell motility. The information included in ACSN is organized in three
-hierarchical levels: a global map, which is composed of five individual maps,
-themselves composed of many functional modules covering individual pathways.
-Each map in ACSN covers hundreds of molecular players, biochemical reactions
-and causal relationships between the molecular players and cellular phenotypes.
-ACSN represents a large-scale biochemical reaction network of 4,826 reactions
+cycle, cell survival, cell death, epithelial-to-mesenchymal transition (EMT) and
+cell motility. Each of these large-scale molecular map is decomposed in a number
+of functional modules. The maps themselves are merged into a global ACSN map.
+Thus the information included in ACSN is organized in three hierarchical levels:
+a global map, five individual maps, and a total of 55 functional modules. Each
+ACSN map covers hundreds of molecular players, biochemical reactions and causal
+relationships between the molecular players and cellular phenotypes.  ACSN
+represents a large-scale biochemical reaction network of 4,826 reactions
 involving 2,371 proteins, and is continuously updated and expanded.  We have
 included the three hierarchical levels in the \pkg{ACSNMineR} package, in order
-to be able to calculate enrichments at all three levels. 
+to be able to calculate enrichments at all three levels. The calculations are
+made by counting the number of occurences of gene symbols (HUGO gene names) from
+a given list of genes of interest in all ACSN maps and modules. Table
+\ref{tab:table1} is detailling the number of gene symbols contained in all the ACSN
+maps.
+
+
+\begin{table}[h!]
+ \centering
+  \caption{ACSN maps included in the \pkg{ACSNMineR} package. Map: map name, Total: total
+  number of gene symbols (HUGO), Nb mod.: number of modules, Min: mimimum
+  number of gene symbols in the modules, Max: maximum number of gene symbols in
+  the modules, Mean: average number of gene sybols per module. N.B.: one gene
+  symbol may be present in several modules of the map.}
+  \label{tab:table1}
+  \begin{tabular}{l|c|c|c|c|c}
+    \hline
+    Map & Total & Nb mod. & Min & Max & Mean\\
+    \hline
+  ACSN global & 2137 & 55 & 2 &625& 85\\
+  Survival  &1065&46  &1 &434 &54\\
+  Apoptosis & 668&44 & 1& 382& 33\\
+  EMT \& Cell motility &620 &41  &1 &615 &43\\
+  DNA repair &337&48  &1 &69  &19\\
+  Cell cycle &119&45  &1 &27  &8\\
+  \hline
+
+  \end{tabular}
+
+\end{table}
+
+
+The statistical significance of the counts in the modules is assessed by using
+either the Fisher exact test \citep{fisher1922interpretation,
+fisher1934statistical} or the hypergeometric test, which are equivalent for this
+purpose \cite{rivals2007enrichment}.
+
+The current ACSN maps are included in the \pkg{ACSNMineR} package, as a list of character matrices.
+
+\begin{verbatim}
+> length(ACSN_maps)
+[1] 6
+> names(ACSN_maps)
+[1] "Apoptosis"    "CellCycle"    "DNA_repair"   "EMT_motility" "ACSN_master" 
+[6] "Survival"    
+\end{verbatim}
+
+For each matrix, rows represent a module, with the name of the module in the
+first column, followed by a description of the module (optional), and then
+followed by all the gene symbols of the module. The maps will be updated
+according to every ACSN major release.
+
+The main function of the \pkg{ACSNMineR} package is the \code{enrichment}
+function, which is calculating over-representation or depletion of genes in the
+ACSN maps and modules.
 
 
 \subsection{RNaviCell}
