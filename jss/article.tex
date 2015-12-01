@@ -169,8 +169,28 @@ according to every ACSN major release.
 
 The main function of the \pkg{ACSNMineR} package is the \code{enrichment}
 function, which is calculating over-representation or depletion of genes in the
-ACSN maps and modules.
+ACSN maps and modules. We have included a small list of 12 Cell Cycle related
+genes in the package, named \code{genes_test} that can be used to test the main
+enrichment function and to get familiar with its different options.
 
+\begin{verbatim}
+> genes_test
+ [1] "ATM"     "ATR"     "CHEK2"   "CREBBP"  "TFDP1"   "E2F1"    "EP300"  
+ [8] "HDAC1"   "KAT2B"   "GTF2H1"  "GTF2H2"  "GTF2H2B"
+\end{verbatim}
+
+
+\begin{verbatim}
+> library(ACSNMineR)
+> results <- enrichment(genes_test)
+> dim(results)
+[1] 36  9
+> results[1,]
+            module module_size nb_genes_in_module      genes_in_module
+V12 Apoptosis:E2F1           5                  4 ATM E2F1 EP300 KAT2B
+    universe_size nb_genes_in_universe      p.value p.value.corrected    test
+V12          2133                   12 1.043478e-08       2.81739e-07 greater
+\end{verbatim}
 
 \subsection{RNaviCell}
 
