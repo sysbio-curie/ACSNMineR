@@ -179,6 +179,21 @@ enrichment function and to get familiar with its different options.
  [8] "HDAC1"   "KAT2B"   "GTF2H1"  "GTF2H2"  "GTF2H2B"
 \end{verbatim}
 
+The example shown below is the simplest command that can be done to test a gene
+list for over-representation on the six included ACSN maps. With the list of 12
+genes mentionned above and a default p-value cutoff of $0.05$, we have a set of
+36 maps or modules that are significantly enriched. The results are structured
+as a data frame with nine columns displaying the module name, the module size,
+the number of genes from the list in the module, the names of the genes that are
+present in the module, the size of the reference universe, the number of genes
+from the list that are present in the universe, the raw p-value, the p-value
+corrected for multiple testing and the type of test performed. The module field
+in the results data frame indicate the map name and the module name separated by
+a column character. If a complete map is significantly enriched or depleted,
+then only the map name is shown, without any module or column character. For
+instance, the first line of the results object below concern the E2F1 module of
+the Apoptosis map. 
+
 
 \begin{verbatim}
 > library(ACSNMineR)
@@ -191,6 +206,24 @@ V12 Apoptosis:E2F1           5                  4 ATM E2F1 EP300 KAT2B
     universe_size nb_genes_in_universe      p.value p.value.corrected    test
 V12          2133                   12 1.043478e-08       2.81739e-07 greater
 \end{verbatim}
+
+
+%    enrichment(Genes = NULL, maps = ACSNMineR::ACSN_maps,
+%       correction_multitest = "BH", statistical_test = "fisher",
+%       min_module_size = 5, universe = "map_defined", threshold = 0.05,
+%       alternative = "greater")
+
+The \code{enrichment} function can take up to eight arguments: the gene list (as
+a character vector), the list of maps that will be used to calculate enrichment
+or depletion, the type of statistical test (either the Fisher exact test or the
+hypergeometric test), the module minimal size for which the calculations will be
+done, the universe, the p-value threshold and the alternative ("greater" for
+calculating over-representation, "less" for depletion and "both" for both
+tests).
+
+Only the gene list is mandatory to call the \code{enrichment} function, all the
+other arguments have default values.  
+
 
 \subsection{RNaviCell}
 
