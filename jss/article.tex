@@ -234,7 +234,20 @@ other arguments have default values.
 
 \subsection{RNaviCell}
 
+The NaviCell Web Service provides a server mode, which allows automating
+visualization tasks and retrieving data from molecular maps via RESTful
+(standard http/https) calls. Bindings to different programming languages are
+provided in order to facilitate the development of data visualization workflows and
+third-party applications \citep{bonnet2015navicell}. RNaviCell is the R binding
+to the NaviCell Web Service. It is implemented as a standard R package, using
+the R object-oriented framework known as Reference Classes \citep{hwR5}. Most
+of the work done by the user using graphical point-and-click operations on the
+NaviCell web interface are encoded as functions in the library encapsulating
+http calls to the server with appropriate parameters and data. Calls to the
+NaviCell server are performed using the library RCurl \citep{rcurl2015}.        
 
+
+\section[Examples]{Examples}
 
 %\bibliographystyle{jss}
 \bibliography{biblio}
