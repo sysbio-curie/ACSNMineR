@@ -1,0 +1,298 @@
+\documentclass[article]{jss}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% almost as usual
+\author{Paul Deveau\\Institut Curie\\PSL Research University\\INSERM U900\\Mines-ParisTech \And 
+        Eric Bonnet\\Institut Curie\\PSL Research University\\INSERM U900\\Mines-ParisTech}
+\title{Calculating Module Enrichment and Visualizing Data on Large-scale Molecular Maps with the R packages \pkg{ACSNMineR} and \pkg{RNaviCell}}
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Paul Deveau, Eric Bonnet} %% comma-separated
+\Plaintitle{Calculating Module Enrichment and Visualizing Data on Large-scale Molecular Maps with the R packages ACSNMineR and RNaviCel} %% without formatting
+\Shorttitle{Module Enrichment and Data Visualization with ACSNMineR and RNaviCell} %% a short title (if necessary)
+
+%% an abstract and keywords
+\Abstract{
+  The abstract of the article.
+}
+\Keywords{keywords, comma-separated, not capitalized, \proglang{Java}}
+\Plainkeywords{keywords, comma-separated, not capitalized, Java} %% without formatting
+%% at least one keyword must be supplied
+
+%% publication information
+%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Eric Bonnet\\
+  Computational Systems Biology of Cancer\\
+  Institut Curie\\
+  26, rue d'Ulm\\
+  75248 Paris, France\\
+  E-mail: \email{eric.bonnet@curie.fr}\\
+}
+%% It is also possible to add a telephone and fax number
+%% before the e-mail in the following format:
+%% Telephone: +43/512/507-7103
+%% Fax: +43/512/507-2851
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%% include your article here, just as usual
+%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+
+\section[Introduction]{Introduction}
+Biological pathways and networks comprise sets of interactions or functional
+relationships, occurring at the molecular level in living cells
+\citep{adriaens2008public}.  A large body of knowledge on cellular biochemistry
+is organized in publicly available repositories such as the KEGG database
+\citep{kanehisa2011kegg}, Reactome \citep{croft2014reactome} and MINT
+\citep{zanzoni2002mint}. All these biological databases facilitate a large
+spectrum of analyses, improving our understanding of cellular systems. For
+instance, it is a very common practice to cross the output of high-throughput
+experiments, such as mRNA or protein expression levels, with curated biological
+pathways in order to visualize changes, analyze their impact on a network and
+formulate new hypotheses about biological processes. Many biologists and
+computational biologists establish list of genes of interest (e.g. a list of
+genes that are differentially expressed between two conditions, such as normal
+vs disease) and then try to see if known biological pathways are enriched with
+this list of genes. 
+
+We have recently released the Atlas of Cancer Signalling Network (ACSN), a
+web-based database which describes signaling and regulatory molecular processes
+that occur in a healthy mammalian cell but that are frequently deregulated
+during cancerogenesis \citep{kuperstein2013navicell}.  The ACSN atlas aims to
+be a comprehensive description of cancer-related mechanisms retrieved from the
+most recent literature. The web interface for ACSN is using the NaviCell
+technology, a software framework dedicated to web-based visualization and
+navigation for biological pathway maps \citep{kuperstein2013navicell}. This
+environment is providing an easy navigation of maps through the use of the
+Google Maps JavaScript library, a community interface with a web blog system,
+and a comprehensive module for visualization and analysis of high-throughput
+data \citep{bonnet2015navicell}.
+
+
+In this article, we describe two software packages related to ACSN analysis and
+data visualization for the popular R statistical enrironment \citep{mainRref,
+vance2009data}. The package \pkg{ACSNMineR} is designed for the calculation of
+gene enrichment and depletion in ACSN maps, while \pkg{RNaviCell} is dedicated
+to data visualization on ACSN maps. Both packages are available on the
+Comprehensive R Archive Network
+(\url{https://cran.r-project.org/web/packages/ACSNMineR/} and
+\url{https://cran.r-project.org/web/packages/RNaviCell/}), and on the GitHub
+repository (\url{https://github.com/sysbio-curie/ACSNMineR} and
+\url{https://github.com/sysbio-curie/RNaviCell}). For the remainder of this
+article, we describe the organization of each package and illustrate their
+capacities with several concrete examples demonstrating their capabilities. 
+
+\section[Package organization]{Packages organization}
+
+\subsection{ACSNMineR}
+Currently, ACSN maps covers signaling pathways involved in DNA repair, cell
+cycle, cell survival, cell death, epithelial-to-mesenchymal transition (EMT) and
+cell motility. Each of these large-scale molecular map is decomposed in a number
+of functional modules. The maps themselves are merged into a global ACSN map.
+Thus the information included in ACSN is organized in three hierarchical levels:
+a global map, five individual maps, and a total of 55 functional modules. Each
+ACSN map covers hundreds of molecular players, biochemical reactions and causal
+relationships between the molecular players and cellular phenotypes.  ACSN
+represents a large-scale biochemical reaction network of 4,826 reactions
+involving 2,371 proteins, and is continuously updated and expanded.  We have
+included the three hierarchical levels in the \pkg{ACSNMineR} package, in order
+to be able to calculate enrichments at all three levels. The calculations are
+made by counting the number of occurences of gene symbols (HUGO gene names) from
+a given list of genes of interest in all ACSN maps and modules. Table
+\ref{tab:table1} is detailling the number of gene symbols contained in all the ACSN
+maps.
+
+
+\begin{table}[h!]
+ \centering
+  \caption{ACSN maps included in the \pkg{ACSNMineR} package. Map: map name, Total: total
+  number of gene symbols (HUGO), Nb mod.: number of modules, Min: mimimum
+  number of gene symbols in the modules, Max: maximum number of gene symbols in
+  the modules, Mean: average number of gene sybols per module. N.B.: one gene
+  symbol may be present in several modules of the map.}
+  \label{tab:table1}
+  \begin{tabular}{l|c|c|c|c|c}
+    \hline
+    Map & Total & Nb mod. & Min & Max & Mean\\
+    \hline
+  ACSN global & 2137 & 55 & 2 &625& 85\\
+  Survival  &1065&46  &1 &434 &54\\
+  Apoptosis & 668&44 & 1& 382& 33\\
+  EMT \& Cell motility &620 &41  &1 &615 &43\\
+  DNA repair &337&48  &1 &69  &19\\
+  Cell cycle &119&45  &1 &27  &8\\
+  \hline
+
+  \end{tabular}
+
+\end{table}
+
+
+The statistical significance of the counts in the modules is assessed by using
+either the Fisher exact test \citep{fisher1922interpretation,
+fisher1934statistical} or the hypergeometric test, which are equivalent for this
+purpose \citep{rivals2007enrichment}.
+
+The current ACSN maps are included in the \pkg{ACSNMineR} package, as a list of character matrices.
+
+\begin{verbatim}
+> length(ACSN_maps)
+[1] 6
+> names(ACSN_maps)
+[1] "Apoptosis"    "CellCycle"    "DNA_repair"   "EMT_motility" "ACSN_master" 
+[6] "Survival"    
+\end{verbatim}
+
+For each matrix, rows represent a module, with the name of the module in the
+first column, followed by a description of the module (optional), and then
+followed by all the gene symbols of the module. The maps will be updated
+according to every ACSN major release.
+
+The main function of the \pkg{ACSNMineR} package is the \code{enrichment}
+function, which is calculating over-representation or depletion of genes in the
+ACSN maps and modules. We have included a small list of 12 Cell Cycle related
+genes in the package, named \code{genes_test} that can be used to test the main
+enrichment function and to get familiar with its different options.
+
+\begin{verbatim}
+> genes_test
+ [1] "ATM"     "ATR"     "CHEK2"   "CREBBP"  "TFDP1"   "E2F1"    "EP300"  
+ [8] "HDAC1"   "KAT2B"   "GTF2H1"  "GTF2H2"  "GTF2H2B"
+\end{verbatim}
+
+The example shown below is the simplest command that can be done to test a gene
+list for over-representation on the six included ACSN maps. With the list of 12
+genes mentionned above and a default p-value cutoff of $0.05$, we have a set of
+36 maps or modules that are significantly enriched. The results are structured
+as a data frame with nine columns displaying the module name, the module size,
+the number of genes from the list in the module, the names of the genes that are
+present in the module, the size of the reference universe, the number of genes
+from the list that are present in the universe, the raw p-value, the p-value
+corrected for multiple testing and the type of test performed. The module field
+in the results data frame indicate the map name and the module name separated by
+a column character. If a complete map is significantly enriched or depleted,
+then only the map name is shown, without any module or column character. For
+instance, the first line of the results object below concern the E2F1 module of
+the Apoptosis map. 
+
+
+\begin{verbatim}
+> library(ACSNMineR)
+> results <- enrichment(genes_test)
+> dim(results)
+[1] 36  9
+> results[1,]
+            module module_size nb_genes_in_module      genes_in_module
+V12 Apoptosis:E2F1           5                  4 ATM E2F1 EP300 KAT2B
+    universe_size nb_genes_in_universe      p.value p.value.corrected    test
+V12          2133                   12 1.043478e-08       2.81739e-07 greater
+\end{verbatim}
+
+
+%    enrichment(Genes = NULL, maps = ACSNMineR::ACSN_maps,
+%       correction_multitest = "BH", statistical_test = "fisher",
+%       min_module_size = 5, universe = "map_defined", threshold = 0.05,
+%       alternative = "greater")
+
+The \code{enrichment} function can take up to eight arguments: the gene list (as
+a character vector), the list of maps that will be used to calculate enrichment
+or depletion, the type of statistical test (either the Fisher exact test or the
+hypergeometric test), the module minimal size for which the calculations will be
+done, the universe, the p-value threshold and the alternative ("greater" for
+calculating over-representation, "less" for depletion and "both" for both
+tests).
+
+Only the gene list is mandatory to call the \code{enrichment} function, all the
+other arguments have default values.  
+
+[explain default values]\\
+The \code{maps} argument can either be a dataframe imported from a gmt file with the \code{format_from_gmt} function or a list of dataframes generated by the same procedure. By default, the function uses the ACSN maps previously described.
+
+<<<<<<< HEAD
+The correction for multiple testing by default is set to false discovery rate
+(fdr), which is equivalent to Benjamini \& Hochberg correction, but can be
+changed to any of the usual corrections such as Bonferroni, Holm, Hochberg,
+Holm, or Benjamini \& Yekutieli \citep{Benjamini2003FDR}, or even disabled .
+=======
+The correction for multiple testing by default is set to false discovery rate (fdr), which is equivalent to Benjamini \& Hochberg correction, but can be changed to any of the usual corrections such as Bonferroni, Holm, Hochberg, Holm, or Benjamini \& Yekutieli \citep{Benjamini2003FDR}, or even disabled .
+>>>>>>> 05bebb57d46ba2cf1c204b182933388730625c5f
+
+The minimal module size represents the smallest size value of a module that will be used to compute enrichment or depletion. This is meant to remove results of low significance for module of small size.
+
+The universe in which the computation is made by default is defined by the maps. Which means that all genes that were given as input and that are not present on the maps will be discarded. To keep all genes, the user can set the universe to \code{HUGO},referring to the database.
+
+The threshold is the maximal value of the corrected p-value (unless user chose not to correct for multiple testing) that will be displayed in the result table.
+
+[give examples with maps, universe, correction multitest]
+
+%multisample_enrichment<-function(Genes_by_sample=NULL,
+%                                 maps = ACSNMineR::ACSN_maps, 
+%                                 correction_multitest = "BH",
+%                                 statistical_test = "fisher",
+%                                 min_module_size = 5,
+%                                 universe = "map_defined",
+%                                 threshold = 0.05,
+%                                 cohort_threshold = TRUE,
+%                                 alternative = "greater"){
+It may be of interest to compare enrichment of pathwways in different cohorts or experiments. For example, enrichment of highly expressed pathways can reveal differences between two cancer types or two cell lines.
+To ease such comparisons, \pkg{ACSNMineR} provides a \code{multisample_enrichment} function. It relies on the \code{enrichment} function but takes a list of character vector genes. The name of each element of the list will be assumed to be the name of the sample for further analysis.
+Most of the arguments given to \code{multisample_enrichment} are the same as the ones passed to \code{enrichment}. However, the \code{cohort_threshold} is designed to filter out modules which would not pass the significance threshold in all samples.   
+
+%represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log", 
+%                               low = "steelblue" , high ="white",
+%                              nrow = 1,sample_name = "Sample",
+%                               na.value = "grey"){
+Finally, to facilitate visualization of results, \pkg{ACSNMineR} integrates a representation function based on \pkg{ggplot2} syntax \citep{ggplot2}. It allows representation of results from \code{enrichment} or \code{multisample_enrichment} with a limited number of parameters. For examples, two types of display are available: heat-map tiles or bars. For multiple samples using a barplot representation the number of rows used can be provided, all plots will be on the same row otherwise. For the heatmap, the color of the non-significant modules, and boundaries of the gradient for significant values can also be tuned.
+
+
+\subsection{RNaviCell}
+
+The NaviCell Web Service provides a server mode, which allows automating
+visualization tasks and retrieving data from molecular maps via RESTful
+(standard http/https) calls. Bindings to different programming languages are
+provided in order to facilitate the development of data visualization workflows and
+third-party applications \citep{bonnet2015navicell}. RNaviCell is the R binding
+to the NaviCell Web Service. It is implemented as a standard R package, using
+the R object-oriented framework known as Reference Classes \citep{hwR5}. Most
+of the work done by the user using graphical point-and-click operations on the
+NaviCell web interface are encoded as functions in the library encapsulating
+http calls to the server with appropriate parameters and data. Calls to the
+NaviCell server are performed using the library RCurl \citep{rcurl2015}, while
+data encoding/decoding in JSON format is performed with the RJSONIO library
+\citep{rjsonio2014}.
+
+Once the RNaviCell library is installed and loaded, the first step is to create
+a NaviCell object and launch the browser session. This will automatically create
+a unique session ID with the NaviCell server. Once the session is established,
+various functions can be called to send data to the web session, set graphical
+options, visualize data on a map or get data from the map. There are 125
+functions available in the current version of RNaviCell. All of them are
+described with their different options in the RNaviCell documentation, and we
+provide a tutorial on the GitHub repository wiki
+(\url{https://github.com/sysbio-curie/RNaviCell/wiki/Tutorial}).  
+
+\section[Examples]{Examples}
+
+%\bibliographystyle{jss}
+\bibliography{biblio}
+
+\end{document}
