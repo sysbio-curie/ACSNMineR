@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.20)  7 DEC 2015 14:38
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.20)  7 DEC 2015 15:21
 entering extended mode
 **article.tex
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.tex
@@ -383,7 +383,7 @@ LaTeX Info: Redefining \nameref on input line 55.
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.out)
 \@outlinefile=\write4
 
-<jsslogo.jpg, id=19, 540.0175pt x 393.47pt>
+<jsslogo.jpg, id=23, 540.0175pt x 393.47pt>
 File: jsslogo.jpg Graphic file (type jpg)
  <use jsslogo.jpg>
 Package pdftex.def Info: jsslogo.jpg used on input line 55.
@@ -406,73 +406,28 @@ LaTeX Font Info:    Try loading font information for T1+aess on input line 55.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ae\t1aess.fd"
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
-
-Package natbib Warning: Citation `adriaens2008public' on page 1 undefined on in
-put line 63.
-
-
-Package natbib Warning: Citation `kanehisa2011kegg' on page 1 undefined on inpu
-t line 65.
-
-
-Package natbib Warning: Citation `croft2014reactome' on page 1 undefined on inp
-ut line 65.
-
-
-Package natbib Warning: Citation `zanzoni2002mint' on page 1 undefined on input
- line 66.
-
-
-Package natbib Warning: Citation `kuperstein2013navicell' on page 1 undefined o
-n input line 80.
-
-
-Package natbib Warning: Citation `kuperstein2013navicell' on page 1 undefined o
-n input line 84.
-
-
-Package natbib Warning: Citation `bonnet2015navicell' on page 1 undefined on in
-put line 88.
-
-
-Underfull \vbox (badness 3690) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1
 
 {C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Use
 r/Documents/GitHub/ACSN_Enrichment/jss/jsslogo.jpg>]
-
-Package natbib Warning: Citation `mainRref' on page 2 undefined on input line 9
-3.
-
-
-Package natbib Warning: Citation `vance2009data' on page 2 undefined on input l
-ine 93.
-
 LaTeX Font Info:    Try loading font information for T1+aett on input line 97.
+
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Overfull \hbox (12.71434pt too wide) in paragraph at lines 91--103
-$\T1/aett/m/n/10.95 github . com / sysbio-[]curie / ACSNMineR$[][] \T1/aer/m/n/
-10.95 and [][]$\T1/aett/m/n/10.95 https : / / github . com / sysbio-[]curie / R
-NaviCell$[][]\T1/aer/m/n/10.95 ).
+Overfull \hbox (3.82872pt too wide) in paragraph at lines 91--103
+$\T1/aett/m/n/10.95 packages / ACSNMineR/$[][] \T1/aer/m/n/10.95 and [][]$\T1/a
+ett/m/n/10.95 https : / / cran . r-[]project . org / web / packages / RNaviCell
+/$[][]\T1/aer/m/n/10.95 ), and
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Package natbib Warning: Citation `fisher1922interpretation' on page 2 undefined
- on input line 152.
-
-
-Package natbib Warning: Citation `fisher1934statistical' on page 2 undefined on
- input line 152.
-
-
-Package natbib Warning: Citation `rivals2007enrichment' on page 2 undefined on 
-input line 153.
+Underfull \vbox (badness 2334) has occurred while \output is active []
 
 
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
@@ -492,66 +447,41 @@ rmat_from_gmt
  []
 
 
-Package natbib Warning: Citation `Benjamini2003FDR' on page 4 undefined on inpu
-t line 230.
-
-
-Package natbib Warning: Citation `bonnet2015navicell' on page 4 undefined on in
-put line 263.
-
-
-Package natbib Warning: Citation `hwR5' on page 4 undefined on input line 265.
-
-
-Package natbib Warning: Citation `rcurl2015' on page 4 undefined on input line 
-269.
-
-
-Package natbib Warning: Citation `rjsonio2014' on page 4 undefined on input lin
-e 271.
-
-
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 4 []
  []
 
-[4]
-No file article.bbl.
-
-Package natbib Warning: There were undefined citations.
-
-LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 279.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
-
+[4] (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.bbl
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 5
  []
 
-[5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
+[5])
+LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 282.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 282.
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+\T1/aer/m/n/10.95 6 []
+ []
+
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 282.
  (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 279.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
-
-
-Package rerunfilecheck Warning: File `article.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `article.out':
-(rerunfilecheck)             Before: 6DD1458C62786C51BD4833E90957DAA4;330
-(rerunfilecheck)             After:  DB36D41C782653307F1E6BC40CA27ADF;385.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 279.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 282.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 282.
+Package rerunfilecheck Info: File `article.out' has not changed.
+(rerunfilecheck)             Checksum: DB36D41C782653307F1E6BC40CA27ADF;385.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 282.
  ) 
 Here is how much of TeX's memory you used:
- 6679 strings out of 493921
- 97194 string characters out of 3147285
- 178441 words of memory out of 3000000
- 9850 multiletter control sequences out of 15000+200000
+ 6752 strings out of 493921
+ 98820 string characters out of 3147285
+ 180411 words of memory out of 3000000
+ 9904 multiletter control sequences out of 15000+200000
  46265 words of font info for 81 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,9n,34p,502b,320s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,9n,34p,653b,438s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
 s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/font
@@ -562,9 +492,9 @@ m/cmsl10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on article.pdf (5 pages, 180446 bytes).
+Output written on article.pdf (6 pages, 207189 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 17 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 183 PDF objects out of 1000 (max. 8388607)
+ 34 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

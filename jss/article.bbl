@@ -1,0 +1,115 @@
+\begin{thebibliography}{16}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Adriaens \emph{et~al.}(2008)Adriaens, Jaillard, Waagmeester, Coort,
+  Pico, and Evelo}]{adriaens2008public}
+Adriaens ME, Jaillard M, Waagmeester A, Coort SL, Pico AR, Evelo CT (2008).
+\newblock \enquote{The public road to high-quality curated biological
+  pathways.}
+\newblock \emph{Drug Discovery Today}, \textbf{13}(19), 856--862.
+
+\bibitem[{Bonnet \emph{et~al.}(2015)Bonnet, Viara, Kuperstein, Calzone, Cohen,
+  Barillot, and Zinovyev}]{bonnet2015navicell}
+Bonnet E, Viara E, Kuperstein I, Calzone L, Cohen DP, Barillot E, Zinovyev A
+  (2015).
+\newblock \enquote{NaviCell Web Service for network-based data visualization.}
+\newblock \emph{Nucleic Acids Research}, p. gkv450.
+
+\bibitem[{Croft \emph{et~al.}(2014)Croft, Mundo, Haw, Milacic, Weiser, Wu,
+  Caudy, Garapati, Gillespie, Kamdar \emph{et~al.}}]{croft2014reactome}
+Croft D, Mundo AF, Haw R, Milacic M, Weiser J, Wu G, Caudy M, Garapati P,
+  Gillespie M, Kamdar MR, \emph{et~al.} (2014).
+\newblock \enquote{The Reactome pathway knowledgebase.}
+\newblock \emph{Nucleic Acids Research}, \textbf{42}(D1), D472--D477.
+
+\bibitem[{Fisher(1922)}]{fisher1922interpretation}
+Fisher RA (1922).
+\newblock \enquote{On the interpretation of $\chi$2 from contingency tables,
+  and the calculation of P.}
+\newblock \emph{Journal of the Royal Statistical Society}, pp. 87--94.
+
+\bibitem[{Fisher(1934)}]{fisher1934statistical}
+Fisher RA (1934).
+\newblock \enquote{Statistical methods for research workers.}
+
+\bibitem[{Kanehisa \emph{et~al.}(2011)Kanehisa, Goto, Sato, Furumichi, and
+  Tanabe}]{kanehisa2011kegg}
+Kanehisa M, Goto S, Sato Y, Furumichi M, Tanabe M (2011).
+\newblock \enquote{KEGG for integration and interpretation of large-scale
+  molecular data sets.}
+\newblock \emph{Nucleic Acids Research}, p. gkr988.
+
+\bibitem[{Kuperstein \emph{et~al.}(2013)Kuperstein, Cohen, Pook, Viara,
+  Calzone, Barillot, and Zinovyev}]{kuperstein2013navicell}
+Kuperstein I, Cohen DP, Pook S, Viara E, Calzone L, Barillot E, Zinovyev A
+  (2013).
+\newblock \enquote{NaviCell: a web-based environment for navigation, curation
+  and maintenance of large molecular interaction maps.}
+\newblock \emph{BMC systems biology}, \textbf{7}(1), 100.
+
+\bibitem[{Lang(2014)}]{rjsonio2014}
+Lang DT (2014).
+\newblock \emph{RJSONIO: Serialize R objects to JSON, JavaScript Object
+  Notation}.
+\newblock R package version 1.3-0,
+  \urlprefix\url{http://CRAN.R-project.org/package=RJSONIO}.
+
+\bibitem[{Lang and the CRAN~team(2015)}]{rcurl2015}
+Lang DT, the CRAN~team (2015).
+\newblock \emph{RCurl: General Network (HTTP/FTP/...) Client Interface for R}.
+\newblock R package version 1.95-4.7,
+  \urlprefix\url{http://CRAN.R-project.org/package=RCurl}.
+
+\bibitem[{{R Core Team}(2014)}]{mainRref}
+{R Core Team} (2014).
+\newblock \emph{R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+\newblock \urlprefix\url{http://www.R-project.org/}.
+
+\bibitem[{Reiner \emph{et~al.}(2003)Reiner, Yekutieli, and
+  Benjamini}]{Benjamini2003FDR}
+Reiner A, Yekutieli D, Benjamini Y (2003).
+\newblock \enquote{Identifying differentially expressed genes using false
+  discovery rate controlling procedures.}
+\newblock \emph{Bioinformatics}, \textbf{19}(3), 368--375.
+
+\bibitem[{Rivals \emph{et~al.}(2007)Rivals, Personnaz, Taing, and
+  Potier}]{rivals2007enrichment}
+Rivals I, Personnaz L, Taing L, Potier MC (2007).
+\newblock \enquote{Enrichment or depletion of a GO category within a class of
+  genes: which test?}
+\newblock \emph{Bioinformatics}, \textbf{23}(4), 401--407.
+
+\bibitem[{Vance(2009)}]{vance2009data}
+Vance A (2009).
+\newblock \enquote{Data analysts captivated by R's power.}
+\newblock \emph{New York Times}, \textbf{6}.
+
+\bibitem[{Wickham(2009)}]{ggplot2}
+Wickham H (2009).
+\newblock \emph{ggplot2: elegant graphics for data analysis}.
+\newblock Springer New York.
+\newblock ISBN 978-0-387-98140-6.
+\newblock \urlprefix\url{http://had.co.nz/ggplot2/book}.
+
+\bibitem[{Wickham(2015)}]{hwR5}
+Wickham H (2015).
+\newblock \emph{Reference classes}.
+\newblock Advanced R, \urlprefix\url{http://adv-r.had.co.nz/R5.html}.
+
+\bibitem[{Zanzoni \emph{et~al.}(2002)Zanzoni, Montecchi-Palazzi, Quondam,
+  Ausiello, Helmer-Citterich, and Cesareni}]{zanzoni2002mint}
+Zanzoni A, Montecchi-Palazzi L, Quondam M, Ausiello G, Helmer-Citterich M,
+  Cesareni G (2002).
+\newblock \enquote{MINT: a Molecular INTeraction database.}
+\newblock \emph{FEBS Letters}, \textbf{513}(1), 135--140.
+
+\end{thebibliography}
