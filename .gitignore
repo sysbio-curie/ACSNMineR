@@ -30,3 +30,13 @@ ACSN_Enrichment.Rproj
 *.Rproj*
 .RData
 inst/doc
+jss/article.pdf
+jss/article.syntex.gz
+jss/article.bbl
+jss/Makefile
+jss/bookreview.tex
+jss/booksnippet.tex
+jss/jss.pdf
+jss/jsslogo.jpg
+jss/README.txt
+jss/softwarereview.tex
