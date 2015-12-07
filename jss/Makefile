@@ -6,3 +6,9 @@ pdf:
 
 read: pdf
 	open article.pdf
+
+clean:
+	rm article.aux
+	rm article.log
+	rm article.out
+	rm article.pdf 
