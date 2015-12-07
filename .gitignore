@@ -31,8 +31,12 @@ ACSN_Enrichment.Rproj
 .RData
 inst/doc
 jss/article.pdf
+jss/article.aux
 jss/article.syntex.gz
 jss/article.bbl
+jss/article.blg
+jss/article.log
+jss/article.out
 jss/Makefile
 jss/bookreview.tex
 jss/booksnippet.tex
