@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.20)  4 DEC 2015 16:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.20)  7 DEC 2015 14:38
 entering extended mode
 **article.tex
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.tex
@@ -329,27 +329,27 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 466.
 Package hyperref Info: Option `linktocpage' set `true' on input line 466.
 Package hyperref Info: Option `plainpages' set `false' on input line 466.
 ) (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 54.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 55.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 55.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -366,7 +366,7 @@ LaTeX Font Info:    ... okay on input line 54.
 \everyMPtoPDFconversion=\toks16
 )
 \AtBeginShipoutBox=\box28
-Package hyperref Info: Link coloring ON on input line 54.
+Package hyperref Info: Link coloring ON on input line 55.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -375,9 +375,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count108
 )
-LaTeX Info: Redefining \ref on input line 54.
-LaTeX Info: Redefining \pageref on input line 54.
-LaTeX Info: Redefining \nameref on input line 54.
+LaTeX Info: Redefining \ref on input line 55.
+LaTeX Info: Redefining \pageref on input line 55.
+LaTeX Info: Redefining \nameref on input line 55.
 
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.out)
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.out)
@@ -386,53 +386,53 @@ LaTeX Info: Redefining \nameref on input line 54.
 <jsslogo.jpg, id=19, 540.0175pt x 393.47pt>
 File: jsslogo.jpg Graphic file (type jpg)
  <use jsslogo.jpg>
-Package pdftex.def Info: jsslogo.jpg used on input line 54.
+Package pdftex.def Info: jsslogo.jpg used on input line 55.
 (pdftex.def)             Requested size: 89.80768pt x 65.43607pt.
-LaTeX Font Info:    Try loading font information for T1+pzc on input line 54.
+LaTeX Font Info:    Try loading font information for T1+pzc on input line 55.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1pzc.fd"
 File: t1pzc.fd 2001/06/04 font definitions for T1/pzc.
 )
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <28> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 54.
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 55.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 54.
+(Font)              <10.95> on input line 55.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 54.
+(Font)              <8> on input line 55.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 54.
-LaTeX Font Info:    Try loading font information for T1+aess on input line 54.
+(Font)              <6> on input line 55.
+LaTeX Font Info:    Try loading font information for T1+aess on input line 55.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ae\t1aess.fd"
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
 
 Package natbib Warning: Citation `adriaens2008public' on page 1 undefined on in
-put line 62.
+put line 63.
 
 
 Package natbib Warning: Citation `kanehisa2011kegg' on page 1 undefined on inpu
-t line 64.
+t line 65.
 
 
 Package natbib Warning: Citation `croft2014reactome' on page 1 undefined on inp
-ut line 64.
+ut line 65.
 
 
 Package natbib Warning: Citation `zanzoni2002mint' on page 1 undefined on input
- line 65.
+ line 66.
 
 
 Package natbib Warning: Citation `kuperstein2013navicell' on page 1 undefined o
-n input line 79.
+n input line 80.
 
 
 Package natbib Warning: Citation `kuperstein2013navicell' on page 1 undefined o
-n input line 83.
+n input line 84.
 
 
 Package natbib Warning: Citation `bonnet2015navicell' on page 1 undefined on in
-put line 87.
+put line 88.
 
 
 Underfull \vbox (badness 3690) has occurred while \output is active []
@@ -443,17 +443,17 @@ Underfull \vbox (badness 3690) has occurred while \output is active []
 r/Documents/GitHub/ACSN_Enrichment/jss/jsslogo.jpg>]
 
 Package natbib Warning: Citation `mainRref' on page 2 undefined on input line 9
-2.
+3.
 
 
 Package natbib Warning: Citation `vance2009data' on page 2 undefined on input l
-ine 92.
+ine 93.
 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 96.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 97.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Overfull \hbox (12.71434pt too wide) in paragraph at lines 90--102
+Overfull \hbox (12.71434pt too wide) in paragraph at lines 91--103
 $\T1/aett/m/n/10.95 github . com / sysbio-[]curie / ACSNMineR$[][] \T1/aer/m/n/
 10.95 and [][]$\T1/aett/m/n/10.95 https : / / github . com / sysbio-[]curie / R
 NaviCell$[][]\T1/aer/m/n/10.95 ).
@@ -464,15 +464,15 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Package natbib Warning: Citation `fisher1922interpretation' on page 2 undefined
- on input line 151.
+ on input line 152.
 
 
 Package natbib Warning: Citation `fisher1934statistical' on page 2 undefined on
- input line 151.
+ input line 152.
 
 
 Package natbib Warning: Citation `rivals2007enrichment' on page 2 undefined on 
-input line 152.
+input line 153.
 
 
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
@@ -485,7 +485,7 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
  []
 
 [3]
-Overfull \hbox (15.97067pt too wide) in paragraph at lines 226--228
+Overfull \hbox (15.97067pt too wide) in paragraph at lines 227--229
 \T1/aer/m/n/10.95 The \T1/aett/m/n/10.95 maps \T1/aer/m/n/10.95 ar-gu-ment can 
 ei-ther be a dataframe im-ported from a gmt file with the \T1/aett/m/n/10.95 fo
 rmat_from_gmt
@@ -493,34 +493,62 @@ rmat_from_gmt
 
 
 Package natbib Warning: Citation `Benjamini2003FDR' on page 4 undefined on inpu
-t line 229.
+t line 230.
 
-No file article.bbl.
 
-Package natbib Warning: There were undefined citations.
+Package natbib Warning: Citation `bonnet2015navicell' on page 4 undefined on in
+put line 263.
 
-LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 250.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
+
+Package natbib Warning: Citation `hwR5' on page 4 undefined on input line 265.
+
+
+Package natbib Warning: Citation `rcurl2015' on page 4 undefined on input line 
+269.
+
+
+Package natbib Warning: Citation `rjsonio2014' on page 4 undefined on input lin
+e 271.
+
 
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 4 []
  []
 
 [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
+No file article.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 279.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
+
+Overfull \hbox (5.47499pt too wide) has occurred while \output is active
+[] \T1/aer/m/n/10.95 5
+ []
+
+[5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
  (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\article.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
-Package rerunfilecheck Info: File `article.out' has not changed.
-(rerunfilecheck)             Checksum: 6DD1458C62786C51BD4833E90957DAA4;330.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 279.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
+
+
+Package rerunfilecheck Warning: File `article.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `article.out':
+(rerunfilecheck)             Before: 6DD1458C62786C51BD4833E90957DAA4;330
+(rerunfilecheck)             After:  DB36D41C782653307F1E6BC40CA27ADF;385.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 279.
  ) 
 Here is how much of TeX's memory you used:
- 6673 strings out of 493921
- 97129 string characters out of 3147285
+ 6679 strings out of 493921
+ 97194 string characters out of 3147285
  178441 words of memory out of 3000000
- 9847 multiletter control sequences out of 15000+200000
+ 9850 multiletter control sequences out of 15000+200000
  46265 words of font info for 81 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  36i,9n,34p,502b,320s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -534,9 +562,9 @@ m/cmsl10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on article.pdf (4 pages, 176880 bytes).
+Output written on article.pdf (5 pages, 180446 bytes).
 PDF statistics:
- 102 PDF objects out of 1000 (max. 8388607)
- 14 named destinations out of 1000 (max. 500000)
+ 108 PDF objects out of 1000 (max. 8388607)
+ 17 named destinations out of 1000 (max. 500000)
  38 words of extra memory for PDF output out of 10000 (max. 10000000)
 

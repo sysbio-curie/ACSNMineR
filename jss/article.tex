@@ -235,11 +235,27 @@ The universe in which the computation is made by default is defined by the maps.
 
 The threshold is the maximal value of the corrected p-value (unless user chose not to correct for multiple testing) that will be displayed in the result table.
 
-[give examples with maps, universe, correction multtest]
+[give examples with maps, universe, correction multitest]
 
-[explain multiple samples]
+%multisample_enrichment<-function(Genes_by_sample=NULL,
+%                                 maps = ACSNMineR::ACSN_maps, 
+%                                 correction_multitest = "BH",
+%                                 statistical_test = "fisher",
+%                                 min_module_size = 5,
+%                                 universe = "map_defined",
+%                                 threshold = 0.05,
+%                                 cohort_threshold = TRUE,
+%                                 alternative = "greater"){
+It may be of interest to compare enrichment of pathwways in different cohorts or experiments. For example, enrichment of highly expressed pathways can reveal differences between two cancer types or two cell lines.
+To ease such comparisons, \pkg{ACSNMineR} provides a \code{multisample_enrichment} function. It relies on the \code{enrichment} function but takes a list of character vector genes. The name of each element of the list will be assumed to be the name of the sample for further analysis.
+Most of the arguments given to \code{multisample_enrichment} are the same as the ones passed to \code{enrichment}. However, the \code{cohort_threshold} is designed to filter out modules which would not pass the significance threshold in all samples.   
 
-[explain graphs generation]
+%represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log", 
+%                               low = "steelblue" , high ="white",
+%                              nrow = 1,sample_name = "Sample",
+%                               na.value = "grey"){
+Finally, to facilitate visualization of results, \pkg{ACSNMineR} integrates a representation function based on \pkg{ggplot2} syntax \cite{ggplot2}. It allows representation of results from \code{enrichment} or \code{multisample_enrichment} with a limited number of parameters. For examples, two types of display are available: heat-map tiles or bars. For multiple samples using a barplot representation the number of rows used can be provided, all plots will be on the same row otherwise. For the heatmap, the color of the non-significant modules, and boundaries of the gradient for significant values can also be tuned.
+
 
 \subsection{RNaviCell}
 
