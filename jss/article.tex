@@ -261,16 +261,17 @@ The number of modules which have a p-value below 0.05 was 36, that can be compar
 \code{enrichment(genes_test,correction_multitest = FALSE)}
 \begin{table}[h!]
   \centering
-  \caption{Overview of results from enrichment analysis without correction. Module : name of the module. Module size: size of the module. Genes in module: genes from input which are found in the module. p-value: uncorrected p-value. Test : null hypothesis used, greater is synonym of enrichment.}
+  \caption{Overview of results from enrichment analysis without correction. Module : name of the module. Mod. size: size of the module. Genes in module: genes from input which are found in the module. p-value: uncorrected p-value. Test : null hypothesis used, greater is synonym of enrichment.}
   \label{tab:table2}
 
   \begin{tabular}{l|c|c|c|c}
 	\hline
-Module & Module size & Genes in module & p-value & Test\\
+Module & Mod. size & Genes in module & p-value & Test\\
 	\hline
-Apoptosis:E2F1 & 5 &  ATM E2F1 EP300 KAT2B  & 1.043478e-08 & greater \\
-Apoptosis:G2 M CHECKPOINT & 35  & ATM KAT2B & 2.040546e-02 & greater \\
-Apoptosis:WNT CANONICAL & 53 & E2F1 EP300 KAT2B  & 4.984433e-03 & greater \\
+Apoptosis:E2F1 & 5 &  ATM E2F1 EP300 & 1.04e-08 & greater \\
+               &   &  KAT2B                 &          &         \\
+Apoptosis:G2 M CHECKPOINT & 35  & ATM KAT2B & 2.04e-02 & greater \\
+Apoptosis:WNT CANONICAL & 53 & E2F1 EP300 KAT2B  & 4.98e-03 & greater \\
 	\end{tabular}
 \end{table}
 

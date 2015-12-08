@@ -1,5 +1,49 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: article.aux
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: article.aux
 The style file: jss.bst
 Database file #1: biblio.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty journal in fisher1934statistical
+You've used 16 entries,
+            3215 wiz_defined-function locations,
+            735 strings with 7985 characters,
+and the built_in function-call counts, 18431 in all, are:
+= -- 1829
+> -- 504
+< -- 11
++ -- 194
+- -- 175
+* -- 1327
+:= -- 2170
+add.period$ -- 61
+call.type$ -- 16
+change.case$ -- 125
+chr.to.int$ -- 17
+cite$ -- 17
+duplicate$ -- 1949
+empty$ -- 1413
+format.name$ -- 210
+if$ -- 3743
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 181
+newline$ -- 93
+num.names$ -- 64
+pop$ -- 958
+preamble$ -- 1
+purify$ -- 122
+quote$ -- 0
+skip$ -- 351
+stack$ -- 0
+substring$ -- 1967
+swap$ -- 444
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 141
+warning$ -- 1
+while$ -- 122
+width$ -- 0
+write$ -- 220
 (There was 1 warning)
