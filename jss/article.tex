@@ -246,7 +246,7 @@ The threshold is the maximal value of the corrected p-value (unless user chose n
 %                                 threshold = 0.05,
 %                                 cohort_threshold = TRUE,
 %                                 alternative = "greater"){
-It may be of interest to compare enrichment of pathwways in different cohorts or experiments. For example, enrichment of highly expressed pathways can reveal differences between two cancer types or two cell lines.
+It may be of interest to compare enrichment of pathways in different cohorts or experiments. For example, enrichment of highly expressed pathways can reveal differences between two cancer types or two cell lines.
 To ease such comparisons, \pkg{ACSNMineR} provides a \code{multisample_enrichment} function. It relies on the \code{enrichment} function but takes a list of character vector genes. The name of each element of the list will be assumed to be the name of the sample for further analysis.
 Most of the arguments given to \code{multisample_enrichment} are the same as the ones passed to \code{enrichment}. However, the \code{cohort_threshold} is designed to filter out modules which would not pass the significance threshold in all samples.   
 
@@ -255,6 +255,26 @@ Most of the arguments given to \code{multisample_enrichment} are the same as the
 %                              nrow = 1,sample_name = "Sample",
 %                               na.value = "grey"){
 Finally, to facilitate visualization of results, \pkg{ACSNMineR} integrates a representation function based on \pkg{ggplot2} syntax \citep{ggplot2}. It allows representation of results from \code{enrichment} or \code{multisample_enrichment} with a limited number of parameters. For examples, two types of display are available: heat-map tiles or bars. For multiple samples using a barplot representation the number of rows used can be provided, all plots will be on the same row otherwise. For the heatmap, the color of the non-significant modules, and boundaries of the gradient for significant values can also be tuned.
+
+The package also includes a use-case that we detail below. Using, \code{genes_test} it is possible to explore the different possibilities of exploration of the maps. We previously computed the p-value of \code{genes_test} with default parameters.
+The number of modules which have a p-value below 0.05 was 36, that can be compared to the 49 obtained without correction:
+\code{enrichment(genes_test,correction_multitest = FALSE)}
+\begin{table}[h!]
+  \centering
+  \caption{Overview of results from enrichment analysis without correction. Module : name of the module. Module size: size of the module. Genes in module: genes from input which are found in the module. p-value: uncorrected p-value. Test : null hypothesis used, greater is synonym of enrichment.}
+  \label{tab:table2}
+
+  \begin{tabular}{l|c|c|c|c}
+	\hline
+Module & Module size & Genes in module & p-value & Test\\
+	\hline
+Apoptosis:E2F1 & 5 &  ATM E2F1 EP300 KAT2B  & 1.043478e-08 & greater \\
+Apoptosis:G2 M CHECKPOINT & 35  & ATM KAT2B & 2.040546e-02 & greater \\
+Apoptosis:WNT CANONICAL & 53 & E2F1 EP300 KAT2B  & 4.984433e-03 & greater \\
+	\end{tabular}
+\end{table}
+
+
 
 
 \subsection{RNaviCell}
