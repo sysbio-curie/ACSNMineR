@@ -322,26 +322,44 @@ described with their different options in the RNaviCell documentation, and we
 provide a tutorial on the GitHub repository wiki
 (\url{https://github.com/sysbio-curie/RNaviCell/wiki/Tutorial}).  
 
+In the simple example detailed below, we create a NaviCell session, then load
+an expression data set from a local (tab-delimited) file. The data represent
+gene expression measured in a prostate cancer cell line resistant to hormonal
+treatment (agressive), and is taken from the Cell Line Encyclopedia project
+\citep{barretina2012cancer}. We visualize the data values on the Cell Cycle map
+(the default map), using heat maps. With this visualization mode, gene
+expression values are represented as a color gradient (green to red) in
+squares positioned next to the entities where the gene has been mapped.      
+
+
 \begin{verbatim}
-> library(RNaviCell)
-> navicell <- NaviCell()
-> navicell$launchBrowser()
+# load RNaviCell library
+
+library(RNaviCell)
+
+# create a NaviCell object and launch a server session
+# this will automatically open a browser on the client 
+
+navicell <- NaviCell()
+navicell$launchBrowser()
+
+data_matrix <- navicell$readDatatable('DU145_data.txt')
+navicell$importDatatable("mRNA expression data", "DU145", data_matrix)
+
+navicell$heatmapEditorSelectSample('0','data')
+navicell$heatmapEditorSelectDatatable('0','DU145')
+navicell$heatmapEditorApply()
 
 \end{verbatim}
 
 \begin{figure}[!ht]
-  \caption{A picture of a gull.}
+  \caption{Gene expression values from a prostate cancer cell line visualized
+on the cell cycle map as heat map plots.}
   \centering
-    \includegraphics[width=0.9\textwidth]{figures/heatmap.pdf}
+    \includegraphics[width=0.8\textwidth]{figures/heatmap.pdf}
 \end{figure}
 
 %navicell$launchBrowser()
-%mat <- navicell$readDatatable('DU145_data.txt')
-%navicell$importDatatable("mRNA expression data", "DU145", mat)
-%navicell$heatmapEditorSelectSample('0','data')
-%navicell$heatmapEditorSelectDatatable('0','DU145')
-%navicell$heatmapEditorApply()
-
 \section[Examples]{Examples}
 
 %\bibliographystyle{jss}
