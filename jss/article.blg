@@ -1,5 +1,48 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: article.aux
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: article.aux
 The style file: jss.bst
 Database file #1: biblio.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty journal in fisher1934statistical
+You've used 17 entries,
+            3215 wiz_defined-function locations,
+            744 strings with 8372 characters,
+and the built_in function-call counts, 21069 in all, are:
+= -- 2105
+> -- 594
+< -- 11
++ -- 230
+- -- 208
+* -- 1538
+:= -- 2457
+add.period$ -- 65
+call.type$ -- 17
+change.case$ -- 140
+chr.to.int$ -- 18
+cite$ -- 18
+duplicate$ -- 2233
+empty$ -- 1596
+format.name$ -- 246
+if$ -- 4274
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 201
+newline$ -- 98
+num.names$ -- 68
+pop$ -- 1101
+preamble$ -- 1
+purify$ -- 137
+quote$ -- 0
+skip$ -- 377
+stack$ -- 0
+substring$ -- 2317
+swap$ -- 492
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 150
+warning$ -- 1
+while$ -- 138
+width$ -- 0
+write$ -- 233
 (There was 1 warning)
