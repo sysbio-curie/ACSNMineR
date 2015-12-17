@@ -271,8 +271,18 @@ Module & Module size & Genes in module & p-value & Test\\
 Apoptosis:E2F1 & 5 &  ATM E2F1 EP300 KAT2B  & 1.043478e-08 & greater \\
 Apoptosis:G2 M CHECKPOINT & 35  & ATM KAT2B & 2.040546e-02 & greater \\
 Apoptosis:WNT CANONICAL & 53 & E2F1 EP300 KAT2B  & 4.984433e-03 & greater \\
+	\hline
 	\end{tabular}
 \end{table}
+
+We can now plot the first ten rows of the results obtained for corrected and uncorrected fisher test (figure 1).
+
+\begin{figure}
+	\centering
+	\caption{Representation of the enriched modules (first ten rows), either with either Bonferroni correction or no correction. Grey tiles means that the data is not available for this module in this sample. P-values of low signifance are in white, whereas p-values of high significance are represent in blue. }
+	\includegraphics{comparison_corrected_unc.pdf}
+\end{figure}
+
 
 
 
