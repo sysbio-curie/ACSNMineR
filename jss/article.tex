@@ -279,12 +279,16 @@ provided, all plots will be on the same row otherwise. For the heatmap, the
 color of the non-significant modules, and boundaries of the gradient for
 significant values can also be tuned.
 
-The package also includes a use-case that we detail below. Using,
-\code{genes_test} it is possible to explore the different possibilities of
-exploration of the maps. We previously computed the p-value of
-\code{genes_test} with default parameters.  The number of modules which have a
-p-value below 0.05 was 36, that can be compared to the 49 obtained without
-correction: \code{enrichment(genes_test,correction_multitest = FALSE)}
+
+We previously computed the p-value of the \code{genes_test} list with default
+parameters. The number of modules which have a p-value below 0.05 was 36, that
+can be compared to the 49 obtained without correction with the simple command
+shown below (some of the results are displayed in table \ref{tab:table2}).
+
+
+\begin{verbatim}
+enrichment(genes_test,correction_multitest = FALSE)
+\end{verbatim}
 
 
 \begin{table}[h!]

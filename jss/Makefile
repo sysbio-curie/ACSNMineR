@@ -5,7 +5,7 @@ pdf:
 	pdflatex article.tex
 
 read: pdf
-	open article.pdf
+	okular article.pdf
 
 clean:
 	rm article.aux
