@@ -312,7 +312,22 @@ Apoptosis:WNT CANONICAL & 53 & E2F1 EP300 KAT2B  & 4.98e-03 & greater \\
 	\end{tabular}
 \end{table}
 
-We can now plot the first ten rows of the results obtained for corrected and uncorrected fisher test with heatmap format (Figure~\ref{fig:heatm}) or barplot (Figure~\ref{fig:barp}).
+We can now plot the first ten rows of the results obtained for corrected and
+uncorrected fisher test with heatmap format (Figure~\ref{fig:heatm}) or barplot
+(Figure~\ref{fig:barp}) with the following commands:
+
+\begin{verbatim}
+# heatmap
+
+represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
+  SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log", 
+  low = "steelblue" , high ="white", na.value = "grey")
+
+# barplot 
+
+represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,],
+ SampleB = enrichment_test[3:10,]), plot = "bar", scale = "log", nrow = 1)
+\end{verbatim}
 
 \begin{figure}
 	\centering
