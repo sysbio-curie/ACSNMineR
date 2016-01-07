@@ -428,6 +428,85 @@ navicell$heatmapEditorApply()
 %navicell$launchBrowser()
 \section[Examples]{Examples}
 
+\subsection{Analysis of breast cancer expression data}
+In a study published in 2008, Schmidt and colleagues analyzed gene expression
+patterns of 200 breast cancer patients not treated by systemic therapy after
+surgery using discovery approach to reveal additional prognostic motifs
+\cite{schmidt2008humoral}. Estrogen receptor (ER) expression and proliferative
+activity of breast carcinomas are well-known and described prognostic markers.
+Patients with ER-positive carcinomas have a better prognosis than those with
+ER-negative carcinomas, and rapidly proliferating carcinomas have an adverse
+prognosis. Knowledge about the molecular mechanisms involved in the
+processes of estrogen-dependent tumor growth and proliferative activity has led
+to the successful development of therapeutic concepts, such as  antiendocrine and
+cytotoxic chemotherapy. 
+
+The dataset corresponding to this study is available as a
+Bioconductor package. The code shown below is creating a list of differentially
+expressed genes 
+
+\begin{verbatim}
+
+library(breastCancerMAINZ)
+library(Biobase)
+library(limma)
+library(ACSNMineR)
+library(hgu133a.db)
+library(RNaviCell)
+
+data(mainz)
+eset <- exprs(mainz)
+pdat <- pData(mainz)
+design <- model.matrix(~factor(pdat$er == '1'))
+lmFit(eset, design) -> fit
+eBayes(fit) -> ebayes
+toptable(ebayes, coef=2,n=25000)->tt
+#which(abs(tt$logFC) >=1 & tt$adj < 0.05) -> sel
+which(tt$adj < 0.05) -> sel
+rownames(tt[sel,]) -> probe_list
+mget(probe_list, env=hgu133aSYMBOL) -> slist
+slist <- as.character(slist)
+
+enrichment(slist) -> res
+
+#apply(eset[probe_list,pdat$er == 1],1,mean)->er_plus_mean
+#apply(eset[probe_list,pdat$er == 0],1,mean)->er_minus_mean
+#cbind(er_plus_mean, er_minus_mean)-> data_er
+#rownames(data_er) <- slist
+
+#n$map_url <- "http://acsn.curie.fr/navicell/maps/apoptosis/master/index.php"
+#n$importDatatable("mRNA expression data", "exp", data_er)
+
+apply(eset[probe_list,pdat$er == 0],1,mean) -> er_minus_mean
+names(er_minus_mean) <- slist
+er_minus_mean <- as.matrix(er_minus_mean)
+colnames(er_minus_mean) <- c('exp')
+
+
+n <- NaviCell()
+n$proxy_url <- "https://acsn.curie.fr/cgi-bin/nv_proxy.php"
+n$map_url <- "https://acsn.curie.fr/navicell/maps/acsn/master/index.php"
+
+n$launchBrowser()
+n$importDatatable("mRNA expression data", "GBM_exp", er_minus_mean)
+n$heatmapEditorSelectSample('0','exp')
+n$heatmapEditorSelectDatatable('0','GBM_exp')
+n$heatmapEditorApply()
+
+# analysis mtsig signature file
+
+#mt <- format_from_gmt('/Users/eric/Downloads/c2.cp.v5.0.symbols.gmt')
+#unique(slist)->l
+#> length(l)
+#[1] 5179
+#> head(l)
+#[1] "ESR1"   "CA12"   "GATA3"  "TBC1D9" "FOXA1"  "IL6ST" 
+#> enrichment(l, maps=mt)
+
+\end{verbatim}
+
+
+
 %\bibliographystyle{jss}
 \bibliography{biblio}
 
