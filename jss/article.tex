@@ -473,33 +473,29 @@ symbol_list <- as.character(symbol_list)
 
 enrichment(symbol_list) -> results
 
+dim(results)
+[1] 7 9
 \end{verbatim}
-
-%> as.character(res$module)
-%[1] "Apoptosis:HEDGEHOG"          "Apoptosis:AKT_MTOR"
-%[3] "DNA_repair"                  "DNA_repair:G1_CC_PHASE"
-%[5] "ACSN_master:AKT_MTOR"        "ACSN_master:G1_CC_PHASE"
-%[7] "Survival:S_PHASE_CHECKPOINT"
 
 \begin{table}[h!]
   \centering
   \caption{ACSN maps enrichment for genes differentially expressed between ER
 positive and ER negative samples in breast cancer.  Module : name of the
 module. Mod. size: size of the module. Nb genes: number of genes from input
-which are found in the module. pval: corrected p-value.}
+which are found in the module. pval: raw p-value. Cor. pval: corrected p-value.}
 \label{tab:table_mainz}
 
-\begin{tabular}{l|c|c|c}
+\begin{tabular}{l|c|c|c|c}
 \hline
-Module & Mod. size & Nb genes & pval \\
+Module & Mod. size & Nb genes & pval & Cor. pval\\
 \hline
-Apoptosis:HEDGEHOG &  &  & 1.04e-08 \\
-Apoptosis:AKT\_MTOR &  &  & 1.04e-08 \\
-DNA\_repair &  &  & 1.04e-08 \\
-DNA\_repair:G1\_CC\_PHASE &  &  & 1.04e-08 \\
-ACSN\_master:AKT\_MTOR &  &  & 1.04e-08 \\
-ACSN\_master:G1\_CC\_PHASE &  &  & 1.04e-08 \\
-Survival:S\_PHASE\_CHECKPOINT &  &  & 1.04e-08 \\
+Apoptosis:HEDGEHOG & 31 & 21 & 0.0016 & 0.042 \\
+Apoptosis:AKT\_MTOR &  79 & 47 & 0.00037 & 0.038 \\
+DNA\_repair & 335 & 163 & 0.0012 & 0.038 \\
+DNA\_repair:G1\_CC\_PHASE &  25 & 18 & 0.0011 & 0.038 \\
+ACSN\_master:AKT\_MTOR & 92 & 53 & 0.0005 & 0.038 \\
+ACSN\_master:G1\_CC\_PHASE & 25 & 18 & 0.0011 & 0.038 \\
+Survival:S\_PHASE\_CHECKPOINT & 8 & 8 & 0.0006 & 0.038 \\
 \hline
 
 \end{tabular}
