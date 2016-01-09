@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{19}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -76,6 +76,13 @@ Lang DT, the CRAN~team (2015).
 \newblock \emph{RCurl: General Network (HTTP/FTP/...) Client Interface for R}.
 \newblock R package version 1.95-4.7,
   \urlprefix\url{http://CRAN.R-project.org/package=RCurl}.
+
+\bibitem[{Liberzon \emph{et~al.}(2011)Liberzon, Subramanian, Pinchback,
+  Thorvaldsd{\'o}ttir, Tamayo, and Mesirov}]{liberzon2011molecular}
+Liberzon A, Subramanian A, Pinchback R, Thorvaldsd{\'o}ttir H, Tamayo P,
+  Mesirov JP (2011).
+\newblock \enquote{Molecular signatures database (MSigDB) 3.0.}
+\newblock \emph{Bioinformatics}, \textbf{27}(12), 1739--1740.
 
 \bibitem[{{R Core Team}(2014)}]{mainRref}
 {R Core Team} (2014).

@@ -425,7 +425,6 @@ navicell$heatmapEditorApply()
 
 \end{verbatim}
 
-%navicell$launchBrowser()
 \section[Examples]{Examples}
 
 \subsection{Analysis of breast cancer expression data}
@@ -442,7 +441,12 @@ to the successful development of therapeutic concepts, such as  antiendocrine an
 cytotoxic chemotherapy. 
 
 The dataset corresponding to this study is available as a Bioconductor package.
-The code shown below is creating a list of differentially expressed genes 
+The code shown below is creating a list of differentially expressed genes
+between ER positive and ER negative samples, and calculates the enrichment in
+ACSN maps from this list of genes. As seen in Table \ref{tab:table_mainz}, there
+are four maps (Apoptosis, DNA repair, ACSN master and Survival) and seven
+modules enriched. Most of the modules are in fact linked to different phases of
+the cell cycle.
 
 \begin{verbatim}
 # load all necessary packages
@@ -497,9 +501,23 @@ ACSN\_master:AKT\_MTOR & 92 & 53 & 0.0005 & 0.038 \\
 ACSN\_master:G1\_CC\_PHASE & 25 & 18 & 0.0011 & 0.038 \\
 Survival:S\_PHASE\_CHECKPOINT & 8 & 8 & 0.0006 & 0.038 \\
 \hline
-
 \end{tabular}
 \end{table}
+
+The Molecular Signatures Database (MSigDB) is one of the most widely used
+repository of well-annotated  gene sets representing the universe of biological
+processes \citep{liberzon2011molecular}. We downloaded the canonical pathways
+set, counting more than 1,300 gene sets representing canonical pathways compiled
+by domain experts. The dataset is encoded with the 'gmt' format, and can be
+imported within ACSNMineR with the \code{format\_from\_gmt} function. We
+calculate the enrichment for the breast cancer differentially expressed gene
+list, simply specifying the MSigDB data we just imported as the \code{maps}
+option. Table \ref{tab:table_msigdb} is displaying the pathways having a
+corrected p-value $< 0.05$. The prefix is indicating the database source, so we
+see that we have pathways from the KEGG, Reactome and PID databases. Consistent
+with our previous results, most of the enriched pathways are related to the cell
+cycle regulation. 
+
 
 \begin{verbatim}
 # analysis mtsig signature file
@@ -508,6 +526,33 @@ mtsig <- format_from_gmt('c2.cp.v5.0.symbols.gmt')
 enrichment(symbol_list, maps = mtsig)
 
 \end{verbatim}
+
+
+\begin{table}[h!]
+  \centering
+  \caption{MSigDB canonical pathway database enrichment for genes differentially expressed between ER
+positive and ER negative samples in breast cancer.  Module : name of the
+module. Mod. size: size of the module. Nb genes: number of genes from input
+which are found in the module. Cor. pval: corrected p-value.}
+\label{tab:table_msigdb}
+
+\begin{tabular}{l|c|c|c}
+\hline
+Pathway & Mod. size & Nb genes & Cor. pval\\
+\hline
+KEGG\_CELL\_CYCLE & 128 & 76 & 1.98e-07\\
+REACTOME\_CELL\_CYCLE\_MITOTIC & 325 & 158 & 2.40e-07\\
+REACTOME\_DNA\_REPLICATION & 192 & 98 & 1.33e-05\\
+PID\_FOXM1\_PATHWAY & 40 & 29 & 5.05e-05\\
+REACTOME\_MITOTIC\_M\_M\_G1\_PHASES & 172 & 87 & 7.38e-05\\
+REACTOME\_CELL\_CYCLE & 421 & 181 & 2.97e-04\\
+PID\_AURORA\_B\_PATHWAY & 39 & 27 & 3.38e-04\\
+REACTOME\_MITOTIC\_G1\_G1\_S\_PHASES & 137 & 70 & 3.83e-04\\ 
+PID\_SYNDECAN\_1\_PATHWAY & 46 & 30 & 4.40e-04\\
+REACTOME\_S\_PHASE & 109 & 58 & 4.40e-04\\
+\hline
+\end{tabular}
+\end{table}
 
 
 \begin{verbatim}
@@ -526,7 +571,6 @@ navicell$heatmapEditorSelectSample('0','exp')
 navicell$heatmapEditorSelectDatatable('0','GBM_exp')
 navicell$heatmapEditorApply()
 \end{verbatim}
-
 
 
 %\bibliographystyle{jss}
