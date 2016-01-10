@@ -5,45 +5,45 @@ The style file: jss.bst
 Database file #1: biblio.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty journal in fisher1934statistical
-You've used 19 entries,
+You've used 22 entries,
             3215 wiz_defined-function locations,
-            757 strings with 8918 characters,
-and the built_in function-call counts, 25471 in all, are:
-= -- 2571
-> -- 728
+            778 strings with 9682 characters,
+and the built_in function-call counts, 30993 in all, are:
+= -- 3135
+> -- 904
 < -- 11
-+ -- 282
-- -- 256
-* -- 1887
-:= -- 2930
-add.period$ -- 73
-call.type$ -- 19
-change.case$ -- 164
-chr.to.int$ -- 20
-cite$ -- 20
-duplicate$ -- 2707
-empty$ -- 1911
-format.name$ -- 300
-if$ -- 5165
++ -- 348
+- -- 319
+* -- 2328
+:= -- 3547
+add.period$ -- 85
+call.type$ -- 22
+change.case$ -- 197
+chr.to.int$ -- 23
+cite$ -- 23
+duplicate$ -- 3287
+empty$ -- 2314
+format.name$ -- 372
+if$ -- 6278
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 235
-newline$ -- 108
-num.names$ -- 76
-pop$ -- 1342
+missing$ -- 283
+newline$ -- 123
+num.names$ -- 88
+pop$ -- 1631
 preamble$ -- 1
-purify$ -- 161
+purify$ -- 194
 quote$ -- 0
-skip$ -- 423
+skip$ -- 489
 stack$ -- 0
-substring$ -- 2910
-swap$ -- 574
+substring$ -- 3600
+swap$ -- 692
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 168
+type$ -- 195
 warning$ -- 1
-while$ -- 164
+while$ -- 200
 width$ -- 0
-write$ -- 259
+write$ -- 298
 (There was 1 warning)
