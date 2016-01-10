@@ -520,7 +520,7 @@ cycle regulation.
 
 
 \begin{verbatim}
-# analysis mtsig signature file
+# Import MSigDB canonical pathways and calculate enrichment on this database 
 
 mtsig <- format_from_gmt('c2.cp.v5.0.symbols.gmt')
 enrichment(symbol_list, maps = mtsig)
@@ -554,12 +554,20 @@ REACTOME\_S\_PHASE & 109 & 58 & 4.40e-04\\
 \end{tabular}
 \end{table}
 
+At last, we visualize the mean expression values for ER negative samples for all
+genes differentially expressed on the ACSN master map using \code{ACSNMineR}
+commands to create heatmaps.
 
 \begin{verbatim}
+# Select ER negative samples and calculate mean expression values
+
 apply(eset[probe_list,pdat$er == 0],1,mean) -> er_minus_mean
 names(er_minus_mean) <- symbol_list
 er_minus_mean <- as.matrix(er_minus_mean)
 colnames(er_minus_mean) <- c('exp')
+
+# create a NaviCell session, import the expression matrix on the map and create
+# heatmaps to represent the data points.
 
 navicell <- NaviCell()
 navicell$proxy_url <- "https://acsn.curie.fr/cgi-bin/nv_proxy.php"
@@ -571,6 +579,68 @@ navicell$heatmapEditorSelectSample('0','exp')
 navicell$heatmapEditorSelectDatatable('0','GBM_exp')
 navicell$heatmapEditorApply()
 \end{verbatim}
+
+The Figure \ref{fig:mainz} is displaying the map for gene that having a
+corrected p-value $< 0.05$ and a log fold-change $>1$. we can see that the genes
+are concentrated in the regions of the map corresponding to the cell cycle, cell
+motility, apoptosis and survival.
+
+\begin{figure}[!ht]
+  \caption{Mean expression values for ER negative differentially expressed
+  genes in breast cancer visualized as heatmaps on the ACSN master map.} 
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/mainz_acsn.pdf}
+  \label{fig:mainz}
+\end{figure}
+
+\subsection{Analysis of glioblastoma mutation frequencies}
+
+
+\begin{table}[h!]
+  \centering
+  \caption{MSigDB canonical pathway database enrichment for genes differentially expressed between ER
+positive and ER negative samples in breast cancer.  Module : name of the
+module. Mod. size: size of the module. Nb genes: number of genes from input
+which are found in the module. Cor. pval: corrected p-value.}
+\label{tab:table_gbm}
+
+\begin{tabular}{l|c|c|c}
+\hline
+module & Mod. size & Nb genes & Cor. pval\\ 
+\hline
+CellCycle:G2\_M\_CHECKPOINT & 14 & 8 & 3.92e-02\\
+CellCycle:S\_PHASE\_CHECKPOINT & 6 & 5 & 3.92e-02\\
+DNA\_repair:S\_PHASE\_CHECKPOINT & 45 & 19 & 1.58e-02\\
+EMT\_motility & 621 & 176 & 1.06e-03\\
+EMT\_motility:CELL\_MATRIX\_ADHESIONS & 72 & 44 & 2.55e-11\\
+EMT\_motility:ECM & 137 & 64 & 2.34e-09\\
+EMT\_motility:EMT\_REGULATORS & 615 & 173 & 1.49e-03\\
+EMT\_motility:CYTOSKELETON\_POLARITY & 154 & 47 & 3.92e-02\\
+EMT\_motility:DESMOSOMES & 29 & 15 & 4.62e-03\\
+ACSN\_master:CELL\_MATRIX\_ADHESIONS & 72 & 44 & 2.55e-11\\
+ACSN\_master:DESMOSOMES & 29 & 15 & 4.62e-03\\
+ACSN\_master:S\_PHASE\_CHECKPOINT & 46 & 20 & 8.23e-03\\
+ACSN\_master:ECM & 138 & 64 & 2.56e-09\\
+ACSN\_master:EMT\_REGULATORS & 625 & 177 & 1.06e-03\\
+ACSN\_master:CYTOSKELETON\_POLARITY & 154 & 47 & 3.92e-02\\
+Survival:ECM & 23 & 11 & 3.92e-02\\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\begin{figure}[!ht]
+  \caption{Mean expression values for ER negative differentially expressed
+  genes in breast cancer visualized as heatmaps on the ACSN master map.} 
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/gbm.pdf}
+  \label{fig:mainz}
+\end{figure}
+
+
+
+
 
 
 %\bibliographystyle{jss}
