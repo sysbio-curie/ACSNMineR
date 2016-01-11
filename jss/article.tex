@@ -630,14 +630,13 @@ Cell Cycle, DNA repair, EMT motility and Survival. Cell matrix adhesions and ECM
 (extra cellular matrix), part of the EMT motility map, are the modules with
 highest significance (corrected p-values of 2.55e-11 and 2.34e-9 respectively). 
 
-
 \begin{table}[h!]
   \centering
-  \caption{MSigDB canonical pathway database enrichment for genes differentially expressed between ER
-positive and ER negative samples in breast cancer.  Module : name of the
-module. Mod. size: size of the module. Nb genes: number of genes from input
-which are found in the module. Cor. pval: corrected p-value.}
-\label{tab:table_gbm}
+  \caption{ACSN maps enrichment for frequently mutated glioblastoma genes.
+  Module : name of the module. Mod. size: size of the module. Nb genes: number
+  of genes from input which are found in the module. Cor. pval: corrected
+  p-value.} 
+  \label{tab:table_gbm}
 
 \begin{tabular}{l|c|c|c}
 \hline
@@ -663,7 +662,7 @@ Survival:ECM & 23 & 11 & 3.92e-02\\
 \end{tabular}
 \end{table}
 
-Visualization of the list of frequently mutated genes is shown on figure
+Visualization of the list of glioblastoma mutated genes is shown on figure
 \ref{fig:gbm}. This figure was generated with the ACSNMineR commands detailed
 below. Results of the enrichment test correlate well with the visualization on
 the map, with a high density of low and high frequency mutated genes in the EMT
@@ -712,8 +711,11 @@ navicell$unorderedConfigApply("GBM", "size")
 \end{verbatim}
 
 \begin{figure}[!ht]
-  \caption{Mean expression values for ER negative differentially expressed
-  genes in breast cancer visualized as heatmaps on the ACSN master map.} 
+  \caption{Glioblastoma gene mutation frequency categories represented as
+  glyphs on the ACSN global cancer map. High frequency mutated genes are
+  pictured as large red circles, while low frequency mutated genes are depicted
+  as small blue squares.
+  } 
   \centering
   \includegraphics[width=0.8\textwidth]{figures/gbm.pdf}
   \label{fig:gbm}
