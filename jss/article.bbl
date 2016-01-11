@@ -1,4 +1,4 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{22}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -49,6 +49,11 @@ Fisher RA (1922).
 Fisher RA (1934).
 \newblock \enquote{Statistical methods for research workers.}
 
+\bibitem[{Hawkins \emph{et~al.}(2010)Hawkins, Hon, and Ren}]{hawkins2010next}
+Hawkins RD, Hon GC, Ren B (2010).
+\newblock \enquote{Next-generation genomics: an integrative approach.}
+\newblock \emph{Nature Reviews Genetics}, \textbf{11}(7), 476--486.
+
 \bibitem[{Kanehisa \emph{et~al.}(2011)Kanehisa, Goto, Sato, Furumichi, and
   Tanabe}]{kanehisa2011kegg}
 Kanehisa M, Goto S, Sato Y, Furumichi M, Tanabe M (2011).
@@ -77,6 +82,29 @@ Lang DT, the CRAN~team (2015).
 \newblock R package version 1.95-4.7,
   \urlprefix\url{http://CRAN.R-project.org/package=RCurl}.
 
+\bibitem[{Liberzon \emph{et~al.}(2011)Liberzon, Subramanian, Pinchback,
+  Thorvaldsd{\'o}ttir, Tamayo, and Mesirov}]{liberzon2011molecular}
+Liberzon A, Subramanian A, Pinchback R, Thorvaldsd{\'o}ttir H, Tamayo P,
+  Mesirov JP (2011).
+\newblock \enquote{Molecular signatures database (MSigDB) 3.0.}
+\newblock \emph{Bioinformatics}, \textbf{27}(12), 1739--1740.
+
+\bibitem[{Maher \emph{et~al.}(2001)Maher, Furnari, Bachoo, Rowitch, Louis,
+  Cavenee, and DePinho}]{maher2001malignant}
+Maher EA, Furnari FB, Bachoo RM, Rowitch DH, Louis DN, Cavenee WK, DePinho RA
+  (2001).
+\newblock \enquote{Malignant glioma: genetics and biology of a grave matter.}
+\newblock \emph{Genes \& development}, \textbf{15}(11), 1311--1333.
+
+\bibitem[{McLendon \emph{et~al.}(2008)McLendon, Friedman, Bigner, Van~Meir,
+  Brat, Mastrogianakis, Olson, Mikkelsen, Lehman, Aldape
+  \emph{et~al.}}]{mclendon2008comprehensive}
+McLendon R, Friedman A, Bigner D, Van~Meir EG, Brat DJ, Mastrogianakis GM,
+  Olson JJ, Mikkelsen T, Lehman N, Aldape K, \emph{et~al.} (2008).
+\newblock \enquote{Comprehensive genomic characterization defines human
+  glioblastoma genes and core pathways.}
+\newblock \emph{Nature}, \textbf{455}(7216), 1061--1068.
+
 \bibitem[{{R Core Team}(2014)}]{mainRref}
 {R Core Team} (2014).
 \newblock \emph{R: A Language and Environment for Statistical Computing}.
@@ -96,6 +124,14 @@ Rivals I, Personnaz L, Taing L, Potier MC (2007).
 \newblock \enquote{Enrichment or depletion of a GO category within a class of
   genes: which test?}
 \newblock \emph{Bioinformatics}, \textbf{23}(4), 401--407.
+
+\bibitem[{Schmidt \emph{et~al.}(2008)Schmidt, B{\"o}hm, von T{\"o}rne, Steiner,
+  Puhl, Pilch, Lehr, Hengstler, K{\"o}lbl, and Gehrmann}]{schmidt2008humoral}
+Schmidt M, B{\"o}hm D, von T{\"o}rne C, Steiner E, Puhl A, Pilch H, Lehr HA,
+  Hengstler JG, K{\"o}lbl H, Gehrmann M (2008).
+\newblock \enquote{The humoral immune system has a key prognostic impact in
+  node-negative breast cancer.}
+\newblock \emph{Cancer research}, \textbf{68}(13), 5405--5413.
 
 \bibitem[{Vance(2009)}]{vance2009data}
 Vance A (2009).
