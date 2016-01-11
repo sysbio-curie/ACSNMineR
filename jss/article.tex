@@ -627,11 +627,8 @@ We loaded the data as a matrix in R and calculated the enrichment in ACSN maps
 with the ACSNMineR function \code{enrichment}. The results are displayed in
 table \ref{tab:table_gbm}. There are 16 modules significantly enriched in the
 Cell Cycle, DNA repair, EMT motility and Survival. Cell matrix adhesions and ECM
-(extra cellular matrix) are the modules with highest significance (corrected
-p-values of 2.55e-11 and 2.34e-9 respectively). Visualization of the list of
-frequently mutated genes is shown on figure \ref{fig:gbm}. This figure was
-generated with the ACSNMineR commands detailed below. 
-
+(extra cellular matrix), part of the EMT motility map, are the modules with
+highest significance (corrected p-values of 2.55e-11 and 2.34e-9 respectively). 
 
 
 \begin{table}[h!]
@@ -665,6 +662,13 @@ Survival:ECM & 23 & 11 & 3.92e-02\\
 \hline
 \end{tabular}
 \end{table}
+
+Visualization of the list of frequently mutated genes is shown on figure
+\ref{fig:gbm}. This figure was generated with the ACSNMineR commands detailed
+below. Results of the enrichment test correlate well with the visualization on
+the map, with a high density of low and high frequency mutated genes in the EMT
+motility , survival, cell cycle and DNA repair regions (maps) of the global ACSN
+map.
 
 \begin{verbatim}
 library(RNaviCell)
