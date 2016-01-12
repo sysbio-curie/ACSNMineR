@@ -7,19 +7,35 @@
 %% almost as usual
 \author{Paul Deveau\\Institut Curie\\PSL Research University\\Univ. Paris-Sud\\INSERM U830\\INSERM U900\\Mines-ParisTech \And 
         Eric Bonnet\\Institut Curie\\PSL Research University\\INSERM U900\\Mines-ParisTech}
-\title{Calculating Module Enrichment and Visualizing Data on Large-scale Molecular Maps with the R packages \pkg{ACSNMineR} and \pkg{RNaviCell}}
+\title{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with the R packages \pkg{ACSNMineR} and \pkg{RNaviCell}}
 
 %% for pretty printing and a nice hypersummary also set:
 \Plainauthor{Paul Deveau, Eric Bonnet} %% comma-separated
-\Plaintitle{Calculating Module Enrichment and Visualizing Data on Large-scale Molecular Maps with the R packages ACSNMineR and RNaviCel} %% without formatting
+\Plaintitle{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with the R packages ACSNMineR and RNaviCell} %% without formatting
 \Shorttitle{Module Enrichment and Data Visualization with ACSNMineR and RNaviCell} %% a short title (if necessary)
 
 %% an abstract and keywords
 \Abstract{
-  The abstract of the article.
+Biological pathways or modules represent sets of interactions or functional
+relationships occurring at the molecular level in living cells. A large body of
+knowledge on pathways is organized in public databases such as the KEGG,
+Reactome, MINT databases, but also in more specialized repositories such as the
+recently released Atlas of Cancer Signaling Networks (ACSN). All these open and
+popular biological databases facilitate a large spectrum of analyses, thereby
+improving our understanding of cellular systems. Here we describe the
+\pkg{ACSNMineR}, a novel R package for calculation of enrichment or depletion
+of list of genes of interest in biological pathways. The package has built-in
+support for ACSN molecular pathways, but can use any molecular pathway database
+encoded as a GMT file, such as any of the gene signatures available in the
+Molecular Signatures Database (MSigDB). We also present the R package
+\pkg{RNaviCell}, that can be used in conjunction with \pkg{ACSNMineR} to
+visualize different data types on web-based, interactive ACSN maps. We
+illustrate the functionalities of the two packages with real-world biological
+data taken from large-scale cancer datasets.          
+
 }
-\Keywords{keywords, comma-separated, not capitalized, \proglang{Java}}
-\Plainkeywords{keywords, comma-separated, not capitalized, Java} %% without formatting
+\Keywords{biological module, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, \proglang{R}}
+\Plainkeywords{biological module, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, R} %% without formatting
 %% at least one keyword must be supplied
 
 %% publication information
@@ -74,7 +90,7 @@ genes that are differentially expressed between two conditions, such as normal
 vs disease) and then try to see if known biological pathways are enriched with
 this list of genes. 
 
-We have recently released the Atlas of Cancer Signalling Network (ACSN), a
+We have recently released the Atlas of Cancer Signalling Networks (ACSN), a
 web-based database which describes signaling and regulatory molecular processes
 that occur in a healthy mammalian cell but that are frequently deregulated
 during cancerogenesis \citep{kuperstein2013navicell}.  The ACSN atlas aims to
@@ -425,7 +441,7 @@ navicell$heatmapEditorApply()
 
 \end{verbatim}
 
-\section[Examples]{Examples}
+\section[Case studies]{Case studies}
 
 \subsection{Analysis of breast cancer expression data}
 In a study published in 2008, Schmidt and colleagues analyzed gene expression
@@ -720,6 +736,13 @@ navicell$unorderedConfigApply("GBM", "size")
 \end{figure}
 
 
+
+
+\section[Acknowledgments]{Acknowledgements}
+
+The authors would like to thank Pierre Gestraud for his comments on early
+versions of the \pkg{ACSNMineR} package and Eric Viara for guidance and
+assistance on the development of the \pkg{RNaviCell} package.
 
 %\bibliographystyle{jss}
 \bibliography{biblio}
