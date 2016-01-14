@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{24}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -38,6 +38,11 @@ Croft D, Mundo AF, Haw R, Milacic M, Weiser J, Wu G, Caudy M, Garapati P,
   Gillespie M, Kamdar MR, \emph{et~al.} (2014).
 \newblock \enquote{The Reactome pathway knowledgebase.}
 \newblock \emph{Nucleic Acids Research}, \textbf{42}(D1), D472--D477.
+
+\bibitem[{Falcon and Gentleman(2007)}]{falcon2007using}
+Falcon S, Gentleman R (2007).
+\newblock \enquote{Using GOstats to test gene lists for GO term association.}
+\newblock \emph{Bioinformatics}, \textbf{23}(2), 257--258.
 
 \bibitem[{Fisher(1922)}]{fisher1922interpretation}
 Fisher RA (1922).
@@ -149,6 +154,13 @@ Wickham H (2009).
 Wickham H (2015).
 \newblock \emph{Reference classes}.
 \newblock Advanced R, \urlprefix\url{http://adv-r.had.co.nz/R5.html}.
+
+\bibitem[{Yu \emph{et~al.}(2012)Yu, Wang, Han, and He}]{yu2012clusterprofiler}
+Yu G, Wang LG, Han Y, He QY (2012).
+\newblock \enquote{clusterProfiler: an R package for comparing biological
+  themes among gene clusters.}
+\newblock \emph{Omics: a journal of integrative biology}, \textbf{16}(5),
+  284--287.
 
 \bibitem[{Zanzoni \emph{et~al.}(2002)Zanzoni, Montecchi-Palazzi, Quondam,
   Ausiello, Helmer-Citterich, and Cesareni}]{zanzoni2002mint}

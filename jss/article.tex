@@ -34,8 +34,8 @@ illustrate the functionalities of the two packages with real-world biological
 data taken from large-scale cancer datasets.          
 
 }
-\Keywords{biological module, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, \proglang{R}}
-\Plainkeywords{biological module, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, R} %% without formatting
+\Keywords{biological module, biological pathway, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, \proglang{R}}
+\Plainkeywords{biological module, biological pathway, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, R} %% without formatting
 %% at least one keyword must be supplied
 
 %% publication information
@@ -83,7 +83,7 @@ is organized in publicly available repositories such as the KEGG database
 spectrum of analyses, improving our understanding of cellular systems. For
 instance, it is a very common practice to cross the output of high-throughput
 experiments, such as mRNA or protein expression levels, with curated biological
-pathways in order to visualize changes, analyze their impact on a network and
+pathways in order to visualize the changes, analyze their impact on a network and
 formulate new hypotheses about biological processes. Many biologists and
 computational biologists establish list of genes of interest (e.g. a list of
 genes that are differentially expressed between two conditions, such as normal
@@ -93,7 +93,7 @@ this list of genes.
 We have recently released the Atlas of Cancer Signalling Networks (ACSN), a
 web-based database which describes signaling and regulatory molecular processes
 that occur in a healthy mammalian cell but that are frequently deregulated
-during cancerogenesis \citep{kuperstein2013navicell}.  The ACSN atlas aims to
+during cancerogenesis \citep{kuperstein2015atlas}.  The ACSN atlas aims to
 be a comprehensive description of cancer-related mechanisms retrieved from the
 most recent literature. The web interface for ACSN is using the NaviCell
 technology, a software framework dedicated to web-based visualization and
@@ -107,10 +107,10 @@ data \citep{bonnet2015navicell}.
 In this article, we describe two software packages related to ACSN analysis and
 data visualization for the popular R statistical enrironment \citep{mainRref,
 vance2009data}. The package \pkg{ACSNMineR} is designed for the calculation of
-gene enrichment and depletion in ACSN maps, while \pkg{RNaviCell} is dedicated
-to data visualization on ACSN maps. Both packages are available on the
-Comprehensive R Archive Network
-(\url{https://cran.r-project.org/web/packages/ACSNMineR/} and
+gene enrichment and depletion in ACSN maps (or any user-defined gene set via
+the import function), while \pkg{RNaviCell} is dedicated to data visualization
+on ACSN maps. Both packages are available on the Comprehensive R Archive
+Network (\url{https://cran.r-project.org/web/packages/ACSNMineR/} and
 \url{https://cran.r-project.org/web/packages/RNaviCell/}), and on the GitHub
 repository (\url{https://github.com/sysbio-curie/ACSNMineR} and
 \url{https://github.com/sysbio-curie/RNaviCell}). For the remainder of this
@@ -288,13 +288,12 @@ out modules which would not pass the significance threshold in all samples.
 Finally, to facilitate visualization of results, \pkg{ACSNMineR} integrates a
 representation function based on \pkg{ggplot2} syntax \citep{ggplot2}. It
 allows representation of results from \code{enrichment} or
-\code{multisample_enrichment} with a limited number of parameters. For
-examples, two types of display are available: heat-map tiles or bars. For
-multiple samples using a barplot representation the number of rows used can be
-provided, all plots will be on the same row otherwise. For the heatmap, the
-color of the non-significant modules, and boundaries of the gradient for
-significant values can also be tuned.
-
+\code{multisample_enrichment} with a limited number of parameters. Two types of
+display are available: heat-map tiles or bars. For multiple samples using a
+barplot representation, the number of rows used can be provided, otherwise all
+plots will be on the same row. For the heatmap, the color of the
+non-significant modules, and boundaries of the gradient for significant values
+can also be tuned.
 
 We previously computed the p-value of the \code{genes_test} list with default
 parameters. The number of modules which have a p-value below 0.05 was 36, that
@@ -309,7 +308,7 @@ enrichment(genes_test,correction_multitest = FALSE)
 
 \begin{table}[h!]
   \centering
-  \caption{Overview of results from enrichment analysis without correction.
+  \caption{Overview of the results from enrichment analysis without correction.
   Module : name of the module. Mod. size: size of the module. Genes in module:
   genes from input which are found in the module. p-value: uncorrected p-value.
   Test : null hypothesis used, greater is synonym of enrichment.}
@@ -405,8 +404,10 @@ squares positioned next to the entities where the gene has been mapped (Figure~\
 on the cell cycle map as heat map plots. The figure is a screenshot of the
 NaviCell map browser, with the map set at the top (the less detailed) zoom
 level. The essential phases of the cell cycle are indicated on the map
-(G1/S/G2/M).} 
-  \centering
+(G1/S/G2/M). Note that on the web browser the map is interactive and the user
+can zoom in and out, change the graphical parameters, import additional data
+and perform functional analysis.  } 
+\centering
   \includegraphics[width=0.8\textwidth]{figures/heatmap.pdf}
   \label{fig:du145}
 \end{figure}
@@ -571,7 +572,7 @@ REACTOME\_S\_PHASE & 109 & 58 & 4.40e-04\\
 \end{table}
 
 At last, we visualize the mean expression values for ER negative samples for all
-genes differentially expressed on the ACSN master map using \code{ACSNMineR}
+genes differentially expressed on the ACSN master (global) map using \code{ACSNMineR}
 commands to create heatmaps.
 
 \begin{verbatim}
@@ -738,26 +739,18 @@ navicell$unorderedConfigApply("GBM", "size")
   \label{fig:gbm}
 \end{figure}
 
-\section[Discussion]{Discussion}
+\section[Summary and perspectives]{Summary and perspectives}
 In this work, we presented the R package \pkg{ACSNMineR}, a novel package for
 the calculation of p-values for enrichment or depletion of genes in biological
-pathways (also called modules here). The main function of the package,
-\code{enrichment}, offers many options to set the statistical test used (either
-the Fisher exact test or the hypergeometric test), the modules (or maps) used,
-the universe of reference for the calculations, the miminal size for a module to
-be taken into account, the choice for over or under-representation. Additional
-functions allow users to create graphical representations for p-values
-(\code{represent\_enrichment}) or to perform calculations for multiple samples
-or groups (\code{multisample\_enrichment}). Large-scale molecular maps of the
-Atlas of Cancer Signaling Networks (ACSN) are included in the package (six
-maps), but any other molecular pathway (such as those defined in the REACTOME
-database) can be imported and used for calculations with the command
-\code{format\_from\_gmt}. 
+pathways. The package includes the six large-scale molecular maps and 55
+functional modules of the Atlas of Cancer Signaling Networks (ACSN) . Enrichment can be
+calculated for those maps and modules with several options to play with, but can
+also be calculated for other databases of molecular pathways, that can be
+imported from GMT formated files. 
 
 We also describe in this work the \pkg{RNaviCell} package, a R package highly
-complementary to \pkg{ACSNMineR}. This package is dedicated to create data
-visualization on ACSN maps, and is communicating with the NaviCell web server to
-create interactive graphical representations. Users might use this tools to
+complementary to \pkg{ACSNMineR}. This package is dedicated to create web-based
+and interactive data visualization on ACSN maps. Users can use this tools to
 represent genes of interest that have been shown to be related to the maps by
 calculating enrichment with the  \pkg{ACSNMineR}.  Creating maps with the
 graphical user interface of the ACSN website can be a tedious task if the user
@@ -765,17 +758,35 @@ has multiple samples or gene lists, and wants to compare their representations
 on ACSN maps. The \pkg{RNaviCell} package can be used to automate the process of
 creating the graphical representations automatically. 
 
-Of course, \pkg{ACSNMineR} is not the only R package for enrichment calculations. For
-instance, \pkg{GOstats} \citep{falcon2007using} is probably one of the first
-packages that was created to calculate enirchment for Gene Ontology categories.
-\pkg{GOstats} can also be used to calculate enrichment for other biological
-pathways categories, such as KEGG pathways (by using an instance of the class
-\code{KEGGHyperGParams}) or PFAM protein families (using
+We have shown how the packages \pkg{ACSNMineR} and \pkg{RNaviCell} can be
+combined to analyze expression data from breast cancer samples, and also to
+analyze the frequency of mutated genes in glioblastoma cancer samples.  
+
+Of course, \pkg{ACSNMineR} is not the only R package for enrichment
+calculations. For instance, \pkg{GOstats} \citep{falcon2007using} is probably
+one of the first packages that was created to calculate enirchment for Gene
+Ontology categories.  \pkg{GOstats} can also be used to calculate enrichment for
+other biological pathways categories, such as KEGG pathways (by using an
+instance of the class \code{KEGGHyperGParams}) or PFAM protein families (using
 \code{PFAMHyperGParams}). However, its usage might not be as straightforward as
 \pkg{ACSNMineR}, and it does not seems possible to test user-defined biological
 pathways. Furthermore, other authors have pointed out that the KEGG database
 used by this package has not been updated since 2012. \pkg{clusterProfiler} is a
-recent R package released for the  
+recent R package released for enrichment analysis of Gene Ontology and KEGG with
+either hypergeometric test or Gene Set Enrichment Analysis (GSEA)
+\citep{yu2012clusterprofiler}. Via other packages, support for analysis of
+Disease Ontology and Reactome Pathways is possible. Interestingly, this package
+also offers the possibility to import user-defined gene set, through
+tab-delimited pairwise definition files.   
+
+In order to improve \pkg{ACSNMineR}, we may in the near future try to improve
+the speed of calculation, which might be a problem if a very large number of
+samples or experiments have to be analyzed rapidly. For instance, we could use
+the \code{foreach} and \code{\%dopar\%} operator to parallelize the most
+computationally demanding operations. It could also be useful to implement more
+sensitive methods of gene set enrichment measures, such as the Gene Set
+Enrichment Analysis (GSEA) method. 
+
 
 \section[Acknowledgments]{Acknowledgements}
 
