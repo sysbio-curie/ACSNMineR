@@ -1,4 +1,4 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{25}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -65,6 +65,15 @@ Kanehisa M, Goto S, Sato Y, Furumichi M, Tanabe M (2011).
 \newblock \enquote{KEGG for integration and interpretation of large-scale
   molecular data sets.}
 \newblock \emph{Nucleic Acids Research}, p. gkr988.
+
+\bibitem[{Kuperstein \emph{et~al.}(2015)Kuperstein, Bonnet, Nguyen, Cohen,
+  Viara, Grieco, Fourquet, Calzone, Russo, Kondratova
+  \emph{et~al.}}]{kuperstein2015atlas}
+Kuperstein I, Bonnet E, Nguyen H, Cohen D, Viara E, Grieco L, Fourquet S,
+  Calzone L, Russo C, Kondratova M, \emph{et~al.} (2015).
+\newblock \enquote{Atlas of Cancer Signalling Network: a systems biology
+  resource for integrative analysis of cancer data with Google Maps.}
+\newblock \emph{Oncogenesis}, \textbf{4}(7), e160.
 
 \bibitem[{Kuperstein \emph{et~al.}(2013)Kuperstein, Cohen, Pook, Viara,
   Calzone, Barillot, and Zinovyev}]{kuperstein2013navicell}
