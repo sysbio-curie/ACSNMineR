@@ -639,18 +639,27 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
                                              y = "module", 
                                              fill = "p.values"))+ggplot2::xlab("")+ ggplot2::ylab("Modules") + ggplot2::geom_tile()
       if(scale == "log"){
-        q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log")
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log10")
       }
+      else if(scale == "reverselog"){
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , high = low, na.value = na.value, trans = "reverselog")
+      }
+      
       else{
         q<-q+ ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value)
       }
       
     }
     else{
-      q<-ggplot2::qplot(x = enrichment$module, y = enrichment$p.values,
+      q<-ggplot2::ggplot(data= enrichment,
+                          aes_string(x= "module",
+                                    y= "p.values"),
                         xlab = "Modules", ylab = "p-values")
       if(scale == "log"){
-        q<- q + ggplot2::scale_y_continuous(trans = "log")
+        q<- q + ggplot2::scale_y_continuous(trans = "log10")
+      }
+      else if(scale == "reverselog"){
+        q<- q + ggplot2::scale_y_continuous(trans = "reverselog")
       }
     }    
     q<-q+ggplot2::theme_minimal()+ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 0), axis.ticks = ggplot2::element_blank())
@@ -752,7 +761,10 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
                                     y = "module", 
                                     fill = "p.values"))+ggplot2::xlab("")+ ggplot2::ylab("Modules") + ggplot2::geom_tile()
       if(scale == "log"){
-        q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log")
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log10")
+      }
+      else if(scale == "reverselog"){
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , high = low, na.value = na.value, trans = "reverselog")
       }
       else{
         q<-q+ ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value)
@@ -839,6 +851,22 @@ format_from_gmt<-function(path = ""){
   }
   
   return(result)
+}
+
+#' Scale for barplots and heatmaps
+#' 
+#' Outputs the "-log" of a scale
+#' @param base : base for the log, defaut is e
+
+reverselog_trans<-function(base = 10){
+  trans<-function(x) -log(x,base)
+  inv<-function(x) base^(-x)
+  
+  trans_new(paste0("reverslog-",format(base)),trans,inv,
+              log_breaks(base = base),
+              domain = c(.Machine$double.xmin,Inf)
+            )
+  
 }
 
 
