@@ -336,14 +336,17 @@ uncorrected fisher test with heatmap format (Figure~\ref{fig:heatm}) or barplot
 \begin{verbatim}
 # heatmap
 
-represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
-  SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log", 
-  low = "steelblue" , high ="white", na.value = "grey")
+represent_enrichment(enrichment = list(Corrected = results[1:10,], 
+Uncorrected = results_uncorrected[1:10,]),
+                                plot = "heatmap", scale = "log", 
+                                low = "steelblue" , high ="white", na.value = "grey")
 
 # barplot 
 
-represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,],
- SampleB = enrichment_test[3:10,]), plot = "bar", scale = "log", nrow = 1)
+ represent_enrichment(enrichment = list(Corrected = results[1:10,], 
+                             Uncorrected = results_uncorrected[1:10,]),
+                               plot = "heatmap", scale = "reverselog", 
+                               nrow = 1)
 \end{verbatim}
 
 \begin{figure}

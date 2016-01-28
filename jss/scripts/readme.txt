@@ -13,6 +13,7 @@ The scripts are:
   and creates glyph visualization on the ACSN master map.
 - gbm_enrichment.R: load GBM data and calculates ACSN maps enrichment
   statistics. 
+- ACSNMineR.R : reproduce enrichment and figures from the paper.
 
 The libraries ACSNMineR and RNaviCell should be installed (they are available on
 CRAN and GitHub).
