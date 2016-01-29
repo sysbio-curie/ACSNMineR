@@ -882,13 +882,12 @@ format_from_gmt<-function(path = ""){
 #' 
 #' Outputs the "-log" of a scale
 #' @param base : base for the log, defaut is e
-
 reverselog_trans<-function(base = 10){
   trans<-function(x) -log(x,base)
   inv<-function(x) base^(-x)
   
-  trans_new(paste0("reverslog-",format(base)),trans,inv,
-              log_breaks(base = base),
+  scales::trans_new(paste0("reverslog-",format(base)),trans,inv,
+              scales::log_breaks(base = base),
               domain = c(.Machine$double.xmin,Inf)
             )
   
