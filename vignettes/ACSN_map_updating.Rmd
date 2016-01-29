@@ -37,9 +37,10 @@ In R the name of your map list should be ACSN_maps
 ### 2. Export it
 If your working directory is the package main directory:
 ```{r export, eval = FALSE}
-  save(list = ACSN_maps,file = "data/ACSN_maps.rda")
+  save(list = "ACSN_maps",file = "data/ACSN_maps.rda")
 
 ````
+<b> Note </b> that the name of the variable should be provided to save not the variable itself.
 
 If you don't know where your working directory is, you can get the information with getwd() and change it with
 ```{r setwd, eval = FALSE}

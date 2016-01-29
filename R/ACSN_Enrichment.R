@@ -856,7 +856,7 @@ format_from_gmt<-function(path = ""){
       z2<-gsub("\t","",z)
       return(nchar(z)-nchar(z2))
     }))+1  ### max gets number of intervals, so number of items is max +1
-    gmt<-read.table(path,header = FALSE, 
+    gmt<-read.csv(path,header = FALSE, 
                   sep = "\t",fill = TRUE,
                   col.names = paste("V",1:max_length,sep="")
     )
