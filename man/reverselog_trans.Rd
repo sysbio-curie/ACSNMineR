@@ -7,7 +7,7 @@
 reverselog_trans(base = 10)
 }
 \arguments{
-\item{base}{: base for the log, defaut is e}
+\item{base}{: base for the log, defaut is 10}
 }
 \description{
 Outputs the "-log" of a scale

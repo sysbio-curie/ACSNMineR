@@ -883,6 +883,7 @@ format_from_gmt<-function(path = ""){
 #' Outputs the "-log" of a scale
 #' @param base : base for the log, defaut is 10
 #' @importFrom scales trans_new log_breaks
+#' @export
 reverselog_trans<-function(base = 10){
   trans<-function(x) -log(x,base)
   inv<-function(x) base^(-x)
