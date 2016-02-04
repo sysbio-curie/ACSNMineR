@@ -7,12 +7,13 @@
 %% almost as usual
 \author{Paul Deveau\\Institut Curie\\PSL University\\Univ. Paris-Sud\\INSERM U830\\INSERM U900\\Mines-ParisTech \And 
         Emmanuel Barillot\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \And 
+        Valentina Boeva\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \AND 
         Andrei Zinovyev\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \And
         Eric Bonnet\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech}
 \title{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with the R packages \pkg{ACSNMineR} and \pkg{RNaviCell}}
 
 %% for pretty printing and a nice hypersummary also set:
-\Plainauthor{Paul Deveau, Emmanuel Barillot, Andrei Zinovyev, Eric Bonnet} %% comma-separated
+\Plainauthor{Paul Deveau, Emmanuel Barillot, Valentina Boeva, Andrei Zinovyev, Eric Bonnet} %% comma-separated
 \Plaintitle{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with the R packages ACSNMineR and RNaviCell} %% without formatting
 \Shorttitle{Module Enrichment and Data Visualization with ACSNMineR and RNaviCell} %% a short title (if necessary)
 
@@ -127,7 +128,7 @@ cycle, cell survival, cell death, epithelial-to-mesenchymal transition (EMT) and
 cell motility. Each of these large-scale molecular map is decomposed in a number
 of functional modules. The maps themselves are merged into a global ACSN map.
 Thus the information included in ACSN is organized in three hierarchical levels:
-a global map, five individual maps, and a total of 55 functional modules, as of today. Each
+a global map, five individual maps, and several functional modules. Each
 ACSN map covers hundreds of molecular players, biochemical reactions and causal
 relationships between the molecular players and cellular phenotypes.  ACSN
 represents a large-scale biochemical reaction network of 4,826 reactions
@@ -152,12 +153,12 @@ maps.
     \hline
     Map & Total & Nb mod. & Min & Max & Mean\\
     \hline
-  ACSN global & 2137 & 55 & 2 &625& 85\\
-  Survival  &1065&46  &1 &434 &54\\
-  Apoptosis & 668&44 & 1& 382& 33\\
-  EMT \& Cell motility &620 &41  &1 &615 &43\\
-  DNA repair &337&48  &1 &69  &19\\
-  Cell cycle &119&45  &1 &27  &8\\
+  ACSN global & 2243 & 63 & 2 &629& 83\\
+  Survival  &1053&5  &208 &431 &328\\
+  Apoptosis & 667&7 & 19& 382& 136\\
+  EMT \& Cell motility &634 &9  &18 &629 &136\\
+  DNA repair &345&21  &3 &171  &45\\
+  Cell cycle &250&25  &2 &130  &19\\
   \hline
 
   \end{tabular}
