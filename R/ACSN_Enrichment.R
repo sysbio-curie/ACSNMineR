@@ -29,7 +29,11 @@
 #' @importFrom stats fisher.test p.adjust phyper
 #' @importFrom utils read.csv
 enrichment<-function(Genes=NULL,
-                     maps = "Master", 
+                     maps = c("Apoptosis",
+                              "CellCycle",
+                              "DNA_repair",
+                              "EMT_motility",
+                              "Survival" ), 
                      correction_multitest = "BH",
                      statistical_test = "fisher",
                      min_module_size = 5,
@@ -546,7 +550,11 @@ enrichment<-function(Genes=NULL,
 #' @export
 
 multisample_enrichment<-function(Genes_by_sample=NULL,
-                                 maps = ACSNMineR::ACSN_maps, 
+                                 maps = c("Apoptosis",
+                                          "CellCycle",
+                                          "DNA_repair",
+                                          "EMT_motility",
+                                          "Survival" ), 
                                  correction_multitest = "BH",
                                  statistical_test = "fisher",
                                  min_module_size = 5,

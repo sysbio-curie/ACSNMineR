@@ -220,10 +220,10 @@ the Apoptosis map.
 > dim(results)
 [1] 36  9
 > results[1,]
-            module module_size nb_genes_in_module      genes_in_module
-V12 Apoptosis:E2F1           5                  4 ATM E2F1 EP300 KAT2B
-    universe_size nb_genes_in_universe      p.value p.value.corrected    test
-V12          2133                   12 1.043478e-08       2.81739e-07 greater
+             module module_size nb_genes_in_module    genes_in_module 
+V17 APOPTOSIS_ENTRY          10                  4 ATM ATR CHEK2 E2F1          
+    universe_size nb_genes_in_universe      p.value	p.value.corrected    test
+V17      2241                   12 3.491372e-07	6.400849e-06 greater
 \end{verbatim}
 
 
@@ -321,10 +321,15 @@ enrichment(genes_test,correction_multitest = FALSE)
 	\hline
 Module & Mod. size & Genes in module & p-value & Test\\
 	\hline
-Apoptosis:E2F1 & 5 &  ATM E2F1 EP300 & 1.04e-08 & greater \\
-               &   &  KAT2B                 &          &         \\
-Apoptosis:G2 M CHECKPOINT & 35  & ATM KAT2B & 2.04e-02 & greater \\
-Apoptosis:WNT CANONICAL & 53 & E2F1 EP300 KAT2B  & 4.98e-03 & greater \\
+CellCycle & 242 & ATM ATR CHEK2   & 5.36e-07 & greater \\
+          &   &  CREBBP KAT2B TFDP1   &          &         \\
+          &   &  E2F1 EP300 HDAC1    &          &         \\
+          &	  & GTF2H1 GTF2H2 GTF2H2B &	& \\
+CellCycle: APOPTOSIS ENTRY & 10 & ATM ATR CHEK2 E2F1 & 3.49e-07 & greater \\
+CellCycle: CYCLINB			& 7  & ATM 				  & 3.98e-02 & greater \\
+
+
+
 	\hline
 
 	\end{tabular}
@@ -337,15 +342,15 @@ uncorrected fisher test with heatmap format (Figure~\ref{fig:heatm}) or barplot
 \begin{verbatim}
 # heatmap
 
-represent_enrichment(enrichment = list(Corrected = results[1:10,], 
-Uncorrected = results_uncorrected[1:10,]),
-                                plot = "heatmap", scale = "log", 
+represent_enrichment(enrichment = list(Corrected = results[1:6,], 
+Uncorrected = results_uncorrected[1:6,]),
+                                plot = "heatmap", scale = "reverselog", 
                                 low = "steelblue" , high ="white", na.value = "grey")
 
 # barplot 
 
- represent_enrichment(enrichment = list(Corrected = results[1:10,], 
-                             Uncorrected = results_uncorrected[1:10,]),
+ represent_enrichment(enrichment = list(Corrected = results[1:6,], 
+                             Uncorrected = results_uncorrected[1:6,]),
                                plot = "heatmap", scale = "reverselog", 
                                nrow = 1)
 \end{verbatim}

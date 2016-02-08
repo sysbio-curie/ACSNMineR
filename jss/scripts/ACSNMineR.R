@@ -9,12 +9,14 @@ print(names(ACSNMineR::ACSN_maps))
 for(map in names(ACSNMineR::ACSN_maps)){
   print(map)
   MAP<-ACSNMineR::ACSN_maps[[map]]
-  print(paste("Number of genes:",length(unique(as.character(MAP[,-(1:2)])))))
-  print(paste("Number of modules:",nrow(MAP)))
-  print(paste("Smallest module size:",min(MAP[,2])))
-  print(paste("Biggest module size:",max(MAP[,2])))
-  print(paste("Mean module size:", round(MAP[,2])))
   
+  print(paste("Number of genes:",sum(unique(as.character(MAP[,-(1:2)]))!="")))
+  MODS<-as.numeric(as.character(MAP[,2]))
+  print(paste("Number of modules:",length(MODS)))
+  print(paste("Smallest module size:",min(MODS)))
+  print(paste("Biggest module size:",max(MODS)))
+  print(paste("Mean module size:", round(mean(MODS))))
+  print("**************")
 }
 
 ### Print genes test
@@ -35,16 +37,16 @@ print(head(results_uncorrected,3))
 
 
 ### Plot heatmap
-heatmap <- represent_enrichment(enrichment = list(Corrected = results[1:10,], 
-                                       Uncorrected = results_uncorrected[1:10,]),
-                                plot = "heatmap", scale = "log", 
+heatmap <- represent_enrichment(enrichment = list(Corrected = results[1:6,], 
+                                       Uncorrected = results_uncorrected[1:6,]),
+                                plot = "heatmap", scale = "reverselog", 
                                 low = "steelblue" , high ="white", na.value = "grey")
 
 print(heatmap)
 
 ### Plot bar
-baplot <- represent_enrichment(enrichment = list(Corrected = results[1:10,], 
-                                                 Uncorrected = results_uncorrected[1:10,]),
+baplot <- represent_enrichment(enrichment = list(Corrected = results[1:6,], 
+                                                 Uncorrected = results_uncorrected[1:6,]),
                                plot = "heatmap", scale = "reverselog", 
                                nrow = 1)
 print(barplot)
