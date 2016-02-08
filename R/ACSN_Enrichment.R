@@ -667,7 +667,9 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log10")
       }
       else if(scale == "reverselog"){
-        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , high = low, na.value = na.value, trans = reverselog_trans())
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , 
+                                             high = low, na.value = na.value, 
+                                             trans = reverselog_trans())
       }
       
       else{
@@ -686,9 +688,9 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
       else if(scale == "reverselog"){
         q<- q + ggplot2::scale_y_continuous(trans = reverselog_trans())
       }
+      q<-q+ggplot2::theme_minimal()+ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 0), axis.ticks = ggplot2::element_blank())
+      q<-q+ggplot2::geom_bar(stat = "identity")
     }    
-    q<-q+ggplot2::theme_minimal()+ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 0), axis.ticks = ggplot2::element_blank())
-    q<-q+ggplot2::geom_bar(stat = "identity")
   }
   else if(is.list(enrichment)){
     sample_names<-names(enrichment)
