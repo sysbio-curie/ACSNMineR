@@ -4,7 +4,8 @@
 \alias{multisample_enrichment}
 \title{Automated gene set analysis for multiple sets}
 \usage{
-multisample_enrichment(Genes_by_sample = NULL, maps = ACSNMineR::ACSN_maps,
+multisample_enrichment(Genes_by_sample = NULL, maps = c("Apoptosis",
+  "CellCycle", "DNA_repair", "EMT_motility", "Survival"),
   correction_multitest = "BH", statistical_test = "fisher",
   min_module_size = 5, universe = "map_defined", threshold = 0.05,
   cohort_threshold = TRUE, alternative = "greater")

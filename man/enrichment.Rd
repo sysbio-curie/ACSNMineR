@@ -4,7 +4,8 @@
 \alias{enrichment}
 \title{Gene set enrichment analysis}
 \usage{
-enrichment(Genes = NULL, maps = "Master", correction_multitest = "BH",
+enrichment(Genes = NULL, maps = c("Apoptosis", "CellCycle", "DNA_repair",
+  "EMT_motility", "Survival"), correction_multitest = "BH",
   statistical_test = "fisher", min_module_size = 5,
   universe = "map_defined", threshold = 0.05, alternative = "greater")
 }
