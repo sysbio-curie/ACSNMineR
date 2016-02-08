@@ -49,11 +49,15 @@ enrichment<-function(Genes=NULL,
       map_names<-names(ACSNMineR::ACSN_maps)
       w<-numeric()
       for(map_index in maps){
-        w<-c(w,which(grepl(pattern = map_index,x = map_names,ignore.case = TRUE)))
+        w<-c(w,which(grepl(pattern = map_index, x = map_names, ignore.case = TRUE)))
       }
       w<- unique(w)
+	#print(w)
       if(length(w)>1){
-        maps<-ACSNMineR::ACSN_maps[[w]]
+        maps<-ACSNMineR::ACSN_maps[w]
+	  mapnames<-names(ACSNMineR::ACSN_maps)[w]
+	
+	  names(maps)<-mapnames
       }
       else if(length(w)){
         maps<-list(ACSNMineR::ACSN_maps[[w]])
@@ -663,7 +667,7 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log10")
       }
       else if(scale == "reverselog"){
-        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , high = low, na.value = na.value, trans = "reverselog")
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , high = low, na.value = na.value, trans = reverselog_trans())
       }
       
       else{
@@ -680,7 +684,7 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         q<- q + ggplot2::scale_y_continuous(trans = "log10")
       }
       else if(scale == "reverselog"){
-        q<- q + ggplot2::scale_y_continuous(trans = "reverselog")
+        q<- q + ggplot2::scale_y_continuous(trans = reverselog_trans())
       }
     }    
     q<-q+ggplot2::theme_minimal()+ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 0), axis.ticks = ggplot2::element_blank())
@@ -785,8 +789,10 @@ represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log",
         q<- q + ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value, trans = "log10")
       }
       else if(scale == "reverselog"){
-        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , high = low, na.value = na.value, trans = "reverselog")
-      }
+        q<- q + ggplot2::scale_fill_gradient("p-values",low = high , high = low, na.value = na.value , trans = reverselog_trans())
+        
+        
+      }     
       else{
         q<-q+ ggplot2::scale_fill_gradient("p-values",low = low , high = high, na.value = na.value)
       }
@@ -884,13 +890,14 @@ format_from_gmt<-function(path = ""){
 #' @param base : base for the log, defaut is 10
 #' @importFrom scales trans_new log_breaks
 #' @export
+#' 
 reverselog_trans<-function(base = 10){
   trans<-function(x) -log(x,base)
   inv<-function(x) base^(-x)
   
-  scales::trans_new(paste0("reverslog-",format(base)),trans,inv,
-              scales::log_breaks(base = base),
-              domain = c(.Machine$double.xmin,Inf)
+  scales::trans_new(name = "reverslog",transform = trans,inverse = inv,
+              breaks = scales::log_breaks(base = base),
+              domain = c(10^(-60),Inf)
             )
   
 }

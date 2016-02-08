@@ -157,7 +157,7 @@ ACSNMineR::represent_enrichment(enrichment = list(
     SampleA = ACSNMineR::enrichment_test[1:10,], 
     SampleB = ACSNMineR::enrichment_test[3:10,]),
     plot = "heatmap", 
-    scale = "log",
+    scale = "reverselog",
     low = "steelblue" , high ="white",
     na.value = "grey")
 ````
