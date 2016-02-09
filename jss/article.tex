@@ -7,7 +7,7 @@
 %% almost as usual
 \author{Paul Deveau\\Institut Curie\\PSL University\\Univ. Paris-Sud\\INSERM U830\\INSERM U900\\Mines-ParisTech \And 
         Emmanuel Barillot\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \And 
-        Valentina Boeva\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \AND 
+        Valentina Boeva\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech\\Institut Cochin\\INSERM U1016\\CNRS UMR 8104\\Paris Descartes University UMR-S1016 \AND 
         Andrei Zinovyev\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \And
         Eric Bonnet\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech}
 \title{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with the R packages \pkg{ACSNMineR} and \pkg{RNaviCell}}
@@ -210,20 +210,22 @@ corrected for multiple testing and the type of test performed. The module field
 in the results data frame indicate the map name and the module name separated by
 a column character. If a complete map is significantly enriched or depleted,
 then only the map name is shown, without any module or column character. For
-instance, the first line of the results object below concern the E2F1 module of
-the Apoptosis map. 
+instance, the third line of the results object below concern the E2F1 module of
+the CellCycle map. 
 
 
 \begin{verbatim}
 > library(ACSNMineR)
 > results <- enrichment(genes_test)
 > dim(results)
-[1] 36  9
-> results[1,]
-             module module_size nb_genes_in_module    genes_in_module 
-V17 APOPTOSIS_ENTRY          10                  4 ATM ATR CHEK2 E2F1          
-    universe_size nb_genes_in_universe      p.value	p.value.corrected    test
-V17      2241                   12 3.491372e-07	6.400849e-06 greater
+[1] 8  9
+> results[3,]
+            module module_size nb_genes_in_module
+V161 CellCycle:E2F1          19                 12
+                                                             genes_in_module
+V161 ATM ATR CHEK2 CREBBP TFDP1 E2F1 EP300 HDAC1 KAT2B GTF2H1 GTF2H2 GTF2H2B
+     universe_size nb_genes_in_universe      p.value p.value.corrected    test
+V161          2237                   12 3.735018e-21      2.353061e-19 greater
 \end{verbatim}
 
 
@@ -471,10 +473,9 @@ cytotoxic chemotherapy.
 The dataset corresponding to this study is available as a Bioconductor package.
 The code shown below is creating a list of differentially expressed genes
 between ER positive and ER negative samples, and calculates the enrichment in
-ACSN maps from this list of genes. As seen in Table \ref{tab:table_mainz}, there
-are four maps (Apoptosis, DNA repair, ACSN master and Survival) and seven
-modules enriched. Most of the modules are in fact linked to different phases of
-the cell cycle.
+ACSN maps from this list of genes. As seen in Table \ref{tab:table_mainz},
+there is one map (Cell Cycle) and six modules (belonging to the Cell Cycle, DNA
+repair and EMT motility maps) enriched. 
 
 \begin{verbatim}
 # load all necessary packages
@@ -521,13 +522,13 @@ which are found in the module. pval: raw p-value. Cor. pval: corrected p-value.}
 \hline
 Module & Mod. size & Nb genes & pval & Cor. pval\\
 \hline
-Apoptosis:HEDGEHOG & 31 & 21 & 0.0016 & 0.042 \\
-Apoptosis:AKT\_MTOR &  79 & 47 & 0.00037 & 0.038 \\
-DNA\_repair & 335 & 163 & 0.0012 & 0.038 \\
-DNA\_repair:G1\_CC\_PHASE &  25 & 18 & 0.0011 & 0.038 \\
-ACSN\_master:AKT\_MTOR & 92 & 53 & 0.0005 & 0.038 \\
-ACSN\_master:G1\_CC\_PHASE & 25 & 18 & 0.0011 & 0.038 \\
-Survival:S\_PHASE\_CHECKPOINT & 8 & 8 & 0.0006 & 0.038 \\
+CellCycle & 242 & 20 & 1.70e-03 & 0.021 \\
+CellCycle:E2F1\_TARGETS & 130 & 14 & 6.26e-04 & 0.009 \\
+CellCycle:E2F2\_TARGETS & 35 & 8 & 4.70e-05 & 0.009 \\
+CellCycle:E2F3\_TARGETS & 51 & 11 & 3.82e-06 & 0.0002 \\
+CellCycle:E2F4\_TARGETS & 100 & 15 & 9.99e-06 & 0.0003 \\
+DNA\_repair:SPINDLE\_CHECKPOINT & 28 & 5 & 3.82e-03 & 0.04 \\
+EMT\_motility:ECM & 147 & 13 & 5.09e-03 & 0.045 \\
 \hline
 \end{tabular}
 \end{table}
