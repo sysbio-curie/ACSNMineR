@@ -656,10 +656,11 @@ higher than 5\%) as "2".
 
 We loaded the data as a matrix in R and calculated the enrichment in ACSN maps
 with the ACSNMineR function \code{enrichment}. The results are displayed in
-table \ref{tab:table_gbm}. There are 16 modules significantly enriched in the
-Cell Cycle, DNA repair, EMT motility and Survival. Cell matrix adhesions and ECM
+table \ref{tab:table_gbm}. There are 6 modules significantly enriched in the
+DNA repair and EMT motility maps. Cell matrix adhesions and ECM
 (extra cellular matrix), part of the EMT motility map, are the modules with
-highest significance (corrected p-values of 2.55e-11 and 2.34e-9 respectively). 
+highest significance. The EMT motility map is significantly enriched at the
+global map level (second line in the table). 
 
 \begin{table}[h!]
   \centering
@@ -673,22 +674,13 @@ highest significance (corrected p-values of 2.55e-11 and 2.34e-9 respectively).
 \hline
 module & Mod. size & Nb genes & Cor. pval\\ 
 \hline
-CellCycle:G2\_M\_CHECKPOINT & 14 & 8 & 3.92e-02\\
-CellCycle:S\_PHASE\_CHECKPOINT & 6 & 5 & 3.92e-02\\
-DNA\_repair:S\_PHASE\_CHECKPOINT & 45 & 19 & 1.58e-02\\
-EMT\_motility & 621 & 176 & 1.06e-03\\
-EMT\_motility:CELL\_MATRIX\_ADHESIONS & 72 & 44 & 2.55e-11\\
-EMT\_motility:ECM & 137 & 64 & 2.34e-09\\
-EMT\_motility:EMT\_REGULATORS & 615 & 173 & 1.49e-03\\
-EMT\_motility:CYTOSKELETON\_POLARITY & 154 & 47 & 3.92e-02\\
-EMT\_motility:DESMOSOMES & 29 & 15 & 4.62e-03\\
-ACSN\_master:CELL\_MATRIX\_ADHESIONS & 72 & 44 & 2.55e-11\\
-ACSN\_master:DESMOSOMES & 29 & 15 & 4.62e-03\\
-ACSN\_master:S\_PHASE\_CHECKPOINT & 46 & 20 & 8.23e-03\\
-ACSN\_master:ECM & 138 & 64 & 2.56e-09\\
-ACSN\_master:EMT\_REGULATORS & 625 & 177 & 1.06e-03\\
-ACSN\_master:CYTOSKELETON\_POLARITY & 154 & 47 & 3.92e-02\\
-Survival:ECM & 23 & 11 & 3.92e-02\\
+DNA\_repair:S\_PHASE\_CHECKPOINT &   45 &      19 &     0.008\\
+EMT\_motility  &  635  &   181  &   0.0002\\
+EMT\_motility:CELL\_MATRIX\_ADHESIONS   &   73  &    45  &    3.73e-12\\
+EMT\_motility:CYTOSKELETON\_POLARITY   &   154 &    47  &    0.022\\
+EMT\_motility:DESMOSOMES & 29  &    15  &    0.002\\
+EMT\_motility:ECM    &    147  &   69   &   9.77e-11\\
+EMT\_motility:EMT\_REGULATORS  &   629   &  178  &   0.0002\\
 \hline
 \end{tabular}
 \end{table}
@@ -697,8 +689,9 @@ Visualization of the list of glioblastoma mutated genes is shown on figure
 \ref{fig:gbm}. This figure was generated with the ACSNMineR commands detailed
 below. Results of the enrichment test correlate well with the visualization on
 the map, with a high density of low and high frequency mutated genes in the EMT
-motility , survival, cell cycle and DNA repair regions (maps) of the global ACSN
-map.
+motility and DNA repair regions (maps) of the global ACSN map. Although they
+are not statistically significant, quite high densities can also be seen in
+other regions of the map.
 
 \begin{verbatim}
 library(RNaviCell)
