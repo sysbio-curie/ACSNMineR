@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{26}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -15,6 +15,12 @@ Adriaens ME, Jaillard M, Waagmeester A, Coort SL, Pico AR, Evelo CT (2008).
 \newblock \enquote{The public road to high-quality curated biological
   pathways.}
 \newblock \emph{Drug Discovery Today}, \textbf{13}(19), 856--862.
+
+\bibitem[{Barillot \emph{et~al.}(2012)Barillot, Calzone, Hupe, Vert, and
+  Zinovyev}]{barillot2012computational}
+Barillot E, Calzone L, Hupe P, Vert JP, Zinovyev A (2012).
+\newblock \emph{Computational systems biology of cancer}.
+\newblock CRC Press.
 
 \bibitem[{Barretina \emph{et~al.}(2012)Barretina, Caponigro, Stransky,
   Venkatesan, Margolin, Kim, Wilson, Leh{\'a}r, Kryukov, Sonkin
