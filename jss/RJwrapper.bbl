@@ -1,0 +1,188 @@
+\begin{thebibliography}{26}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Adriaens et~al.(2008)Adriaens, Jaillard, Waagmeester, Coort, Pico, and
+  Evelo]{adriaens2008public}
+M.~E. Adriaens, M.~Jaillard, A.~Waagmeester, S.~L. Coort, A.~R. Pico, and C.~T.
+  Evelo.
+\newblock The public road to high-quality curated biological pathways.
+\newblock \emph{Drug Discovery Today}, 13\penalty0 (19):\penalty0 856--862,
+  2008.
+
+\bibitem[Barillot et~al.(2012)Barillot, Calzone, Hupe, Vert, and
+  Zinovyev]{barillot2012computational}
+E.~Barillot, L.~Calzone, P.~Hupe, J.-P. Vert, and A.~Zinovyev.
+\newblock \emph{Computational systems biology of cancer}.
+\newblock CRC Press, 2012.
+
+\bibitem[Barretina et~al.(2012)Barretina, Caponigro, Stransky, Venkatesan,
+  Margolin, Kim, Wilson, Leh{\'a}r, Kryukov, Sonkin,
+  et~al.]{barretina2012cancer}
+J.~Barretina, G.~Caponigro, N.~Stransky, K.~Venkatesan, A.~A. Margolin, S.~Kim,
+  C.~J. Wilson, J.~Leh{\'a}r, G.~V. Kryukov, D.~Sonkin, et~al.
+\newblock The cancer cell line encyclopedia enables predictive modelling of
+  anticancer drug sensitivity.
+\newblock \emph{Nature}, 483\penalty0 (7391):\penalty0 603--607, 2012.
+
+\bibitem[Bonnet et~al.(2015)Bonnet, Viara, Kuperstein, Calzone, Cohen,
+  Barillot, and Zinovyev]{bonnet2015navicell}
+E.~Bonnet, E.~Viara, I.~Kuperstein, L.~Calzone, D.~P. Cohen, E.~Barillot, and
+  A.~Zinovyev.
+\newblock Navicell web service for network-based data visualization.
+\newblock \emph{Nucleic Acids Research}, page gkv450, 2015.
+
+\bibitem[Croft et~al.(2014)Croft, Mundo, Haw, Milacic, Weiser, Wu, Caudy,
+  Garapati, Gillespie, Kamdar, et~al.]{croft2014reactome}
+D.~Croft, A.~F. Mundo, R.~Haw, M.~Milacic, J.~Weiser, G.~Wu, M.~Caudy,
+  P.~Garapati, M.~Gillespie, M.~R. Kamdar, et~al.
+\newblock The reactome pathway knowledgebase.
+\newblock \emph{Nucleic Acids Research}, 42\penalty0 (D1):\penalty0 D472--D477,
+  2014.
+
+\bibitem[Falcon and Gentleman(2007)]{falcon2007using}
+S.~Falcon and R.~Gentleman.
+\newblock Using gostats to test gene lists for go term association.
+\newblock \emph{Bioinformatics}, 23\penalty0 (2):\penalty0 257--258, 2007.
+
+\bibitem[Fisher(1922)]{fisher1922interpretation}
+R.~A. Fisher.
+\newblock On the interpretation of $\chi$2 from contingency tables, and the
+  calculation of p.
+\newblock \emph{Journal of the Royal Statistical Society}, pages 87--94, 1922.
+
+\bibitem[Fisher(1934)]{fisher1934statistical}
+R.~A. Fisher.
+\newblock Statistical methods for research workers.
+\newblock 1934.
+
+\bibitem[Hawkins et~al.(2010)Hawkins, Hon, and Ren]{hawkins2010next}
+R.~D. Hawkins, G.~C. Hon, and B.~Ren.
+\newblock Next-generation genomics: an integrative approach.
+\newblock \emph{Nature Reviews Genetics}, 11\penalty0 (7):\penalty0 476--486,
+  2010.
+
+\bibitem[Kanehisa et~al.(2011)Kanehisa, Goto, Sato, Furumichi, and
+  Tanabe]{kanehisa2011kegg}
+M.~Kanehisa, S.~Goto, Y.~Sato, M.~Furumichi, and M.~Tanabe.
+\newblock Kegg for integration and interpretation of large-scale molecular data
+  sets.
+\newblock \emph{Nucleic Acids Research}, page gkr988, 2011.
+
+\bibitem[Kuperstein et~al.(2013)Kuperstein, Cohen, Pook, Viara, Calzone,
+  Barillot, and Zinovyev]{kuperstein2013navicell}
+I.~Kuperstein, D.~P. Cohen, S.~Pook, E.~Viara, L.~Calzone, E.~Barillot, and
+  A.~Zinovyev.
+\newblock Navicell: a web-based environment for navigation, curation and
+  maintenance of large molecular interaction maps.
+\newblock \emph{BMC systems biology}, 7\penalty0 (1):\penalty0 100, 2013.
+
+\bibitem[Kuperstein et~al.(2015)Kuperstein, Bonnet, Nguyen, Cohen, Viara,
+  Grieco, Fourquet, Calzone, Russo, Kondratova, et~al.]{kuperstein2015atlas}
+I.~Kuperstein, E.~Bonnet, H.~Nguyen, D.~Cohen, E.~Viara, L.~Grieco,
+  S.~Fourquet, L.~Calzone, C.~Russo, M.~Kondratova, et~al.
+\newblock Atlas of cancer signalling network: a systems biology resource for
+  integrative analysis of cancer data with google maps.
+\newblock \emph{Oncogenesis}, 4\penalty0 (7):\penalty0 e160, 2015.
+
+\bibitem[Lang(2014)]{rjsonio2014}
+D.~T. Lang.
+\newblock \emph{RJSONIO: Serialize R objects to JSON, JavaScript Object
+  Notation}, 2014.
+\newblock URL \url{http://CRAN.R-project.org/package=RJSONIO}.
+\newblock R package version 1.3-0.
+
+\bibitem[Lang and the CRAN~team(2015)]{rcurl2015}
+D.~T. Lang and the CRAN~team.
+\newblock \emph{RCurl: General Network (HTTP/FTP/...) Client Interface for R},
+  2015.
+\newblock URL \url{http://CRAN.R-project.org/package=RCurl}.
+\newblock R package version 1.95-4.7.
+
+\bibitem[Liberzon et~al.(2011)Liberzon, Subramanian, Pinchback,
+  Thorvaldsd{\'o}ttir, Tamayo, and Mesirov]{liberzon2011molecular}
+A.~Liberzon, A.~Subramanian, R.~Pinchback, H.~Thorvaldsd{\'o}ttir, P.~Tamayo,
+  and J.~P. Mesirov.
+\newblock Molecular signatures database (msigdb) 3.0.
+\newblock \emph{Bioinformatics}, 27\penalty0 (12):\penalty0 1739--1740, 2011.
+
+\bibitem[Maher et~al.(2001)Maher, Furnari, Bachoo, Rowitch, Louis, Cavenee, and
+  DePinho]{maher2001malignant}
+E.~A. Maher, F.~B. Furnari, R.~M. Bachoo, D.~H. Rowitch, D.~N. Louis, W.~K.
+  Cavenee, and R.~A. DePinho.
+\newblock Malignant glioma: genetics and biology of a grave matter.
+\newblock \emph{Genes \& development}, 15\penalty0 (11):\penalty0 1311--1333,
+  2001.
+
+\bibitem[McLendon et~al.(2008)McLendon, Friedman, Bigner, Van~Meir, Brat,
+  Mastrogianakis, Olson, Mikkelsen, Lehman, Aldape,
+  et~al.]{mclendon2008comprehensive}
+R.~McLendon, A.~Friedman, D.~Bigner, E.~G. Van~Meir, D.~J. Brat, G.~M.
+  Mastrogianakis, J.~J. Olson, T.~Mikkelsen, N.~Lehman, K.~Aldape, et~al.
+\newblock Comprehensive genomic characterization defines human glioblastoma
+  genes and core pathways.
+\newblock \emph{Nature}, 455\penalty0 (7216):\penalty0 1061--1068, 2008.
+
+\bibitem[{R Core Team}(2014)]{mainRref}
+{R Core Team}.
+\newblock \emph{R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2014.
+\newblock URL \url{http://www.R-project.org/}.
+
+\bibitem[Reiner et~al.(2003)Reiner, Yekutieli, and Benjamini]{Benjamini2003FDR}
+A.~Reiner, D.~Yekutieli, and Y.~Benjamini.
+\newblock Identifying differentially expressed genes using false discovery rate
+  controlling procedures.
+\newblock \emph{Bioinformatics}, 19\penalty0 (3):\penalty0 368--375, 2003.
+
+\bibitem[Rivals et~al.(2007)Rivals, Personnaz, Taing, and
+  Potier]{rivals2007enrichment}
+I.~Rivals, L.~Personnaz, L.~Taing, and M.-C. Potier.
+\newblock Enrichment or depletion of a go category within a class of genes:
+  which test?
+\newblock \emph{Bioinformatics}, 23\penalty0 (4):\penalty0 401--407, 2007.
+
+\bibitem[Schmidt et~al.(2008)Schmidt, B{\"o}hm, von T{\"o}rne, Steiner, Puhl,
+  Pilch, Lehr, Hengstler, K{\"o}lbl, and Gehrmann]{schmidt2008humoral}
+M.~Schmidt, D.~B{\"o}hm, C.~von T{\"o}rne, E.~Steiner, A.~Puhl, H.~Pilch, H.-A.
+  Lehr, J.~G. Hengstler, H.~K{\"o}lbl, and M.~Gehrmann.
+\newblock The humoral immune system has a key prognostic impact in
+  node-negative breast cancer.
+\newblock \emph{Cancer research}, 68\penalty0 (13):\penalty0 5405--5413, 2008.
+
+\bibitem[Vance(2009)]{vance2009data}
+A.~Vance.
+\newblock Data analysts captivated by r's power.
+\newblock \emph{New York Times}, 6, 2009.
+
+\bibitem[Wickham(2009)]{ggplot2}
+H.~Wickham.
+\newblock \emph{ggplot2: elegant graphics for data analysis}.
+\newblock Springer New York, 2009.
+\newblock ISBN 978-0-387-98140-6.
+\newblock URL \url{http://had.co.nz/ggplot2/book}.
+
+\bibitem[Wickham(2015)]{hwR5}
+H.~Wickham.
+\newblock \emph{Reference classes}, 2015.
+\newblock URL \url{http://adv-r.had.co.nz/R5.html}.
+\newblock Advanced R.
+
+\bibitem[Yu et~al.(2012)Yu, Wang, Han, and He]{yu2012clusterprofiler}
+G.~Yu, L.-G. Wang, Y.~Han, and Q.-Y. He.
+\newblock clusterprofiler: an r package for comparing biological themes among
+  gene clusters.
+\newblock \emph{Omics: a journal of integrative biology}, 16\penalty0
+  (5):\penalty0 284--287, 2012.
+
+\bibitem[Zanzoni et~al.(2002)Zanzoni, Montecchi-Palazzi, Quondam, Ausiello,
+  Helmer-Citterich, and Cesareni]{zanzoni2002mint}
+A.~Zanzoni, L.~Montecchi-Palazzi, M.~Quondam, G.~Ausiello, M.~Helmer-Citterich,
+  and G.~Cesareni.
+\newblock Mint: a molecular interaction database.
+\newblock \emph{FEBS Letters}, 513\penalty0 (1):\penalty0 135--140, 2002.
+
+\end{thebibliography}

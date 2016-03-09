@@ -1,0 +1,10 @@
+\BOOKMARK [0][-]{section*.1}{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with ACSNMineR and RNaviCell packages}{}% 1
+\BOOKMARK [1][-]{section.2.1}{Introduction}{section*.1}% 2
+\BOOKMARK [1][-]{section.2.2}{Packages organization}{section*.1}% 3
+\BOOKMARK [2][-]{subsection.2.2.1}{ACSNMineR}{section.2.2}% 4
+\BOOKMARK [2][-]{subsection.2.2.2}{RNaviCell}{section.2.2}% 5
+\BOOKMARK [1][-]{section.2.3}{Case studies}{section*.1}% 6
+\BOOKMARK [2][-]{subsection.2.3.1}{Analysis of breast cancer expression data}{section.2.3}% 7
+\BOOKMARK [2][-]{subsection.2.3.2}{Analysis of glioblastoma mutation frequencies}{section.2.3}% 8
+\BOOKMARK [1][-]{section.2.4}{Summary and perspectives}{section*.1}% 9
+\BOOKMARK [1][-]{section.2.5}{Acknowledgments}{section*.1}% 10
