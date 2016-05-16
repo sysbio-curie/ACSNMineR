@@ -905,7 +905,7 @@ reverselog_trans<-function(base = 10){
   trans<-function(x) -log(x,base)
   inv<-function(x) base^(-x)
   
-  scales::trans_new(name = "reverslog",transform = trans,inverse = inv,
+  scales::trans_new(name = "reverselog",transform = trans,inverse = inv,
               breaks = scales::log_breaks(base = base),
               domain = c(10^(-60),Inf)
             )
