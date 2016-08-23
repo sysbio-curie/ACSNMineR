@@ -704,43 +704,51 @@ navicell$unorderedConfigApply("GBM", "size")
 \end{figure}
 
 \section[Summary and perspectives]{Summary and perspectives}
+
 In this work, we presented the R package \pkg{ACSNMineR}, a novel package for
 the calculation of p-values for enrichment or depletion of genes in biological
 pathways. The package includes the six large-scale molecular maps and 55
-functional modules of the Atlas of Cancer Signaling Network (ACSN) . Enrichment can be
-calculated for those maps and modules with several options to play with, but can
-also be calculated for other databases of molecular pathways, that can be
-imported from GMT formated files. 
+functional modules of the Atlas of Cancer Signaling Network (ACSN) . Enrichment
+can be calculated for those maps and modules with several options to play with,
+but can also be calculated for other databases of molecular pathways, that can
+be imported from GMT formated files. 
 
-We also describe in this work the \pkg{RNaviCell} package, a R package convenient to use with \pkg{ACSNMineR}. This package is dedicated to create web-based
-and interactive data visualization on ACSN maps. Users can use this tools to
-represent genes of interest that have been shown to be related to the maps by
-calculating enrichment with the  \pkg{ACSNMineR}.  Creating maps with the
-graphical user interface of the ACSN website can be a tedious task if the user
-has multiple samples or gene lists, and wants to compare their representations
-on ACSN maps. The \pkg{RNaviCell} package can be used to automate the process of
-creating the graphical representations automatically. 
+We also describe in this work the \pkg{RNaviCell} package, a R package
+convenient to use with \pkg{ACSNMineR}. This package is dedicated to create
+web-based and interactive data visualization on ACSN maps. Users can use this
+tools to represent genes of interest that have been shown to be related to the
+maps by calculating enrichment with the  \pkg{ACSNMineR}.  Creating maps with
+the graphical user interface of the ACSN website can be a tedious task if the
+user has multiple samples or gene lists, and wants to compare their
+representations on ACSN maps. The \pkg{RNaviCell} package can be used to
+automate the process of creating the graphical representations automatically. 
 
 We have shown how the packages \pkg{ACSNMineR} and \pkg{RNaviCell} can be
 combined to analyze expression data from breast cancer samples, and also to
 analyze the frequency of mutated genes in glioblastoma cancer samples.  
 
 Of course, \pkg{ACSNMineR} is not the only R package for enrichment
-calculations. For instance, \BIOpkg{GOstats} \citep{falcon2007using} is probably
-one of the first packages that was created to calculate enrichment for Gene
-Ontology categories.  \pkg{GOstats} can also be used to calculate enrichment for
-other biological pathways categories, such as KEGG pathways (by using an
-instance of the class \code{KEGGHyperGParams}) or PFAM protein families (using
-\code{PFAMHyperGParams}). However, its usage might not be as straightforward as
-\pkg{ACSNMineR}, and it does not seem possible to test user-defined biological
-pathways. Furthermore, other authors have pointed out that the KEGG database
-used by this package has not been updated since 2012. \BIOpkg{clusterProfiler} is a
-recent R package released for enrichment analysis of Gene Ontology and KEGG with
-either hypergeometric test or Gene Set Enrichment Analysis (GSEA)
-\citep{yu2012clusterprofiler}. Via other packages, support for analysis of
-Disease Ontology and Reactome Pathways is possible. Interestingly, this package
-also offers the possibility to import user-defined gene set, through
-tab-delimited pairwise definition files.   
+calculations. For instance, \BIOpkg{GOstats} \citep{falcon2007using} is
+probably one of the first packages that was created to calculate enrichment for
+Gene Ontology categories.  \pkg{GOstats} can also be used to calculate
+enrichment for other biological pathways categories, such as KEGG pathways (by
+using an instance of the class \code{KEGGHyperGParams}) or PFAM protein
+families (using \code{PFAMHyperGParams}). However, its usage might not be as
+straightforward as \pkg{ACSNMineR}, and it does not seem possible to test
+user-defined biological pathways. Furthermore, other authors have pointed out
+that the KEGG database used by this package has not been updated since 2012.
+\BIOpkg{clusterProfiler} is a recent R package released for enrichment analysis
+of Gene Ontology and KEGG with either hypergeometric test or Gene Set
+Enrichment Analysis (GSEA) \citep{yu2012clusterprofiler}. Via other packages,
+support for analysis of Disease Ontology and Reactome Pathways is possible.
+Interestingly, this package also offers the possibility to import user-defined
+gene set, through tab-delimited pairwise definition files. Other notable
+packages for enrichment calculations are \pkg{ReactomePA} for Reactome molecular
+pathways \citep{ReactomePA2016}, \pkg{miRNApath} for microRNA pathways
+\citep{miRNApath2008} and \pkg{gage} \citep{gage2009}. We believe that the main
+advantages of ACSNMineR compared to other packages are a direct access to the
+full set of ACSN maps (updated on a regular basis) and an easy way to test
+MSigDB gene sets or any user-defined gene set formatted appropriately.
 
 In order to improve \pkg{ACSNMineR}, we may in the near future try to improve
 the speed of calculation, which might be a problem if a very large number of
@@ -750,6 +758,20 @@ computationally demanding operations. It could also be useful to implement more
 sensitive methods of gene set enrichment measures, such as the Gene Set
 Enrichment Analysis (GSEA) method. 
 
+\pkg{RNaviCell} relies on standard HTTP calls to provide informations and
+calculations, and we have developped a number of bindings for popular
+programming languages such as R, Java and Python \citep{bonnet2015navicell}.
+This open architecture is designed to facilitate the development of utilities
+by other programmers and to facilitate the integration of ACSN maps in existing
+frameworks. The development of such services, sometimes called ``microservices"
+\citep{fowler2014} is in expansion. Furthermore, this kind of open architecture
+could clear the way for a more unified and general access to reaction networks
+database, including for example WikiPathways \citep{kelder2012wikipathways},
+Reactome \citep{croft2014reactome} and other databases. The PSICQUIC project is
+a successfull example of such an architecture \citep{aranda2011psicquic}. It is
+an effort of the HUPO proteomics standard initiative to standardize the access
+to molecular interaction databases programmatically, based on the specification
+of web services (using REST and SOAP calls) and a common query language (MIQL).
 
 \section[Acknowledgments]{Acknowledgements}
 
@@ -759,7 +781,8 @@ authors would like to thank Pierre Gestraud for his comments on early versions
 of the \pkg{ACSNMineR} package and Eric Viara for guidance and assistance on
 the development of the \pkg{RNaviCell} package.
 
-\bibliography{ACSNMineR}
+
+\bibliography{Deveau}
 
 \address{
   Paul Deveau\\

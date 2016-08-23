@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -12,6 +12,14 @@ M.~E. Adriaens, M.~Jaillard, A.~Waagmeester, S.~L. Coort, A.~R. Pico, and C.~T.
 \newblock The public road to high-quality curated biological pathways.
 \newblock \emph{Drug Discovery Today}, 13\penalty0 (19):\penalty0 856--862,
   2008.
+
+\bibitem[Aranda et~al.(2011)Aranda, Blankenburg, Kerrien, Brinkman, Ceol,
+  Chautard, Dana, De~Las~Rivas, Dumousseau, Galeota,
+  et~al.]{aranda2011psicquic}
+B.~Aranda, H.~Blankenburg, S.~Kerrien, F.~S. Brinkman, A.~Ceol, E.~Chautard,
+  J.~M. Dana, J.~De~Las~Rivas, M.~Dumousseau, E.~Galeota, et~al.
+\newblock Psicquic and psiscore: accessing and scoring molecular interactions.
+\newblock \emph{Nature Methods}, 8\penalty0 (7):\penalty0 528--529, 2011.
 
 \bibitem[Barillot et~al.(2012)Barillot, Calzone, Hupe, Vert, and
   Zinovyev]{barillot2012computational}
@@ -35,6 +43,16 @@ E.~Bonnet, E.~Viara, I.~Kuperstein, L.~Calzone, D.~P. Cohen, E.~Barillot, and
 \newblock Navicell web service for network-based data visualization.
 \newblock \emph{Nucleic Acids Research}, page gkv450, 2015.
 
+\bibitem[Cogswell et~al.(2008)Cogswell, Ward, Taylor, Waters, Shi, Cannon,
+  Kelnar, Kemppainen, Brown, Chen, Prinjha, Richardson, Saunders, Roses, and
+  Richards]{miRNApath2008}
+J.~P. Cogswell, J.~M. Ward, I.~A. Taylor, M.~Waters, Y.~Shi, B.~Cannon,
+  K.~Kelnar, J.~Kemppainen, D.~Brown, C.~Chen, R.~K. Prinjha, J.~C. Richardson,
+  A.~M. Saunders, A.~D. Roses, and C.~A. Richards.
+\newblock Identification of mirna changes in alzheimer's disease brain and csf
+  yields putative biomarkers and insights into disease pathways.
+\newblock \emph{Journal of Alzheimer's Disease}, 14:\penalty0 27--41, 2008.
+
 \bibitem[Croft et~al.(2014)Croft, Mundo, Haw, Milacic, Weiser, Wu, Caudy,
   Garapati, Gillespie, Kamdar, et~al.]{croft2014reactome}
 D.~Croft, A.~F. Mundo, R.~Haw, M.~Milacic, J.~Weiser, G.~Wu, M.~Caudy,
@@ -56,8 +74,15 @@ R.~A. Fisher.
 
 \bibitem[Fisher(1934)]{fisher1934statistical}
 R.~A. Fisher.
-\newblock Statistical methods for research workers.
-\newblock 1934.
+\newblock \emph{Statistical methods for research workers}.
+\newblock Oliver and Boyd, 1934.
+\newblock ISBN 0-05-002170-2.
+
+\bibitem[Fowler(2014)]{fowler2014}
+M.~Fowler.
+\newblock \emph{Microservices}, 2014.
+\newblock URL \url{http://martinfowler.com/articles/microservices.html}.
+\newblock Microservices.
 
 \bibitem[Hawkins et~al.(2010)Hawkins, Hon, and Ren]{hawkins2010next}
 R.~D. Hawkins, G.~C. Hon, and B.~Ren.
@@ -71,6 +96,14 @@ M.~Kanehisa, S.~Goto, Y.~Sato, M.~Furumichi, and M.~Tanabe.
 \newblock Kegg for integration and interpretation of large-scale molecular data
   sets.
 \newblock \emph{Nucleic Acids Research}, page gkr988, 2011.
+
+\bibitem[Kelder et~al.(2012)Kelder, van Iersel, Hanspers, Kutmon, Conklin,
+  Evelo, and Pico]{kelder2012wikipathways}
+T.~Kelder, M.~P. van Iersel, K.~Hanspers, M.~Kutmon, B.~R. Conklin, C.~T.
+  Evelo, and A.~R. Pico.
+\newblock Wikipathways: building research communities on biological pathways.
+\newblock \emph{Nucleic Acids Research}, 40\penalty0 (D1):\penalty0
+  D1301--D1307, 2012.
 
 \bibitem[Kuperstein et~al.(2013)Kuperstein, Cohen, Pook, Viara, Calzone,
   Barillot, and Zinovyev]{kuperstein2013navicell}
@@ -109,6 +142,13 @@ A.~Liberzon, A.~Subramanian, R.~Pinchback, H.~Thorvaldsd{\'o}ttir, P.~Tamayo,
 \newblock Molecular signatures database (msigdb) 3.0.
 \newblock \emph{Bioinformatics}, 27\penalty0 (12):\penalty0 1739--1740, 2011.
 
+\bibitem[{Luo} et~al.(2009){Luo}, {Weijun}, {Friedman}, {Michael}, {Shedden},
+  {Kerby}, {Hankenson}, {Kurt}, {Woolf}, and {Peter}]{gage2009}
+{Luo}, {Weijun}, {Friedman}, {Michael}, {Shedden}, {Kerby}, {Hankenson},
+  {Kurt}, {Woolf}, and {Peter}.
+\newblock Gage: generally applicable gene set enrichment for pathway analysis.
+\newblock \emph{BMC Bioinformatics}, 10:\penalty0 161, 2009.
+
 \bibitem[Maher et~al.(2001)Maher, Furnari, Bachoo, Rowitch, Louis, Cavenee, and
   DePinho]{maher2001malignant}
 E.~A. Maher, F.~B. Furnari, R.~M. Bachoo, D.~H. Rowitch, D.~N. Louis, W.~K.
@@ -125,12 +165,6 @@ R.~McLendon, A.~Friedman, D.~Bigner, E.~G. Van~Meir, D.~J. Brat, G.~M.
 \newblock Comprehensive genomic characterization defines human glioblastoma
   genes and core pathways.
 \newblock \emph{Nature}, 455\penalty0 (7216):\penalty0 1061--1068, 2008.
-
-\bibitem[{R Core Team}(2014)]{mainRref}
-{R Core Team}.
-\newblock \emph{R: A Language and Environment for Statistical Computing}.
-\newblock R Foundation for Statistical Computing, Vienna, Austria, 2014.
-\newblock URL \url{http://www.R-project.org/}.
 
 \bibitem[Reiner et~al.(2003)Reiner, Yekutieli, and Benjamini]{Benjamini2003FDR}
 A.~Reiner, D.~Yekutieli, and Y.~Benjamini.
@@ -153,11 +187,6 @@ M.~Schmidt, D.~B{\"o}hm, C.~von T{\"o}rne, E.~Steiner, A.~Puhl, H.~Pilch, H.-A.
   node-negative breast cancer.
 \newblock \emph{Cancer research}, 68\penalty0 (13):\penalty0 5405--5413, 2008.
 
-\bibitem[Vance(2009)]{vance2009data}
-A.~Vance.
-\newblock Data analysts captivated by r's power.
-\newblock \emph{New York Times}, 6, 2009.
-
 \bibitem[Wickham(2009)]{ggplot2}
 H.~Wickham.
 \newblock \emph{ggplot2: elegant graphics for data analysis}.
@@ -170,6 +199,15 @@ H.~Wickham.
 \newblock \emph{Reference classes}, 2015.
 \newblock URL \url{http://adv-r.had.co.nz/R5.html}.
 \newblock Advanced R.
+
+\bibitem[Yu and He(2016)]{ReactomePA2016}
+G.~Yu and Q.-Y. He.
+\newblock Reactomepa: an r/bioconductor package for reactome pathway analysis
+  and visualization.
+\newblock \emph{Molecular BioSystems}, page accepted, 2016.
+\newblock \doi{10.1039/C5MB00663E}.
+\newblock URL
+  \url{http://pubs.rsc.org/en/Content/ArticleLanding/2015/MB/C5MB00663E}.
 
 \bibitem[Yu et~al.(2012)Yu, Wang, Han, and He]{yu2012clusterprofiler}
 G.~Yu, L.-G. Wang, Y.~Han, and Q.-Y. He.
