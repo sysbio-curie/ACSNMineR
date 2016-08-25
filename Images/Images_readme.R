@@ -8,3 +8,9 @@ q<-represent_enrichment(enrichment = enrichment_test,scale = "reverselog",
                                           sample_name = "test",plot = "bar")
 
 ggsave("Images/barplot.png")
+
+# Generate table
+knitr::kable(enrichment(genes_test,
+           min_module_size = 10, 
+           threshold = 0.05,
+           maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle)))

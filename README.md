@@ -52,6 +52,13 @@ Where:
 * threshold is the maximal p-value that will be displayed in the results (all modules with p-values higher than threshold will be removed)
 * maps is a list of maps -here we take the cell cycle map from ACSN-  imported through the format_from_gmt() function of the package
 
+Output looks like:
+
+|module |module_size |nb_genes_in_module |genes_in_module                  | universe_size| nb_genes_in_universe| p.value| p.value.corrected|test    |
+|:------|:-----------|:------------------|:--------------------------------|-------------:|--------------------:|-------:|-----------------:|:-------|
+|E2F1   |19          |12                 |ATM ATR CHEK2 CREBBP TFDP1 E2F1  |           104|                   12| 4.5e-06|          6.68e-05|greater |
+|	    |            |                   |EP300 HDAC1 KAT2B GTF2H1 GTF2H2 GTF2H2B |       |                     |        |                  |        |
+
 Gene set enrichment for multiple sets/cohorts can be performed by calling:
 
 ``` 
