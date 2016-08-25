@@ -36,11 +36,11 @@ The gene set that was used for tests is the following:
 > genes_test<-c("ATM","ATR","CHEK2","CREBBP","TFDP1","E2F1","EP300","HDAC1","KAT2B","GTF2H1","GTF2H2","GTF2H2B")
 
 Gene set enrichment for a single set can be performed by calling:
-> enrichment(genes_test,
+``` enrichment(genes_test,
     min_module_size = 10, 
     threshold = 0.05,
     maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle))
-
+```
 Where:
 * genes_test is a character vector to test
 * min_module_size is the minimal size of a module to be taken into account
@@ -48,10 +48,10 @@ Where:
 * maps is a list of maps -here we take the cell cycle map from ACSN-  imported through the format_from_gmt() function of the package
 
 Gene set enrichment for multiple sets/cohorts can be performed by calling:
->multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
+``` multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
     maps = ACSNEnrichment::ACSN_maps$CellCycle,
     min_module_size = 15)
-
+```
 Where:
 
 * Genes_by_sample is a list of character vectors to test
@@ -65,13 +65,11 @@ Results from the enrichment analysis function can be transformed to images thank
 ####  <a name="IVA">Heatmaps</a>  
 ______
 Heatmaps for single sample or multiple sample representing p-values can be easily generated thanks to the represent_enrichment function.
-> represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
-    SampleB = enrichment_test[3:10,]),
-    plot = "heatmap", 
-    scale = "log",
-    low = "steelblue" , high ="white",
-    na.value = "grey")
 
+``` represent_enrichment(enrichment = list(SampleA = enrichment_test, 
+                                          SampleB = enrichment_test[1:3,]), 
+                        plot = "heatmap", scale = "log")
+```
 Where:
 
 * enrichment is the result from the enrichment or multisample_enrichment function
@@ -86,12 +84,11 @@ The result of this is:
 ####  <a name="IVB">Barplots</a> 
 ______
 A barplot can be achieved by using the following:
-> represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
-    'SampleB = enrichment_test[3:10,]),
-    plot = "bar", 
-    scale = "log",
-    nrow = 1)
-
+``` represent_enrichment(enrichment = enrichment_test,
+						scale = "reverselog",
+                        sample_name = "test",
+						plot = "bar")
+```
 Where:
 * enrichment is the result from the enrichment or multisample_enrichment function
 * scale can be set to either identity or log and will affect the gradient of colors

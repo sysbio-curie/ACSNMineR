@@ -665,7 +665,8 @@ p.val.calc<-function(x,y,z,a,stat_test,alt){
 #'                     sample_name = "test",plot = "bar")
 #'
 #'represent_enrichment(enrichment = list(SampleA = enrichment_test, 
-#'SampleB = enrichment_test[1:3]), plot = "heatmap", scale = "log")
+#'                                      SampleB = enrichment_test[1:3,]), 
+#'                      plot = "heatmap", scale = "log")
 #'@return Function returns a ggplot2 object if input is a dataframe or a gridExtra object if the output is a list. 
 #'@import ggplot2 
 #'@importFrom gridExtra grid.arrange
