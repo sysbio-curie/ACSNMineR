@@ -33,14 +33,19 @@ This readme contains:
 ###  <a name="IIIA">Pathway analysis</a> 
 ______
 The gene set that was used for tests is the following:
-> genes_test<-c("ATM","ATR","CHEK2","CREBBP","TFDP1","E2F1","EP300","HDAC1","KAT2B","GTF2H1","GTF2H2","GTF2H2B")
+
+``` 
+genes_test<-c("ATM","ATR","CHEK2","CREBBP","TFDP1","E2F1","EP300","HDAC1","KAT2B","GTF2H1","GTF2H2","GTF2H2B")
+```
 
 Gene set enrichment for a single set can be performed by calling:
-``` enrichment(genes_test,
+``` 
+enrichment(genes_test,
     min_module_size = 10, 
     threshold = 0.05,
     maps = list(cellcycle = ACSNEnrichment::ACSN_maps$CellCycle))
 ```
+
 Where:
 * genes_test is a character vector to test
 * min_module_size is the minimal size of a module to be taken into account
