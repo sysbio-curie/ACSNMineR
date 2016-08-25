@@ -1,42 +1,42 @@
-%% authors
-%\author{Paul Deveau\\Institut Curie\\PSL University\\Univ. Paris-Sud\\INSERM U830\\INSERM U900\\Mines-ParisTech \And 
-%        Emmanuel Barillot\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \And 
-%        Valentina Boeva\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech\\Institut Cochin\\INSERM U1016\\CNRS UMR 8104\\Paris Descartes University UMR-S1016 \AND 
-%        Andrei Zinovyev\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech \And
-%        Eric Bonnet\\Institut Curie\\PSL University\\INSERM U900\\Mines-ParisTech}
-%\title{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with the \R packages \pkg{ACSNMineR} and \pkg{RNaviCell}}
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc}     
 
-%% for pretty printing and a nice hypersummary also set:
-\author{by Paul Deveau, Emmanuel Barillot, Valentina Boeva, Andrei Zinovyev and Eric Bonnet} %% comma-separated
-\title{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with \pkg{ACSNMineR} and \pkg{RNaviCell} packages} %% without formatting
-%\Shorttitle{Module Enrichment and Data Visualization with ACSNMineR and RNaviCell} %% a short title (if necessary)
+\author{Paul Deveau, Emmanuel Barillot, Valentina Boeva, \\Andrei Zinovyev and Eric Bonnet} %% comma-separated
+\title{Calculating Biological Module Enrichment or Depletion and Visualizing Data on Large-scale Molecular Maps with ACSNMineR and RNaviCell R packages} %% without formatting
+
+
+\begin{document}
+
 \maketitle
-%% publication information
 
+\begin{abstract}
+Biological pathways or modules represent sets of interactions or functional
+relationships occurring at the molecular level in living cells. A large body of
+knowledge on pathways is organized in public databases such as the KEGG,
+Reactome, or in more specialized repositories, such as the Atlas of Cancer
+Signaling Network (ACSN). All these open biological databases facilitate
+analyses, improving our understanding of cellular systems. We hereby describe
+the R package \verb|ACSNMineR| for calculation of enrichment or depletion of
+lists of genes of interest in biological pathways. \verb|ACSNMineR| integrates
+ACSN molecular pathways, but can use any molecular pathway encoded as a GMT
+file, for instance sets of genes available in the Molecular Signatures Database
+(MSigDB). We also present the R package \verb|RNaviCell|, that can be used in
+conjunction with \verb|ACSNMineR| to visualize different data types on
+web-based, interactive ACSN maps. We illustrate the functionalities of the two
+packages with biological data taken from large-scale cancer datasets.
+\end{abstract}
 
-%% an abstract and keywords
-\abstract{
-Biological pathways or modules represent sets of interactions or functional relationships occurring at the molecular level in living cells. A large body of knowledge on pathways is organized in public databases such as the KEGG, Reactome, or in more specialized repositories, the Atlas of Cancer Signaling Network (ACSN) being an example. All these open biological databases facilitate analyses, improving our understanding of cellular systems. We hereby describe \CRANpkg{ACSNMineR} for calculation of enrichment or depletion of lists of genes of interest in biological pathways. \pkg{ACSNMineR} integrates ACSN molecular pathways, but can use any molecular pathway encoded as a GMT file, for instance sets of genes available in the Molecular Signatures Database (MSigDB). We also present \CRANpkg{RNaviCell}, that can be used in conjunction with \pkg{ACSNMineR} to visualize different data types on web-based, interactive ACSN maps. We illustrate the functionalities of the two packages with biological data taken from large-scale cancer datasets.  
-
-
-}
-%\Keywords{biological module, biological pathway, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, \proglang{R}}
-%\Plainkeywords{biological module, biological pathway, enrichment, depletion, cancer, maps, molecular networks, molecular pathways, R} %% without formatting
-
-
-
-
-
-%% include your article here, just as usual
-%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
 
 \section[Introduction]{Introduction}
 Biological pathways and networks comprise sets of interactions or functional
 relationships, occurring at the molecular level in living cells
-\citep{adriaens2008public, barillot2012computational}.  A large body of
+\cite{adriaens2008public, barillot2012computational}.  A large body of
 knowledge on cellular biochemistry is organized in publicly available
-repositories such as the KEGG database \citep{kanehisa2011kegg}, Reactome
-\citep{croft2014reactome} and MINT \citep{zanzoni2002mint}. All these
+repositories such as the KEGG database \cite{kanehisa2011kegg}, Reactome
+\cite{croft2014reactome} and MINT \cite{zanzoni2002mint}. All these
 biological databases facilitate a large spectrum of analyses, improving our
 understanding of cellular systems. For instance, it is a very common practice
 to cross the output of high-throughput experiments, such as mRNA or protein
@@ -50,21 +50,21 @@ if known biological pathways have significant overlap with this list of genes.
 We have recently released the Atlas of Cancer Signaling Network (ACSN), a
 web-based database which describes signaling and regulatory molecular processes
 that occur in a healthy mammalian cell but that are frequently deregulated
-during cancerogenesis \citep{kuperstein2015atlas}.  The ACSN atlas aims to
+during cancerogenesis \cite{kuperstein2015atlas}.  The ACSN atlas aims to
 be a comprehensive description of cancer-related mechanisms retrieved from the
 most recent literature. The web interface for ACSN is using the NaviCell
 technology, a software framework dedicated to web-based visualization and
-navigation for biological pathway maps \citep{kuperstein2013navicell}. This
+navigation for biological pathway maps \cite{kuperstein2013navicell}. This
 environment is providing an easy navigation of maps through the use of the
 Google Maps JavaScript library, a community interface with a web blog system,
 and a comprehensive module for visualization and analysis of high-throughput
-data \citep{bonnet2015navicell}.
+data \cite{bonnet2015navicell}.
 
 
-In this article, we describe two packages related to ACSN analysis and
-data visualization. The package \CRANpkg{ACSNMineR} is designed for the calculation of
+In this article, we describe two R packages related to ACSN analysis and
+data visualization. The package \verb|ACSNMineR| is designed for the calculation of
 gene enrichment and depletion in ACSN maps (or any user-defined gene set via
-the import function), while \CRANpkg{RNaviCell} is dedicated to data visualization
+the import function), while \verb|RNaviCell| is dedicated to data visualization
 on ACSN maps. Both packages are available on the Comprehensive R Archive
 Network (\url{https://cran.r-project.org/web/packages/ACSNMineR/} and
 \url{https://cran.r-project.org/web/packages/RNaviCell/}), and on the GitHub
@@ -86,7 +86,7 @@ ACSN map covers hundreds of molecular players, biochemical reactions and causal
 relationships between the molecular players and cellular phenotypes.  ACSN
 represents a large-scale biochemical reaction network of 4,826 reactions
 involving 2,371 proteins (as of today), and is continuously updated and expanded.  We have
-included the three hierarchical levels in the \pkg{ACSNMineR} package, in order
+included the three hierarchical levels in the \verb|ACSNMineR| package, in order
 to be able to calculate enrichments at all three levels. The calculations are
 made by counting the number of occurences of gene symbols (HUGO gene names) from
 a given list of genes of interest in all ACSN maps and modules. Table
@@ -96,23 +96,24 @@ maps.
 
 \begin{table}[h!]
  \centering
-  \caption{ACSN maps included in the \pkg{ACSNMineR} package. Map: map name,
+  \caption{ACSN maps included in the ACSNMineR package. Map: map name,
   Total: total number of gene symbols (HUGO) used to construct the map, Nb
   mod.: number of modules, Min: mimimum number of gene symbols in the modules,
   Max: maximum number of gene symbols in the modules, Mean: average number of
   gene sybols per module. N.B.: one gene symbol may be present in several
-  modules of the map.} \label{tab:table1}
-  \begin{tabular}{l c c c c c}
-    \toprule
+  modules of the map.} 
+  \label{tab:table1}
+  \begin{tabular}{lccccc}
+    \hline
     Map & Total & Nb mod. & Min & Max & Mean\\
-    \midrule
+    \hline
   ACSN global & 2243 & 63 & 2 &629& 83\\
   Survival  &1053&5  &208 &431 &328\\
   Apoptosis & 667&7 & 19& 382& 136\\
   EMT \& Cell motility &634 &9  &18 &629 &136\\
   DNA repair &345&21  &3 &171  &45\\
   Cell cycle &250&25  &2 &130  &19\\
-  \bottomrule
+  \hline
 
   \end{tabular}
 
@@ -120,36 +121,36 @@ maps.
 
 
 The statistical significance of the counts in the modules is assessed by using
-either the Fisher exact test \citep{fisher1922interpretation,
+either the Fisher exact test \cite{fisher1922interpretation,
 fisher1934statistical} or the hypergeometric test, which are equivalent for this
-purpose \citep{rivals2007enrichment}.
+purpose \cite{rivals2007enrichment}.
 
-The current ACSN maps are included in the \pkg{ACSNMineR} package, as a list of character matrices.
+The current ACSN maps are included in the \verb|ACSNMineR| package, as a list of character matrices.
 
-\begin{example}
+\begin{verbatim}
 > length(ACSN_maps)
 [1] 6
 > names(ACSN_maps)
 [1] "Apoptosis"    "CellCycle"    "DNA_repair"   "EMT_motility" "Master" 
 [6] "Survival"    
-\end{example}
+\end{verbatim}
 
 For each matrix, rows represent a module, with the name of the module in the
 first column, followed by a description of the module (optional), and then
 followed by all the gene symbols of the module. The maps will be updated
 according to every ACSN major release.
 
-The main function of the \pkg{ACSNMineR} package is the \code{enrichment}
+The main function of the \verb|ACSNMineR| package is the \verb|enrichment|
 function, which is calculating over-representation or depletion of genes in the
 ACSN maps and modules. We have included a small list of 12 Cell Cycle related
-genes in the package, named \code{genes\_test} that can be used to test the main
+genes in the package, named \verb|genes_test| that can be used to test the main
 enrichment function and to get familiar with its different options.
 
-\begin{example}
+\begin{verbatim}
 > genes_test
  [1] "ATM"     "ATR"     "CHEK2"   "CREBBP"  "TFDP1"   "E2F1"    "EP300"  
  [8] "HDAC1"   "KAT2B"   "GTF2H1"  "GTF2H2"  "GTF2H2B"
-\end{example}
+\end{verbatim}
 
 The example shown below is the simplest command that can be done to test a gene
 list for over-representation on the six included ACSN maps. With the list of 12
@@ -167,7 +168,7 @@ instance, the third line of the results object below concern the E2F1 module of
 the CellCycle map. 
 
 
-\begin{example}
+\begin{verbatim}
 > library(ACSNMineR)
 > results <- enrichment(genes_test)
 > dim(results)
@@ -179,15 +180,10 @@ V161 CellCycle:E2F1          19                 12
 V161 ATM ATR CHEK2 CREBBP TFDP1 E2F1 EP300 HDAC1 KAT2B GTF2H1 GTF2H2 GTF2H2B
      universe_size nb_genes_in_universe      p.value p.value.corrected    test
 V161          2237                   12 3.735018e-21      2.353061e-19 greater
-\end{example}
+\end{verbatim}
 
 
-%    enrichment(Genes = NULL, maps = ACSNMineR::ACSN_maps,
-%       correction_multitest = "BH", statistical_test = "fisher",
-%       min_module_size = 5, universe = "map_defined", threshold = 0.05,
-%       alternative = "greater")
-
-The \code{enrichment} function can take up to eight arguments: the gene list (as
+The \verb|enrichment| function can take up to eight arguments: the gene list (as
 a character vector), the list of maps that will be used to calculate enrichment
 or depletion, the type of statistical test (either the Fisher exact test or the
 hypergeometric test), the module minimal size for which the calculations will be
@@ -195,75 +191,59 @@ done, the universe, the p-value threshold and the alternative ("greater" for
 calculating over-representation, "less" for depletion and "both" for both
 tests).
 
-Only the gene list is mandatory to call the \code{enrichment} function, all the
-other arguments have default values.  The \code{maps} argument can either be a
-dataframe imported from a gmt file with the \code{format\_from\_gmt} function or
+Only the gene list is mandatory to call the \verb|enrichment| function, all the
+other arguments have default values.  The \verb|maps| argument can either be a
+dataframe imported from a gmt file with the \verb|format_from_gmt| function or
 a list of dataframes generated by the same procedure. By default, the function
 uses the ACSN maps previously described.  The correction for multiple testing
 is set by default to use the method of Benjamini \& Hochberg, but can be
 changed to any of the usual correction methods (Bonferroni, Holm, Hochberg,
-Holm, or Benjamini \& Yekutieli \citep{Benjamini2003FDR}), or even disabled .
+Holm, or Benjamini \& Yekutieli \cite{Benjamini2003FDR}), or even disabled .
 The minimal module size represents the smallest size value of a module that
 will be used to compute enrichment or depletion. This is meant to remove
 results of low significance for module of small size.  The universe in which
 the computation is made by default is defined by all the gene symbols contained
 in the maps. All the genes that were given as input and that are not present on
 the maps will be discarded. To keep all genes, the user can change the universe
-to \code{HUGO}, and in that case, the complete list of HUGO gene symbols will
+to \verb|HUGO|, and in that case, the complete list of HUGO gene symbols will
 be used as the reference ($>$ 39,000 genes). The threshold corresponds to the
 maximal value of the corrected p-value (unless the user chose not to correct
 for multiple testing) that will be displayed in the result table.
 
 
-%multisample_enrichment<-function(Genes_by_sample=NULL,
-%                                 maps = ACSNMineR::ACSN_maps, 
-%                                 correction_multitest = "BH",
-%                                 statistical_test = "fisher",
-%                                 min_module_size = 5,
-%                                 universe = "map_defined",
-%                                 threshold = 0.05,
-%                                 cohort_threshold = TRUE,
-%                                 alternative = "greater"){
-
-
 It may be of interest to compare enrichment of pathways in different cohorts or
 experiments. For example, enrichment of highly expressed pathways can reveal
 differences between two cancer types or two cell lines.  To facilitate such
-comparisons, \pkg{ACSNMineR} provides a \code{multisample\_enrichment} function.
-It relies on the \code{enrichment} function but takes a list of character
+comparisons, \verb|ACSNMineR| provides a \verb|multisample_enrichment| function.
+It relies on the \verb|enrichment| function but takes a list of character
 vector genes. The name of each element of the list will be assumed to be the
 name of the sample for further analysis.  Most of the arguments given to
-\code{multisample\_enrichment} are the same as the ones passed to
-\code{enrichment}. However, the \code{cohort\_threshold} is designed to filter
+\verb|multisample_enrichment| are the same as the ones passed to
+\verb|enrichment|. However, the \verb|cohort_threshold| is designed to filter
 out modules which would not pass the significance threshold in all samples.   
 
-%represent_enrichment<-function(enrichment, plot = "heatmap" , scale = "log", 
-%                               low = "steelblue" , high ="white",
-%                              nrow = 1,sample_name = "Sample",
-%                               na.value = "grey"){
-
-Finally, to facilitate visualization of results, \pkg{ACSNMineR} integrates a
-representation function based on \CRANpkg{ggplot2} syntax \citep{ggplot2}. It
-allows representation of results from \code{enrichment} or
-\code{multisample\_enrichment} with a limited number of parameters. Two types of
+Finally, to facilitate visualization of results, \verb|ACSNMineR| integrates a
+representation function based on \verb|ggplot2| syntax \cite{ggplot2}. It
+allows representation of results from \verb|enrichment| or
+\verb|multisample_enrichment| with a limited number of parameters. Two types of
 display are available: heat-map tiles or bars. For multiple samples using a
 barplot representation, the number of rows used can be provided, otherwise all
 plots will be on the same row. For the heatmap, the color of the
 non-significant modules, and boundaries of the gradient for significant values
 can also be tuned.
 
-We previously computed the p-value of the \code{genes\_test} list with default
+We previously computed the p-value of the \verb|genes_test| list with default
 parameters. The number of modules which have a p-value below 0.05 was 36, that
 can be compared to the 49 obtained without correction with the simple command
 shown below (some of the results are displayed in table \ref{tab:table2}).
 
 
-\begin{example}
+\begin{verbatim}
 enrichment(genes_test,correction_multitest = FALSE)
-\end{example}
+\end{verbatim}
 
 
-\begin{widetable}[h!]
+\begin{table}[h!]
   \centering
   \caption{Overview of the results from enrichment analysis without correction.
   Module : name of the module. Mod. size: size of the module. Genes in module:
@@ -272,28 +252,32 @@ enrichment(genes_test,correction_multitest = FALSE)
   \label{tab:table2}
 
   \begin{tabular}{l c c c c}
-	\toprule
+	\hline
 Module & Mod. size & Genes in module & p-value & Test\\
-	\midrule
-CellCycle & 242 & ATM ATR CHEK2   & 5.36e-07 & greater \\
-          &   &  CREBBP KAT2B TFDP1   &          &         \\
-          &   &  E2F1 EP300 HDAC1    &          &         \\
-          &	  & GTF2H1 GTF2H2 GTF2H2B &	& \\
-CellCycle: APOPTOSIS ENTRY & 10 & ATM ATR CHEK2 E2F1 & 3.49e-07 & greater \\
+	\hline
+CellCycle & 242 & ATM ATR & 5.36e-07 & greater \\
+          &   &  CHEK2 &   &     \\
+          &   &  CREBBP KAT2B &   &     \\
+          &   &  TFDP1 E2F1  &    &     \\
+          &	  &  EP300 HDAC1 &	& \\
+          &	  &  GTF2H1 GTF2H2 &	& \\
+          &	  &  GTF2H2B &	& \\
+CellCycle: APOPTOSIS ENTRY & 10 & ATM ATR & 3.49e-07 &greater  \\
+ & & CHEK2 E2F1 &  & \\
 CellCycle: CYCLINB			& 7  & ATM 				  & 3.98e-02 & greater \\
 
 
 
-	\bottomrule
+	\hline
 
 	\end{tabular}
-\end{widetable}
+\end{table}
 
 We can now plot the first six rows of the results obtained for corrected and
 uncorrected fisher test with heatmap format (Figure~\ref{fig:heatm}) or barplot
 (Figure~\ref{fig:barp}) with the following commands:
 
-\begin{example}
+\begin{verbatim}
 # heatmap
 
 represent_enrichment(enrichment = list(Corrected = results[1:6,], 
@@ -307,7 +291,7 @@ Uncorrected = results_uncorrected[1:6,]),
                              Uncorrected = results_uncorrected[1:6,]),
                                plot = "heatmap", scale = "reverselog", 
                                nrow = 1)
-\end{example}
+\end{verbatim}
 
 \begin{figure}[h!]
 	\centering
@@ -316,7 +300,7 @@ Uncorrected = results_uncorrected[1:6,]),
     data is not available for this module in this sample. P-values of low
     significance are in white, whereas p-values of high significance are
     represented in blue.}
-    \includegraphics[width=0.8\textwidth]{figures/comparison_corrected_unc.pdf}
+    \includegraphics[width=\textwidth]{figures/comparison_corrected_unc.pdf}
     \label{fig:heatm}
 
 \end{figure}
@@ -339,15 +323,15 @@ The NaviCell Web Service provides a server mode, which allows automating
 visualization tasks and retrieving data from molecular maps via RESTful
 (standard http/https) calls. Bindings to different programming languages are
 provided in order to facilitate the development of data visualization workflows and
-third-party applications \citep{bonnet2015navicell}. RNaviCell is the R binding
+third-party applications \cite{bonnet2015navicell}. RNaviCell is the R binding
 to the NaviCell Web Service. It is implemented as a standard R package, using
-the R object-oriented framework known as Reference Classes \citep{hwR5}. Most
+the R object-oriented framework known as Reference Classes \cite{hwR5}. Most
 of the work done by the user using graphical point-and-click operations on the
 NaviCell web interface are encoded as functions in the library encapsulating
 http calls to the server with appropriate parameters and data. Calls to the
-NaviCell server are performed using the library RCurl \citep{rcurl2015}, while
+NaviCell server are performed using the library RCurl \cite{rcurl2015}, while
 data encoding/decoding in JSON format is performed with the RJSONIO library
-\citep{rjsonio2014}.
+\cite{rjsonio2014}.
 
 Once the RNaviCell library is installed and loaded, the first step is to create
 a NaviCell object and launch the browser session. This will automatically create
@@ -363,7 +347,7 @@ In the simple example detailed below, we create a NaviCell session, then load
 an expression data set from a local (tab-delimited) file. The data represent
 gene expression measured in a prostate cancer cell line resistant to hormonal
 treatment (agressive), and is taken from the Cell Line Encyclopedia project
-\citep{barretina2012cancer}. We visualize the data values on the Cell Cycle map
+\cite{barretina2012cancer}. We visualize the data values on the Cell Cycle map
 (the default map), using heat maps. With this visualization mode, gene
 expression values are represented as a color gradient (green to red) in
 squares positioned next to the entities where the gene has been mapped (Figure~\ref{fig:du145}).      
@@ -378,13 +362,13 @@ level. The essential phases of the cell cycle are indicated on the map
 can zoom in and out, change the graphical parameters, import additional data
 and perform functional analysis.  } 
 \centering
-  \includegraphics[width=0.8\textwidth]{figures/heatmap.pdf}
+  \includegraphics[width=\textwidth]{figures/heatmap.pdf}
   \label{fig:du145}
 \end{figure}
 
 
 
-\begin{example}
+\begin{verbatim}
 # a short RNaviCell script example
 
 # load RNaviCell library
@@ -410,7 +394,7 @@ navicell$heatmapEditorSelectSample('0','data')
 navicell$heatmapEditorSelectDatatable('0','DU145')
 navicell$heatmapEditorApply()
 
-\end{example}
+\end{verbatim}
 
 \section[Case studies]{Case studies}
 
@@ -418,7 +402,7 @@ navicell$heatmapEditorApply()
 In a study published in 2008, Schmidt and colleagues analyzed gene expression
 patterns of 200 breast cancer patients not treated by systemic therapy after
 surgery using discovery approach to reveal additional prognostic motifs
-\citep{schmidt2008humoral}. Estrogen receptor (ER) expression and proliferative
+\cite{schmidt2008humoral}. Estrogen receptor (ER) expression and proliferative
 activity of breast carcinomas are well-known and described prognostic markers.
 Patients with ER-positive carcinomas have a better prognosis than those with
 ER-negative carcinomas, and rapidly proliferating carcinomas have an adverse
@@ -434,7 +418,7 @@ ACSN maps from this list of genes. As seen in Table \ref{tab:table_mainz},
 there is one map (Cell Cycle) and six modules (belonging to the Cell Cycle, DNA
 repair and EMT motility maps) enriched. 
 
-\begin{example}
+\begin{verbatim}
 # load all necessary packages
 library(breastCancerMAINZ)
 library(Biobase)
@@ -465,7 +449,7 @@ enrichment(symbol_list) -> results
 
 dim(results)
 [1] 7 9
-\end{example}
+\end{verbatim}
 
 \begin{table}[h!]
   \centering
@@ -476,9 +460,9 @@ which are found in the module. pval: raw p-value. Cor. pval: corrected p-value.}
 \label{tab:table_mainz}
 
 \begin{tabular}{l c c c c}
-\toprule
+\hline
 Module & Mod. size & Nb genes & pval & Cor. pval\\
-\midrule
+\hline
 CellCycle & 242 & 20 & 1.70e-03 & 0.021 \\
 CellCycle:E2F1\_TARGETS & 130 & 14 & 6.26e-04 & 0.009 \\
 CellCycle:E2F2\_TARGETS & 35 & 8 & 4.70e-05 & 0.009 \\
@@ -486,18 +470,18 @@ CellCycle:E2F3\_TARGETS & 51 & 11 & 3.82e-06 & 0.0002 \\
 CellCycle:E2F4\_TARGETS & 100 & 15 & 9.99e-06 & 0.0003 \\
 DNA\_repair:SPINDLE\_CHECKPOINT & 28 & 5 & 3.82e-03 & 0.04 \\
 EMT\_motility:ECM & 147 & 13 & 5.09e-03 & 0.045 \\
-\bottomrule
+\hline
 \end{tabular}
 \end{table}
 
 The Molecular Signatures Database (MSigDB) is one of the most widely used
 repository of well-annotated  gene sets representing the universe of biological
-processes \citep{liberzon2011molecular}. We downloaded the canonical pathways
+processes \cite{liberzon2011molecular}. We downloaded the canonical pathways
 set, counting more than 1,300 gene sets representing canonical pathways compiled
 by domain experts. The dataset is encoded with the 'gmt' format, and can be
-imported within ACSNMineR with the \code{format\_from\_gmt} function. We
+imported within ACSNMineR with the \verb|format_from_gmt| function. We
 calculate the enrichment for the breast cancer differentially expressed gene
-list, simply specifying the MSigDB data we just imported as the \code{maps}
+list, simply specifying the MSigDB data we just imported as the \verb|maps|
 option. Table \ref{tab:table_msigdb} is displaying the pathways having a
 corrected p-value $< 0.05$. The prefix is indicating the database source, so we
 see that we have pathways from the KEGG, Reactome and PID databases. Consistent
@@ -505,13 +489,13 @@ with our previous results, most of the enriched pathways are related to the cell
 cycle regulation. 
 
 
-\begin{example}
+\begin{verbatim}
 # Import MSigDB canonical pathways and calculate enrichment on this database 
 
 mtsig <- format_from_gmt('c2.cp.v5.0.symbols.gmt')
 enrichment(symbol_list, maps = mtsig)
 
-\end{example}
+\end{verbatim}
 
 
 \begin{table}[h!]
@@ -523,9 +507,9 @@ which are found in the module. Cor. pval: corrected p-value.}
 \label{tab:table_msigdb}
 
 \begin{tabular}{l c c c}
-\toprule
+\hline
 Pathway & Mod. size & Nb genes & Cor. pval\\
-\midrule
+\hline
 KEGG\_CELL\_CYCLE & 128 & 76 & 1.98e-07\\
 REACTOME\_CELL\_CYCLE\_MITOTIC & 325 & 158 & 2.40e-07\\
 REACTOME\_DNA\_REPLICATION & 192 & 98 & 1.33e-05\\
@@ -536,15 +520,15 @@ PID\_AURORA\_B\_PATHWAY & 39 & 27 & 3.38e-04\\
 REACTOME\_MITOTIC\_G1\_G1\_S\_PHASES & 137 & 70 & 3.83e-04\\ 
 PID\_SYNDECAN\_1\_PATHWAY & 46 & 30 & 4.40e-04\\
 REACTOME\_S\_PHASE & 109 & 58 & 4.40e-04\\
-\bottomrule
+\hline
 \end{tabular}
 \end{table}
 
 At last, we visualize the mean expression values for ER negative samples for all
-genes differentially expressed on the ACSN master (global) map using \code{ACSNMineR}
+genes differentially expressed on the ACSN master (global) map using \verb|ACSNMineR|
 commands to create heatmaps.
 
-\begin{example}
+\begin{verbatim}
 # Select ER negative samples and calculate mean expression values
 
 apply(eset[probe_list,pdat$er == 0],1,mean) -> er_minus_mean
@@ -564,7 +548,7 @@ navicell$importDatatable("mRNA expression data", "GBM_exp", er_minus_mean)
 navicell$heatmapEditorSelectSample('0','exp')
 navicell$heatmapEditorSelectDatatable('0','GBM_exp')
 navicell$heatmapEditorApply()
-\end{example}
+\end{verbatim}
 
 The Figure \ref{fig:mainz} is displaying the map for gene that having a
 corrected p-value $< 0.05$ and a log fold-change $>1$. we can see that the genes
@@ -575,7 +559,7 @@ motility, apoptosis and survival.
   \caption{Mean expression values for ER negative differentially expressed
   genes in breast cancer visualized as heatmaps on the ACSN master map.} 
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/mainz_acsn.pdf}
+  \includegraphics[width=\textwidth]{figures/mainz_acsn.pdf}
   \label{fig:mainz}
 \end{figure}
 
@@ -584,19 +568,19 @@ motility, apoptosis and survival.
 Recent years have witnessed a dramatic increase in new technologies for
 interrogating the activity levels of various cellular components on a
 genome-wide scale, including genomic, epigenomic, transcriptomic, and proteomic
-information \citep{hawkins2010next}. Integrating these heterogeneous datasets
+information \cite{hawkins2010next}. Integrating these heterogeneous datasets
 provides more biological insights than performing separate analyses. For
 instance, international consortia such as The Cancer Genome Atlas (TCGA) have
 launched large-scale initiatives to characterize multiple types of cancer at
 different levels on hundreds of samples.  These integrative studies have
 already led to the identification of novel cancer genes
-\citep{mclendon2008comprehensive}. 
+\cite{mclendon2008comprehensive}. 
 
 Malignant gliomas, the most common subtype of primary brain tumors, are
 aggressive, highly invasive, and neurologically destructive tumors considered
 to be among the deadliest of human cancers. In its most aggressive
 manifestation, glioblastoma (GBM), median survival ranges from 9 to 12 months,
-despite maximum treatment efforts \citep{maher2001malignant}. In this study we
+despite maximum treatment efforts \cite{maher2001malignant}. In this study we
 have analyzed whole-genome mutation data generated by the TCGA project on
 hundreds of patients. More specifically, we parsed the MAF (Mutation Annotation
 Format) GBM files produced by different sequencing centers to count and
@@ -612,7 +596,7 @@ greater than 1\% and less than 5\% as "1" and genes highly mutated (frequency
 higher than 5\%) as "2". 
 
 We loaded the data as a matrix in R and calculated the enrichment in ACSN maps
-with the ACSNMineR function \code{enrichment}. The results are displayed in
+with the ACSNMineR function \verb|enrichment|. The results are displayed in
 table \ref{tab:table_gbm}. There are 6 modules significantly enriched in the
 DNA repair and EMT motility maps. Cell matrix adhesions and ECM
 (extra cellular matrix), part of the EMT motility map, are the modules with
@@ -628,9 +612,9 @@ global map level (second line in the table).
   \label{tab:table_gbm}
 
 \begin{tabular}{l c c c}
-\toprule
+\hline
 module & Mod. size & Nb genes & Cor. pval\\ 
-\midrule
+\hline
 DNA\_repair:S\_PHASE\_CHECKPOINT &   45 &      19 &     0.008\\
 EMT\_motility  &  635  &   181  &   0.0002\\
 EMT\_motility:CELL\_MATRIX\_ADHESIONS   &   73  &    45  &    3.73e-12\\
@@ -638,7 +622,7 @@ EMT\_motility:CYTOSKELETON\_POLARITY   &   154 &    47  &    0.022\\
 EMT\_motility:DESMOSOMES & 29  &    15  &    0.002\\
 EMT\_motility:ECM    &    147  &   69   &   9.77e-11\\
 EMT\_motility:EMT\_REGULATORS  &   629   &  178  &   0.0002\\
-\bottomrule
+\hline
 \end{tabular}
 \end{table}
 
@@ -650,7 +634,7 @@ motility and DNA repair regions (maps) of the global ACSN map. Although they
 are not statistically significant, quite high densities can also be seen in
 other regions of the map.
 
-\begin{example}
+\begin{verbatim}
 library(RNaviCell)
 
 # Create a NaviCell object, point it to the ACSN master map and launch
@@ -689,7 +673,7 @@ navicell$unorderedConfigSetDiscreteSize("GBM", "sample", 0, 4)
 navicell$unorderedConfigSetDiscreteSize("GBM", "sample", 1, 14)
 
 navicell$unorderedConfigApply("GBM", "size")
-\end{example}
+\end{verbatim}
 
 
 \begin{figure}[!ht]
@@ -699,127 +683,104 @@ navicell$unorderedConfigApply("GBM", "size")
   as small blue squares.
   } 
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/gbm.pdf}
+  \includegraphics[width=\textwidth]{figures/gbm.pdf}
   \label{fig:gbm}
 \end{figure}
 
 \section[Summary and perspectives]{Summary and perspectives}
-
-In this work, we presented the R package \pkg{ACSNMineR}, a novel package for
+In this work, we presented the R package \verb|ACSNMineR|, a novel package for
 the calculation of p-values for enrichment or depletion of genes in biological
 pathways. The package includes the six large-scale molecular maps and 55
-functional modules of the Atlas of Cancer Signaling Network (ACSN) . Enrichment
-can be calculated for those maps and modules with several options to play with,
-but can also be calculated for other databases of molecular pathways, that can
-be imported from GMT formated files. 
+functional modules of the Atlas of Cancer Signaling Network (ACSN) . Enrichment can be
+calculated for those maps and modules with several options to play with, but can
+also be calculated for other databases of molecular pathways, that can be
+imported from GMT formated files. 
 
-We also describe in this work the \pkg{RNaviCell} package, a R package
-convenient to use with \pkg{ACSNMineR}. This package is dedicated to create
-web-based and interactive data visualization on ACSN maps. Users can use this
-tools to represent genes of interest that have been shown to be related to the
-maps by calculating enrichment with the  \pkg{ACSNMineR}.  Creating maps with
-the graphical user interface of the ACSN website can be a tedious task if the
-user has multiple samples or gene lists, and wants to compare their
-representations on ACSN maps. The \pkg{RNaviCell} package can be used to
-automate the process of creating the graphical representations automatically. 
+We also describe in this work the \verb|RNaviCell| package, a R package convenient to use with \verb|ACSNMineR|. This package is dedicated to create web-based
+and interactive data visualization on ACSN maps. Users can use this tools to
+represent genes of interest that have been shown to be related to the maps by
+calculating enrichment with the  \verb|ACSNMineR|.  Creating maps with the
+graphical user interface of the ACSN website can be a tedious task if the user
+has multiple samples or gene lists, and wants to compare their representations
+on ACSN maps. The \verb|RNaviCell| package can be used to automate the process of
+creating the graphical representations automatically. 
 
-We have shown how the packages \pkg{ACSNMineR} and \pkg{RNaviCell} can be
+We have shown how the packages \verb|ACSNMineR| and \verb|RNaviCell| can be
 combined to analyze expression data from breast cancer samples, and also to
 analyze the frequency of mutated genes in glioblastoma cancer samples.  
 
-Of course, \pkg{ACSNMineR} is not the only R package for enrichment
-calculations. For instance, \BIOpkg{GOstats} \citep{falcon2007using} is
-probably one of the first packages that was created to calculate enrichment for
-Gene Ontology categories.  \pkg{GOstats} can also be used to calculate
-enrichment for other biological pathways categories, such as KEGG pathways (by
-using an instance of the class \code{KEGGHyperGParams}) or PFAM protein
-families (using \code{PFAMHyperGParams}). However, its usage might not be as
-straightforward as \pkg{ACSNMineR}, and it does not seem possible to test
-user-defined biological pathways. Furthermore, other authors have pointed out
-that the KEGG database used by this package has not been updated since 2012.
-\BIOpkg{clusterProfiler} is a recent R package released for enrichment analysis
-of Gene Ontology and KEGG with either hypergeometric test or Gene Set
-Enrichment Analysis (GSEA) \citep{yu2012clusterprofiler}. Via other packages,
-support for analysis of Disease Ontology and Reactome Pathways is possible.
-Interestingly, this package also offers the possibility to import user-defined
-gene set, through tab-delimited pairwise definition files. Other notable
-packages for enrichment calculations are \pkg{ReactomePA} for Reactome molecular
-pathways \citep{ReactomePA2016}, \pkg{miRNApath} for microRNA pathways
-\citep{miRNApath2008} and \pkg{gage} \citep{gage2009}. We believe that the main
-advantages of ACSNMineR compared to other packages are a direct access to the
-full set of ACSN maps (updated on a regular basis) and an easy way to test
-MSigDB gene sets or any user-defined gene set formatted appropriately.
+Of course, \verb|ACSNMineR| is not the only R package for enrichment
+calculations. For instance, \verb|GOstats| \cite{falcon2007using} is probably
+one of the first packages that was created to calculate enrichment for Gene
+Ontology categories.  \verb|GOstats| can also be used to calculate enrichment for
+other biological pathways categories, such as KEGG pathways (by using an
+instance of the class \verb|KEGGHyperGParams|) or PFAM protein families (using
+\verb|PFAMHyperGParams|). However, its usage might not be as straightforward as
+\verb|ACSNMineR|, and it does not seem possible to test user-defined biological
+pathways. Furthermore, other authors have pointed out that the KEGG database
+used by this package has not been updated since 2012. \verb|clusterProfiler| is a
+recent R package released for enrichment analysis of Gene Ontology and KEGG with
+either hypergeometric test or Gene Set Enrichment Analysis (GSEA)
+\cite{yu2012clusterprofiler}. Via other packages, support for analysis of
+Disease Ontology and Reactome Pathways is possible. Interestingly, this package
+also offers the possibility to import user-defined gene set, through
+tab-delimited pairwise definition files.   
 
-In order to improve \pkg{ACSNMineR}, we may in the near future try to improve
+In order to improve \verb|ACSNMineR|, we may in the near future try to improve
 the speed of calculation, which might be a problem if a very large number of
 samples or experiments have to be analyzed rapidly. For instance, we could use
-the \code{foreach} and \code{\%dopar\%} operator to parallelize the most
+the \verb|foreach| and \verb|\%dopar\%| operator to parallelize the most
 computationally demanding operations. It could also be useful to implement more
 sensitive methods of gene set enrichment measures, such as the Gene Set
 Enrichment Analysis (GSEA) method. 
 
-\pkg{RNaviCell} relies on standard HTTP calls to provide informations and
-calculations, and we have developped a number of bindings for popular
-programming languages such as R, Java and Python \citep{bonnet2015navicell}.
-This open architecture is designed to facilitate the development of utilities
-by other programmers and to facilitate the integration of ACSN maps in existing
-frameworks. The development of such services, sometimes called ``microservices"
-\citep{fowler2014} is in expansion. Furthermore, this kind of open architecture
-could clear the way for a more unified and general access to reaction networks
-database, including for example WikiPathways \citep{kelder2012wikipathways},
-Reactome \citep{croft2014reactome} and other databases. The PSICQUIC project is
-a successfull example of such an architecture \citep{aranda2011psicquic}. It is
-an effort of the HUPO proteomics standard initiative to standardize the access
-to molecular interaction databases programmatically, based on the specification
-of web services (using REST and SOAP calls) and a common query language (MIQL).
 
 \section[Acknowledgments]{Acknowledgements}
 
 This work was supported by a grant ``Projet Incitatif et Collaboratif
 Computational Systems Biology Approach for Cancer" from Institut Curie. The
 authors would like to thank Pierre Gestraud for his comments on early versions
-of the \pkg{ACSNMineR} package and Eric Viara for guidance and assistance on
-the development of the \pkg{RNaviCell} package.
+of the \verb|ACSNMineR| package and Eric Viara for guidance and assistance on
+the development of the \verb|RNaviCell| package.
 
 
+\section{Affiliations}
+
+Paul Deveau (paul.deveau@curie.fr)\\
+  Computational Systems Biology of Cancer, Institut Curie\\
+  26, rue d'Ulm 75248 Paris\\
+  France\\
+
+\noindent
+Emmanuel Barillot (emmanuel.barillot@curie.fr)\\
+  Computational Systems Biology of Cancer, Institut Curie\\
+  26, rue d'Ulm 75248 Paris\\
+  France\\
+
+\noindent
+Valentina Boeva (valentina.boeva@curie.fr)\\
+  Computational Systems Biology of Cancer, Institut Curie\\
+  26, rue d'Ulm 75248 Paris\\
+  France\\
+
+\noindent
+Andrei Zinovyev (andrei.zinovyev@curie.fr)\\
+  Computational Systems Biology of Cancer, Institut Curie\\
+  26, rue d'Ulm 75248 Paris\\
+  France\\
+
+\noindent
+Eric Bonnet (eric.bonnet@cng.fr)\\
+%  Computational Systems Biology of Cancer, Institut Curie\\
+%  26, rue d'Ulm 75248 Paris\\
+%  France\\
+Centre National de Génotypage\\ 
+Institut de Génomique\\
+CEA\\
+91057 Evry\\ 
+France\\
+
+\bibliographystyle{unsrt}
 \bibliography{Deveau}
 
-\address{
-  Paul Deveau\\
-  Computational Systems Biology of Cancer, Institut Curie\\
-  26, rue d'Ulm 75248 Paris\\
-  France\\
-}
-\email{paul.deveau@curie.fr}
-
-\address{
-  Emmanuel Barillot\\
-  Computational Systems Biology of Cancer, Institut Curie\\
-  26, rue d'Ulm 75248 Paris\\
-  France\\
-}
-\email{emmanuel.barillot@curie.fr}
-
-\address{
-  Valentina Boeva\\
-  Computational Systems Biology of Cancer, Institut Curie\\
-  26, rue d'Ulm 75248 Paris\\
-  France\\
-}
-\email{valentina.boeva@curie.fr}
-
-\address{
-  Andrei Zinovyev\\
-  Computational Systems Biology of Cancer, Institut Curie\\
-  26, rue d'Ulm 75248 Paris\\
-  France\\
-}
-\email{andrei.zinovyev@curie.fr}
-
-\address{
-  Eric Bonnet\\
-  Centre National de Génotypage, Institut de Génomique, CEA\\
-  2, rue Gaston Crémieux, 91057 Evry\\
-  France\\
-}
-\email{eric.bonnet@cng.fr}
+\end{document}

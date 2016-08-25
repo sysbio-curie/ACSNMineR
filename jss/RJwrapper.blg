@@ -1,5 +1,46 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: RJwrapper.aux
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: RJwrapper.aux
 The style file: abbrvnat.bst
-Database file #1: ACSNMineR.bib
-Warning--empty journal in fisher1934statistical
-(There was 1 warning)
+Database file #1: Deveau.bib
+You've used 30 entries,
+            2773 wiz_defined-function locations,
+            783 strings with 11422 characters,
+and the built_in function-call counts, 18739 in all, are:
+= -- 1559
+> -- 1621
+< -- 13
++ -- 546
+- -- 516
+* -- 1738
+:= -- 2995
+add.period$ -- 99
+call.type$ -- 30
+change.case$ -- 250
+chr.to.int$ -- 30
+cite$ -- 60
+duplicate$ -- 659
+empty$ -- 1138
+format.name$ -- 552
+if$ -- 3781
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 29
+newline$ -- 167
+num.names$ -- 120
+pop$ -- 477
+preamble$ -- 1
+purify$ -- 227
+quote$ -- 0
+skip$ -- 602
+stack$ -- 0
+substring$ -- 586
+swap$ -- 84
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 315
+warning$ -- 0
+while$ -- 130
+width$ -- 0
+write$ -- 408
