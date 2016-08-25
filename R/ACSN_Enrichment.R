@@ -16,11 +16,20 @@
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. 
 #' Can be either "HUGO","ACSN","map_defined", or a character vector of genes.
-#' @param threshold : maximal p-value (corrected if correction is enabled) that will be displayed
+#' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param alternative One of "greater", "less", "both" or "two.sided"
 #' Greater will check for enrichment, less will check for depletion, and both will look for 
 #' both and will keep track of the side,
-#' while two-sided (only for fisher test) checks if there is a difference .
+#' while two-sided (only for fisher test) checks if there is a difference.
+#' @return Output is a dataframe with the following columns:\describe{
+#'  \item{module}{The name of the map or the module preceded by the map}
+#'  \item{module_size}{The number of genes in the module after taking into account universe reduction}
+#'  \item{nb_genes_in_module}{The number of genes from input list in the module}
+#'  \item{genes_in_module}{Names of the genes from input list in the module, space separated}
+#'  \item{universe_size}{size of the input universe}
+#'  \item{nb_genes_in_universe}{number of genes from the input list that are found in the universe}
+#'  \item{test}{the kind of test that was looked for. "greater" when enrichment is tested, "less" when depletion is tested, or "two.sided"}
+#' }
 #' @examples enrichment(genes_test,min_module_size = 10, 
 #'    threshold = 0.05,
 #'    maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle),
@@ -543,10 +552,19 @@ enrichment<-function(Genes=NULL,
 #' has p-value lower than threshold, otherwise the threshold is applied for each sample independently.
 #' @param alternative One of "greater", "less", "both", or "two.sided" (only for fisher test).
 #' Greater will check for enrichment, less will check for depletion, and both will look for both.
-#' @examples multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
+#' @return Output is a list of dataframes with names the names given in `Genes_by_sample` with the following columns:\describe{
+#'  \item{module}{The name of the map or the module preceded by the map}
+#'  \item{module_size}{The number of genes in the module after taking into account universe reduction}
+#'  \item{nb_genes_in_module}{The number of genes from input list in the module}
+#'  \item{genes_in_module}{Names of the genes from input list in the module, space separated}
+#'  \item{universe_size}{size of the input universe}
+#'  \item{nb_genes_in_universe}{number of genes from the input list that are found in the universe}
+#'  \item{test}{the kind of test that was looked for. "greater" when enrichment is tested, "less" when depletion is tested, or "two.sided"}
+#' }
+#' @examples multisample_enrichment(Genes_by_sample = list(set1 = genes_test,set2=c(genes_test,"PTPRD")),
 #' maps = list(cellcycle = ACSNMineR::ACSN_maps$CellCycle),
 #' min_module_size = 10,
-#' universe = "ACSN")
+#' universe = "ACSN",cohort_threshold = FALSE)
 #' @export
 
 multisample_enrichment<-function(Genes_by_sample=NULL,
@@ -632,17 +650,23 @@ p.val.calc<-function(x,y,z,a,stat_test,alt){
 
 #### Graphic representation of results ####
 #' Graphic representation of enrichment
-#'@param enrichment Data frame or list of dataframes with p-values or corrected p-values (whenever available) and module names for representation.
+#'@param enrichment Data frame or list of dataframes with p-values or corrected p-values (whenever available) 
+#'and module names for representation.
 #'The name of the dataframe will be used as sample name.
 #'@param plot Any of "heatmap" or "bar"
-#'@param scale Any of "log" or "identity"
+#'@param scale Any of "log", "identity" or "reverselog" (i.e. -log10(p-value))
 #'@param low Color to be used in heatmap mode corresponding to lowest value
 #'@param high Color to be used in heatmap mode corresponding to highest value
 #'@param nrow Number of rows of the grid for display in bar mode.
 #'@param sample_name  used only is enrichment is a dataframe
 #'@param na.value color for the missing values in the heatmap
-#'@examples represent_enrichment(enrichment = list(SampleA = enrichment_test[1:10,], 
-#'SampleB = enrichment_test[3:10,]), plot = "heatmap", scale = "log")
+#'@examples 
+#'represent_enrichment(enrichment = enrichment_test,scale = "reverselog",
+#'                     sample_name = "test",plot = "bar")
+#'
+#'represent_enrichment(enrichment = list(SampleA = enrichment_test, 
+#'SampleB = enrichment_test[1:3]), plot = "heatmap", scale = "log")
+#'@return Function returns a ggplot2 object if input is a dataframe or a gridExtra object if the output is a list. 
 #'@import ggplot2 
 #'@importFrom gridExtra grid.arrange
 #'@export
@@ -847,8 +871,10 @@ cnum<-function(x){
 #' Import data from gmt files
 #' Convert gmt file to dataframe that can be used for anaysis
 #'@param path Path to the gmt file to be imported
+#'@return Returns a dataframe with the module - first column -, module length - seconde column - and gene names
 #'@examples file<-system.file("extdata", "cellcycle_short.gmt", package = "ACSNMineR")
 #'format_from_gmt(file)
+#'
 #'@export
 
 format_from_gmt<-function(path = ""){
@@ -899,7 +925,6 @@ format_from_gmt<-function(path = ""){
 #' Outputs the "-log" of a scale
 #' @param base : base for the log, defaut is 10
 #' @importFrom scales trans_new log_breaks
-#' @export
 #' 
 reverselog_trans<-function(base = 10){
   trans<-function(x) -log(x,base)
