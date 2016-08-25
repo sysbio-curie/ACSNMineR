@@ -89,7 +89,9 @@ The result of this is:
 ####  <a name="IVB">Barplots</a> 
 ______
 A barplot can be achieved by using the following:
-``` represent_enrichment(enrichment = enrichment_test,
+
+``` 
+represent_enrichment(enrichment = enrichment_test,
 						scale = "reverselog",
                         sample_name = "test",
 						plot = "bar")
