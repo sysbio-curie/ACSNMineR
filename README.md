@@ -53,9 +53,11 @@ Where:
 * maps is a list of maps -here we take the cell cycle map from ACSN-  imported through the format_from_gmt() function of the package
 
 Gene set enrichment for multiple sets/cohorts can be performed by calling:
-``` multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
-    maps = ACSNEnrichment::ACSN_maps$CellCycle,
-    min_module_size = 15)
+
+``` 
+multisample_enrichment(Genes_by_sample = list(set1 = genes_test[-1],set2=genes_test[-2]),
+						maps = ACSNEnrichment::ACSN_maps$CellCycle,
+						min_module_size = 15)
 ```
 Where:
 
@@ -71,8 +73,9 @@ Results from the enrichment analysis function can be transformed to images thank
 ______
 Heatmaps for single sample or multiple sample representing p-values can be easily generated thanks to the represent_enrichment function.
 
-``` represent_enrichment(enrichment = list(SampleA = enrichment_test, 
-                                          SampleB = enrichment_test[1:3,]), 
+``` 
+represent_enrichment(enrichment = list(SampleA = enrichment_test, 
+                                        SampleB = enrichment_test[1:3,]), 
                         plot = "heatmap", scale = "log")
 ```
 Where:
