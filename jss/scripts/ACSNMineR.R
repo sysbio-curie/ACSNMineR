@@ -42,14 +42,13 @@ heatmap <- represent_enrichment(enrichment = list(Corrected = results[1:6,],
                                 plot = "heatmap", scale = "reverselog", 
                                 low = "steelblue" , high ="white", na.value = "grey")
 
-print(heatmap)
-
+ggsave("jss/figures/comparison_corrected_unc.pdf")
 ### Plot bar
-baplot <- represent_enrichment(enrichment = list(Corrected = results[1:6,], 
+barplot <- represent_enrichment(enrichment = list(Corrected = results[1:6,], 
                                                  Uncorrected = results_uncorrected[1:6,]),
-                               plot = "heatmap", scale = "reverselog", 
+                               plot = "bar", scale = "reverselog", 
                                nrow = 1)
-print(barplot)
+ggsave("jss/figures/comparison_corrected_unc_bars.pdf")
 
 
 ### End of ACSNMineR demo
