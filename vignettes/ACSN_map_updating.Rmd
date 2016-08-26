@@ -31,7 +31,7 @@ Changing this package and re-installing the modified ACSNMineR will thus change 
 In R the name of your map list should be ACSN_maps
 
 ### 2. Export it
-If your working directory is the package main directory:
+If your working directory in the package main directory:
 ```{r export, eval = FALSE}
   save(list = "ACSN_maps",file = "data/ACSN_maps.rda")
 

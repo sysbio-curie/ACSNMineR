@@ -28,15 +28,16 @@ dim(results)
 ### Generate table
 if(!require("xtable")) install.packages("xtable")
 print(xtable::xtable(results[,c("module","module_size","nb_genes_in_module","p.value","p.value.corrected")],
-                     display = c("s","d","d","g","g")),
-      include.rownames = FALSE)
+                     display = c("s","d","d","g","g","g")),
+      include.rownames = FALSE,math.style.exponents = TRUE)
 
 mtsig <- format_from_gmt('jss/scripts/c2.cp.v5.0.symbols.gmt')
 mtsig_enrich<- enrichment(symbol_list, maps = mtsig)[,c("module","module_size","nb_genes_in_module","p.value.corrected")]
 print(xtable::xtable(mtsig_enrich), include.rownames=FALSE)
 
 ### Show 10 with lowest p-value
-print(xtable::xtable(mtsig_enrich[order(mtsig_enrich$p.value.corrected,decreasing = FALSE)[1:10],],
+print(xtable::xtable(mtsig_enrich[order(mtsig_enrich$p.value.corrected,decreasing = FALSE)[1:10],
+                                  c("module","module_size","nb_genes_in_module","p.value.corrected")],
                      display = c("s","d","d","g","g")),
       include.rownames=FALSE,math.style.exponents = TRUE)
 

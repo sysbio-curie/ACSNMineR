@@ -106,12 +106,12 @@ maps.
     \toprule
     Map & Total & Nb mod. & Min & Max & Mean\\
     \midrule
-  ACSN global & 2243 & 63 & 2 &629& 83\\
+  ACSN global & 2239 & 67 & 2 &629& 79\\
   Survival  &1053&5  &208 &431 &328\\
   Apoptosis & 667&7 & 19& 382& 136\\
-  EMT \& Cell motility &634 &9  &18 &629 &136\\
+  EMT \& Cell motility &634 &9  &18 &629 &137\\
   DNA repair &345&21  &3 &171  &45\\
-  Cell cycle &250&25  &2 &130  &19\\
+  Cell cycle &250&25  &2 &130  &20\\
   \bottomrule
 
   \end{tabular}
@@ -154,7 +154,7 @@ enrichment function and to get familiar with its different options.
 The example shown below is the simplest command that can be done to test a gene
 list for over-representation on the six included ACSN maps. With the list of 12
 genes mentionned above and a default p-value cutoff of $0.05$, we have a set of
-36 maps or modules that are significantly enriched. The results are structured
+8 maps or modules that are significantly enriched. The results are structured
 as a data frame with nine columns displaying the module name, the module size,
 the number of genes from the list in the module, the names of the genes that are
 present in the module, the size of the reference universe, the number of genes
@@ -253,8 +253,8 @@ non-significant modules, and boundaries of the gradient for significant values
 can also be tuned.
 
 We previously computed the p-value of the \code{genes\_test} list with default
-parameters. The number of modules which have a p-value below 0.05 was 36, that
-can be compared to the 49 obtained without correction with the simple command
+parameters. The number of modules which have a p-value below 0.05 was 8, that
+can be compared to the 16 obtained without correction with the simple command
 shown below (some of the results are displayed in table \ref{tab:table2}).
 
 
@@ -265,7 +265,7 @@ enrichment(genes_test,correction_multitest = FALSE)
 
 \begin{widetable}[h!]
   \centering
-  \caption{Overview of the results from enrichment analysis without correction.
+  \caption{First rows of the results from enrichment analysis without correction.
   Module : name of the module. Mod. size: size of the module. Genes in module:
   genes from input which are found in the module. p-value: uncorrected p-value.
   Test : null hypothesis used, greater is synonym of enrichment.}
@@ -275,12 +275,12 @@ enrichment(genes_test,correction_multitest = FALSE)
 	\toprule
 Module & Mod. size & Genes in module & p-value & Test\\
 	\midrule
-CellCycle & 242 & ATM ATR CHEK2   & 5.36e-07 & greater \\
-          &   &  CREBBP KAT2B TFDP1   &          &         \\
-          &   &  E2F1 EP300 HDAC1    &          &         \\
-          &	  & GTF2H1 GTF2H2 GTF2H2B &	& \\
-CellCycle: APOPTOSIS ENTRY & 10 & ATM ATR CHEK2 E2F1 & 3.49e-07 & greater \\
-CellCycle: CYCLINB			& 7  & ATM 				  & 3.98e-02 & greater \\
+CellCycle & 242 & ATM ATR CHEK2 & $5.4 \times 10^{-7}$  & greater \\
+		  &     & CREBBP TFDP1 E2F1 &  & \\
+		  &     & EP300 HDAC1 KAT2B & & \\
+		  &     & GTF2H1 GTF2H2 GTF2H2B &  &\\ 
+  CellCycle:APOPTOSIS\_ENTRY & 10 & ATM ATR CHEK2 E2F1 & $3.5 \times 10^{-7}$  & greater \\ 
+  CellCycle:CYCLINB & 7 & ATM & 0.04 & greater \\ 
 
 
 
@@ -305,7 +305,7 @@ Uncorrected = results_uncorrected[1:6,]),
 
  represent_enrichment(enrichment = list(Corrected = results[1:6,], 
                              Uncorrected = results_uncorrected[1:6,]),
-                               plot = "heatmap", scale = "reverselog", 
+                               plot = "bar", scale = "reverselog", 
                                nrow = 1)
 \end{example}
 
@@ -708,7 +708,7 @@ navicell$unorderedConfigApply("GBM", "size")
 
 In this work, we presented the R package \pkg{ACSNMineR}, a novel package for
 the calculation of p-values for enrichment or depletion of genes in biological
-pathways. The package includes the six large-scale molecular maps and 55
+pathways. The package includes the six large-scale molecular maps and 67
 functional modules of the Atlas of Cancer Signaling Network (ACSN) . Enrichment
 can be calculated for those maps and modules with several options to play with,
 but can also be calculated for other databases of molecular pathways, that can

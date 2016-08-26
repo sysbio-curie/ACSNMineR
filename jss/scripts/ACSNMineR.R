@@ -33,8 +33,11 @@ print(results[1,])
 ### compute uncorrected enrichment
 
 results_uncorrected<-enrichment(genes_test,correction_multitest = FALSE)
-print(head(results_uncorrected,3))
+print(nrow(results_uncorrected))
 
+print(xtable::xtable(results_uncorrected[1:3,c("module","module_size","genes_in_module","p.value","test")],
+                     display = c("s","d","s","g","g","s")),
+      include.rownames = FALSE,math.style.exponents = TRUE)
 
 ### Plot heatmap
 heatmap <- represent_enrichment(enrichment = list(Corrected = results[1:6,], 
@@ -44,11 +47,11 @@ heatmap <- represent_enrichment(enrichment = list(Corrected = results[1:6,],
 
 ggsave("jss/figures/comparison_corrected_unc.pdf")
 ### Plot bar
-barplot <- represent_enrichment(enrichment = list(Corrected = results[1:6,], 
+pdf("jss/figures/comparison_corrected_unc_bars.pdf")
+represent_enrichment(enrichment = list(Corrected = results[1:6,], 
                                                  Uncorrected = results_uncorrected[1:6,]),
                                plot = "bar", scale = "reverselog", 
                                nrow = 1)
-ggsave("jss/figures/comparison_corrected_unc_bars.pdf")
-
+dev.off()
 
 ### End of ACSNMineR demo

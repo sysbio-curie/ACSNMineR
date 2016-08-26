@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.20)  26 AUG 2016 11:50
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.20)  26 AUG 2016 16:13
 entering extended mode
 **RJwrapper.tex
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\RJwrapper.tex
@@ -1210,8 +1210,40 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <9> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 22.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 33.
-LaTeX Font Info:    Try loading font information for T1+zi4 on input line 69.
 
+
+Package natbib Warning: Citation `adriaens2008public' on page 1 undefined on in
+put line 36.
+
+
+Package natbib Warning: Citation `barillot2012computational' on page 1 undefine
+d on input line 36.
+
+
+Package natbib Warning: Citation `kanehisa2011kegg' on page 1 undefined on inpu
+t line 38.
+
+
+Package natbib Warning: Citation `croft2014reactome' on page 1 undefined on inp
+ut line 39.
+
+
+Package natbib Warning: Citation `zanzoni2002mint' on page 1 undefined on input
+ line 39.
+
+
+Package natbib Warning: Citation `kuperstein2015atlas' on page 1 undefined on i
+nput line 53.
+
+
+Package natbib Warning: Citation `kuperstein2013navicell' on page 1 undefined o
+n input line 57.
+
+
+Package natbib Warning: Citation `bonnet2015navicell' on page 1 undefined on in
+put line 61.
+
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 69.
 (C:\Users\User\AppData\Roaming\MiKTeX\2.9\tex\latex\inconsolata\t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
@@ -1283,6 +1315,9 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 78.
 
+
+LaTeX Warning: Reference `tab:table1' on page 1 undefined on input line 93.
+
 [1{C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 ]
@@ -1298,12 +1333,51 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.91925pt on input line 105.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 6.25204pt on input line 105.
- [2]
+
+
+Package natbib Warning: Citation `fisher1922interpretation' on page 2 undefined
+ on input line 124.
+
+
+Package natbib Warning: Citation `fisher1934statistical' on page 2 undefined on
+ input line 124.
+
+
+Package natbib Warning: Citation `rivals2007enrichment' on page 2 undefined on 
+input line 125.
+
+[2]
+
+Package natbib Warning: Citation `Benjamini2003FDR' on page 3 undefined on inpu
+t line 205.
+
+
+Package natbib Warning: Citation `ggplot2' on page 3 undefined on input line 24
+6.
+
+
+Overfull \hbox (21.12431pt too wide) in paragraph at lines 245--254
+\T1/ppl/m/n/9 (-20) based on [][]\T1/ppl/b/n/9 gg-plot2[][] \T1/ppl/m/n/9 (-20)
+ syn-tax (\T1/ppl/b/n/9 ?\T1/ppl/m/n/9 (-20) ). It al-lows rep-re-sen-ta-tion o
+f re-sults from \T1/zi4/m/n/9 enrichment \T1/ppl/m/n/9 (-20) or \T1/zi4/m/n/9 m
+ultisample_enrichment
+ []
+
+
+LaTeX Warning: Reference `tab:table2' on page 3 undefined on input line 258.
+
+
 Overfull \hbox (56.90552pt too wide) in paragraph at lines 290--290
  []$[]$ 
  []
 
-[3] <figures/comparison_corrected_unc.pdf, id=123, 505.89pt x 505.89pt>
+
+LaTeX Warning: Reference `fig:heatm' on page 3 undefined on input line 293.
+
+
+LaTeX Warning: Reference `fig:barp' on page 3 undefined on input line 294.
+
+[3] <figures/comparison_corrected_unc.pdf, id=80, 505.89pt x 505.89pt>
 File: figures/comparison_corrected_unc.pdf Graphic file (type pdf)
 
 <use figures/comparison_corrected_unc.pdf>
@@ -1311,7 +1385,7 @@ Package pdftex.def Info: figures/comparison_corrected_unc.pdf used on input lin
 e 319.
 (pdftex.def)             Requested size: 318.67207pt x 318.67378pt.
 
-<figures/comparison_corrected_unc_bars.pdf, id=124, 505.89pt x 505.89pt>
+<figures/comparison_corrected_unc_bars.pdf, id=81, 505.89pt x 505.89pt>
 File: figures/comparison_corrected_unc_bars.pdf Graphic file (type pdf)
 
 <use figures/comparison_corrected_unc_bars.pdf>
@@ -1322,15 +1396,38 @@ t line 328.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/comparison_corre
-cted_unc.pdf>] <figures/heatmap.pdf, id=150, 634.37pt x 631.35875pt>
-File: figures/heatmap.pdf Graphic file (type pdf)
 
-<use figures/heatmap.pdf>
+Package natbib Warning: Citation `bonnet2015navicell' on page 4 undefined on in
+put line 342.
+
+
+Package natbib Warning: Citation `hwR5' on page 4 undefined on input line 344.
+
+
+Package natbib Warning: Citation `rcurl2015' on page 4 undefined on input line 
+348.
+
+
+Package natbib Warning: Citation `rjsonio2014' on page 4 undefined on input lin
+e 350.
+
+[4 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/comparison_corre
+cted_unc.pdf>]
+
+Package natbib Warning: Citation `barretina2012cancer' on page 5 undefined on i
+nput line 366.
+
+
+LaTeX Warning: Reference `fig:du145' on page 5 undefined on input line 369.
+
+<figures/heatmap.pdf, id=94, 634.37pt x 631.35875pt>
+File: figures/heatmap.pdf Graphic file (type pdf)
+ <use figures/heatmap.pdf>
 Package pdftex.def Info: figures/heatmap.pdf used on input line 381.
 (pdftex.def)             Requested size: 318.67207pt x 317.1622pt.
- [5 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/comparison_corr
-ected_unc_bars.pdf>]
+
+[5 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/comparison_corre
+cted_unc_bars.pdf>]
 LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 404.
 
 
@@ -1344,46 +1441,147 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
+
+Package natbib Warning: Citation `schmidt2008humoral' on page 6 undefined on in
+put line 421.
+
 [6 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/heatmap.pdf>]
-[7] <figures/mainz_acsn.png, id=193, 658.8615pt x 481.19775pt>
+
+LaTeX Warning: Reference `tab:table_mainz' on page 7 undefined on input line 43
+3.
+
+
+Package natbib Warning: Citation `liberzon2011molecular' on page 7 undefined on
+ input line 496.
+
+
+LaTeX Warning: Reference `tab:table_msigdb' on page 7 undefined on input line 5
+02.
+
+[7]
+
+LaTeX Warning: Reference `fig:mainz' on page 8 undefined on input line 570.
+
+<figures/mainz_acsn.png, id=127, 658.8615pt x 481.19775pt>
 File: figures/mainz_acsn.png Graphic file (type png)
 
 <use figures/mainz_acsn.png>
 Package pdftex.def Info: figures/mainz_acsn.png used on input line 579.
 (pdftex.def)             Requested size: 318.67207pt x 232.74184pt.
- [8] [9 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/mainz_acsn.
-png>]
-<figures/gbm.pdf, id=216, 845.0471pt x 597.51233pt>
+
+
+Package natbib Warning: Citation `hawkins2010next' on page 8 undefined on input
+ line 588.
+
+
+Package natbib Warning: Citation `mclendon2008comprehensive' on page 8 undefine
+d on input line 594.
+
+
+Package natbib Warning: Citation `maher2001malignant' on page 8 undefined on in
+put line 600.
+
+[8]
+
+LaTeX Warning: Reference `tab:table_gbm' on page 9 undefined on input line 617.
+
+
+
+LaTeX Warning: Reference `fig:gbm' on page 9 undefined on input line 647.
+
+[9 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/mainz_acsn.png>]
+<figures/gbm.pdf, id=139, 845.0471pt x 597.51233pt>
 File: figures/gbm.pdf Graphic file (type pdf)
  <use figures/gbm.pdf>
 Package pdftex.def Info: figures/gbm.pdf used on input line 703.
 (pdftex.def)             Requested size: 318.67207pt x 225.32475pt.
 
-[10] [11 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/gbm.pdf>]
+[10 <C:/Users/User/Documents/GitHub/ACSN_Enrichment/jss/figures/gbm.pdf>]
+
+Package natbib Warning: Citation `falcon2007using' on page 11 undefined on inpu
+t line 732.
+
+
+Package natbib Warning: Citation `yu2012clusterprofiler' on page 11 undefined o
+n input line 743.
+
+
+Package natbib Warning: Citation `ReactomePA2016' on page 11 undefined on input
+ line 748.
+
+
+Package natbib Warning: Citation `miRNApath2008' on page 11 undefined on input 
+line 749.
+
+
+Package natbib Warning: Citation `gage2009' on page 11 undefined on input line 
+749.
+
+
+Package natbib Warning: Citation `bonnet2015navicell' on page 11 undefined on i
+nput line 764.
+
+
+Package natbib Warning: Citation `fowler2014' on page 11 undefined on input lin
+e 768.
+
+
+Package natbib Warning: Citation `kelder2012wikipathways' on page 11 undefined 
+on input line 770.
+
+
+Package natbib Warning: Citation `croft2014reactome' on page 11 undefined on in
+put line 771.
+
+
+Package natbib Warning: Citation `aranda2011psicquic' on page 11 undefined on i
+nput line 772.
+
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\RJwrapper.bbl
 (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\RJwrapper.brf)
 \tf@brf=\write6
- [12]))
-[13] [14]
+ [11]
+[12]))
+
+Package natbib Warning: There were undefined citations.
+
+[13]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 24.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 24.
- (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\RJwrapper.aux)
+ (C:\Users\User\Documents\GitHub\ACSN_Enrichment\jss\RJwrapper.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 24.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 24.
 Package rerunfilecheck Info: File `RJwrapper.out' has not changed.
 (rerunfilecheck)             Checksum: 16597BC114C4F444B4AA1E8CC6178A90;824.
-Package rerunfilecheck Info: File `RJwrapper.brf' has not changed.
-(rerunfilecheck)             Checksum: 2EB4C098DCDF5B8AC2987E6511E63C36;1882.
+
+
+Package rerunfilecheck Warning: File `RJwrapper.brf' has changed.
+(rerunfilecheck)                Rerun to get bibliographical references right.
+
+Package rerunfilecheck Info: Checksums for `RJwrapper.brf':
+(rerunfilecheck)             Before: 2EB4C098DCDF5B8AC2987E6511E63C36;1882
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 24.
  ) 
 Here is how much of TeX's memory you used:
- 21724 strings out of 493921
- 388700 string characters out of 3147285
- 484709 words of memory out of 3000000
+ 21725 strings out of 493921
+ 388711 string characters out of 3147285
+ 479927 words of memory out of 3000000
  24323 multiletter control sequences out of 15000+200000
- 46916 words of font info for 208 fonts, out of 3000000 for 9000
+ 46987 words of font info for 209 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,11n,56p,1085b,618s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,12n,56p,1085b,652s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/User/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/inconsolata/i4-ts1.
 enc}{C:/Users/User/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/inconsolata/i4-t1
 -0.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Users/U
@@ -1394,9 +1592,9 @@ er/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/mathpazo/fplmri.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files/MiKTeX
  2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/urw/palatino/uplri8a.pfb>
-Output written on RJwrapper.pdf (14 pages, 1327087 bytes).
+Output written on RJwrapper.pdf (13 pages, 1311626 bytes).
 PDF statistics:
- 374 PDF objects out of 1000 (max. 8388607)
- 67 named destinations out of 1000 (max. 500000)
+ 294 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 500000)
  35446 words of extra memory for PDF output out of 35830 (max. 10000000)
 
