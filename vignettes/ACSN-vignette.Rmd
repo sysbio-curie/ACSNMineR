@@ -2,15 +2,10 @@
 title: "ACSN description"
 author: "Paul Deveau"
 date: "`r Sys.Date()`"
-output: 
-  rmarkdown::html_vignette:
-      self_contained: no
-      fig_width: 7
-      fig_height: 7
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ACSN description}
   %\VignetteEngine{knitr::rmarkdown}
-  %\usepackage[utf8]{inputenc}
+  %\VignetteIndexEntry{ACSN description}
 
 ---
 # <a name="I">ACSN Enrichment</a>

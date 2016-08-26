@@ -464,7 +464,7 @@ symbol_list <- as.character(symbol_list)
 enrichment(symbol_list) -> results
 
 dim(results)
-[1] 7 9
+[1] 8 9
 \end{example}
 
 \begin{table}[h!]
@@ -479,13 +479,14 @@ which are found in the module. pval: raw p-value. Cor. pval: corrected p-value.}
 \toprule
 Module & Mod. size & Nb genes & pval & Cor. pval\\
 \midrule
-CellCycle & 242 & 20 & 1.70e-03 & 0.021 \\
-CellCycle:E2F1\_TARGETS & 130 & 14 & 6.26e-04 & 0.009 \\
-CellCycle:E2F2\_TARGETS & 35 & 8 & 4.70e-05 & 0.009 \\
-CellCycle:E2F3\_TARGETS & 51 & 11 & 3.82e-06 & 0.0002 \\
-CellCycle:E2F4\_TARGETS & 100 & 15 & 9.99e-06 & 0.0003 \\
-DNA\_repair:SPINDLE\_CHECKPOINT & 28 & 5 & 3.82e-03 & 0.04 \\
-EMT\_motility:ECM & 147 & 13 & 5.09e-03 & 0.045 \\
+Apoptosis:AKT\_MTOR & 79 & 47 & 0.00 & 0.01 \\ 
+CellCycle:E2F2\_TARGETS & 35 & 22 & 0.01 & 0.04 \\ 
+CellCycle:E2F3\_TARGETS & 51 & 31 & 0.00 & 0.02 \\ 
+CellCycle:E2F4\_TARGETS & 100 & 60 & 0.00 & 0.00 \\ 
+DNA\_repair & 346 & 172 & 0.00 & 0.01 \\ 
+DNA\_repair:CELL\_CYCLE & 82 & 49 & 0.00 & 0.01 \\ 
+DNA\_repair:G1\_CC\_PHASE & 25 & 18 & 0.00 & 0.02 \\ 
+DNA\_repair:S\_CC\_PHASE & 46 & 28 & 0.00 & 0.03 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -517,7 +518,7 @@ enrichment(symbol_list, maps = mtsig)
 \begin{table}[h!]
   \centering
   \caption{MSigDB canonical pathway database enrichment for genes differentially expressed between ER
-positive and ER negative samples in breast cancer.  Module : name of the
+positive and ER negative samples in breast cancer. This table presents the 10 modules with lowest p-value out of 125 with corrected p-value lower than 0.05. Module : name of the
 module. Mod. size: size of the module. Nb genes: number of genes from input
 which are found in the module. Cor. pval: corrected p-value.}
 \label{tab:table_msigdb}
@@ -526,16 +527,16 @@ which are found in the module. Cor. pval: corrected p-value.}
 \toprule
 Pathway & Mod. size & Nb genes & Cor. pval\\
 \midrule
-KEGG\_CELL\_CYCLE & 128 & 76 & 1.98e-07\\
-REACTOME\_CELL\_CYCLE\_MITOTIC & 325 & 158 & 2.40e-07\\
-REACTOME\_DNA\_REPLICATION & 192 & 98 & 1.33e-05\\
-PID\_FOXM1\_PATHWAY & 40 & 29 & 5.05e-05\\
-REACTOME\_MITOTIC\_M\_M\_G1\_PHASES & 172 & 87 & 7.38e-05\\
-REACTOME\_CELL\_CYCLE & 421 & 181 & 2.97e-04\\
-PID\_AURORA\_B\_PATHWAY & 39 & 27 & 3.38e-04\\
-REACTOME\_MITOTIC\_G1\_G1\_S\_PHASES & 137 & 70 & 3.83e-04\\ 
-PID\_SYNDECAN\_1\_PATHWAY & 46 & 30 & 4.40e-04\\
-REACTOME\_S\_PHASE & 109 & 58 & 4.40e-04\\
+  KEGG\_CELL\_CYCLE & 128 & 76 & $3.9 \times 10^{-8}$ \\ 
+  REACTOME\_CELL\_CYCLE\_MITOTIC & 325 & 159 & $3.9 \times 10^{-8}$ \\ 
+  REACTOME\_DNA\_REPLICATION & 192 & 98 & $4.9 \times 10^{-6}$ \\ 
+  PID\_FOXM1PATHWAY & 40 & 29 & $3.1 \times 10^{-5}$ \\ 
+  REACTOME\_MITOTIC\_M\_M\_G1\_PHASES & 172 & 87 & $3.1 \times 10^{-5}$ \\ 
+  REACTOME\_CELL\_CYCLE & 421 & 182 & $5 \times 10^{-5}$ \\ 
+  REACTOME\_MITOTIC\_G1\_G1\_S\_PHASES & 137 & 71 & $9 \times 10^{-5}$ \\ 
+  PID\_AURORA\_B\_PATHWAY & 39 & 27 & 0.0002 \\ 
+  REACTOME\_S\_PHASE & 109 & 58 & 0.00024 \\ 
+  PID\_SYNDECAN\_1\_PATHWAY & 46 & 30 & 0.00026 \\ 
 \bottomrule
 \end{tabular}
 \end{table}
@@ -575,7 +576,7 @@ motility, apoptosis and survival.
   \caption{Mean expression values for ER negative differentially expressed
   genes in breast cancer visualized as heatmaps on the ACSN master map.} 
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/mainz_acsn.pdf}
+  \includegraphics[width=0.8\textwidth]{figures/mainz_acsn.png}
   \label{fig:mainz}
 \end{figure}
 
