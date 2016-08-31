@@ -20,8 +20,9 @@ Depends:
     R (>= 3.1.0),ggplot2,
     gridExtra,scales,
 Suggests:
-    rmarkdown
+    rmarkdown,
+	knitr
 License: GPL-2
 LazyData: true
-VignetteBuilder: rmarkdown
+VignetteBuilder: knitr
 RoxygenNote: 5.0.1
