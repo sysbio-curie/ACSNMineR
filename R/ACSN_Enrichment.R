@@ -16,7 +16,7 @@
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. 
 #' Can be either "HUGO","ACSN","map_defined", or a character vector of genes.
-#' @param Remove_from_universe: Default is NULL. A list of genes that should not be considered for enrichment 
+#' @param Remove_from_universe Default is NULL. A list of genes that should not be considered for enrichment 
 #' (will be removed from input, maps, and universe). The size of universe and map will be updated after removal. 
 #' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param alternative One of "greater", "less", "both" or "two.sided"
@@ -588,7 +588,7 @@ enrichment<-function(Genes=NULL,
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN" 
 #' ,"map_defined", or a character vector of genes.
-#' @param Remove_from_universe: Default is NULL. A list of genes that should not be considered for enrichment 
+#' @param Remove_from_universe Default is NULL. A list of genes that should not be considered for enrichment 
 #' (will be removed from input, maps, and universe). The size of universe and map will be updated after removal. 
 #' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param cohort_threshold if TRUE modules will be kept in all samples if at least one sample 

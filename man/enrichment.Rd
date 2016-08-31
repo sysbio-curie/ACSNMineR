@@ -7,7 +7,8 @@
 enrichment(Genes = NULL, maps = c("Apoptosis", "CellCycle", "DNA_repair",
   "EMT_motility", "Survival"), correction_multitest = "BH",
   statistical_test = "fisher", min_module_size = 5,
-  universe = "map_defined", threshold = 0.05, alternative = "greater")
+  universe = "map_defined", Remove_from_universe = NULL, threshold = 0.05,
+  alternative = "greater")
 }
 \arguments{
 \item{Genes}{Character vector of genes that should be tested for enrichment}
@@ -23,6 +24,9 @@ Default: tests on the master map.}
 
 \item{universe}{Universe on which the statistical analysis should be performed. 
 Can be either "HUGO","ACSN","map_defined", or a character vector of genes.}
+
+\item{Remove_from_universe}{Default is NULL. A list of genes that should not be considered for enrichment 
+(will be removed from input, maps, and universe). The size of universe and map will be updated after removal.}
 
 \item{threshold}{maximal p-value (corrected if correction is enabled) that will be displayed}
 
