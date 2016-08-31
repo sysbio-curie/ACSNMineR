@@ -453,8 +453,8 @@ The dataset corresponding to this study is available as a Bioconductor package.
 The code shown below is creating a list of differentially expressed genes
 between ER positive and ER negative samples, and calculates the enrichment in
 ACSN maps from this list of genes. As seen in Table \ref{tab:table_mainz},
-there is one map (Cell Cycle) and six modules (belonging to the Cell Cycle, DNA
-repair and EMT motility maps) enriched. 
+there is one map (DNA repair) and seven modules (belonging to the Cell Cycle, DNA
+repair and Apoptosis maps) enriched. 
 
 \begin{example}
 # load all necessary packages
@@ -493,7 +493,7 @@ dim(results)
   \centering
   \caption{ACSN maps enrichment for genes differentially expressed between ER
 positive and ER negative samples in breast cancer.  Module : name of the
-module. Mod. size: size of the module. Nb genes: number of genes from input
+map/module. Mod. size: size of the module. Nb genes: number of genes from input
 which are found in the module. pval: raw p-value. Cor. pval: corrected p-value.}
 \label{tab:table_mainz}
 
@@ -589,10 +589,8 @@ navicell$heatmapEditorSelectDatatable('0','GBM_exp')
 navicell$heatmapEditorApply()
 \end{example}
 
-The Figure \ref{fig:mainz} is displaying the map for gene that having a
-corrected p-value $< 0.05$ and a log fold-change $>1$. we can see that the genes
-are concentrated in the regions of the map corresponding to the cell cycle, cell
-motility, apoptosis and survival.
+The Figure \ref{fig:mainz} is displaying the map for genes having a
+corrected p-value $< 0.05$. 
 
 \begin{figure}[!ht]
   \caption{Mean expression values for ER negative differentially expressed
@@ -750,11 +748,10 @@ to zoom in and out, search for genes or molecular species, and see the details
 of the molecular reactions (what partners are involved, what is the state of a
 given species, etc.). For more details on how to use the interface and the
 different possibilities, see \cite{kuperstein2013navicell},
-\cite{bonnet2015navicell} and \cite{kuperstein2015atlas}.
-
-We have shown how the packages \pkg{ACSNMineR} and \pkg{RNaviCell} can be
-combined to analyze expression data from breast cancer samples, and also to
-analyze the frequency of mutated genes in glioblastoma cancer samples.  
+\cite{bonnet2015navicell} and \cite{kuperstein2015atlas}. We have shown how the
+packages \pkg{ACSNMineR} and \pkg{RNaviCell} can be combined to analyze
+expression data from breast cancer samples, and also to analyze the frequency
+of mutated genes in glioblastoma cancer samples.  
 
 Of course, \pkg{ACSNMineR} is not the only R package for enrichment
 calculations. For instance, \BIOpkg{GOstats} \citep{falcon2007using} is
