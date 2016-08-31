@@ -16,6 +16,8 @@
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. 
 #' Can be either "HUGO","ACSN","map_defined", or a character vector of genes.
+#' @param Remove_from_universe: Default is NULL. A list of genes that should not be considered for enrichment 
+#' (will be removed from input, maps, and universe). The size of universe and map will be updated after removal. 
 #' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param alternative One of "greater", "less", "both" or "two.sided"
 #' Greater will check for enrichment, less will check for depletion, and both will look for 
@@ -47,6 +49,7 @@ enrichment<-function(Genes=NULL,
                      statistical_test = "fisher",
                      min_module_size = 5,
                      universe = "map_defined",
+                     Remove_from_universe = NULL,
                      threshold = 0.05,
                      alternative = "greater"){
   
@@ -93,8 +96,20 @@ enrichment<-function(Genes=NULL,
     universe_was_ACSN<-FALSE
   }
   
+
   ### Checking that gene list is unique
   Genes<-unique(Genes)
+  if(!is.null(Remove_from_universe)){
+    Remove_from_universe<-unique(Remove_from_universe)
+    test<-Genes %in% Remove_from_universe
+    if(sum(test)){
+      warning(paste("The following genes were found in input and asked to be removed from universe:\n",
+                    paste(Genes[test],collapse = " "))
+      )
+      Genes<-Genes[!test]
+    }
+    
+  }
   Genes_size<-length(Genes)    
   if(!(alternative %in% c("greater","less","both","two.sided"))){
     stop('enrichment variable should be one of:"greater","less","both","two.sided" ')
@@ -112,15 +127,37 @@ enrichment<-function(Genes=NULL,
   ### If universe is ACSN: extract genes from ACSN and define it as universe
   if(length(universe) == 1){
     if(universe == "ACSN"){
-      genesACSN<-unique(unlist(lapply(X = ACSNMineR::ACSN_maps,FUN = function(z){
-        return(as.character(unique(z[,-(1:2)])))
-      })))
-      universe<-genesACSN[genesACSN!=""]
-      size<-length(genesACSN)
+      if(is.null(Remove_from_universe)){
+        genesACSN<-unique(unlist(lapply(X = ACSNMineR::ACSN_maps,FUN = function(z){
+          return(as.character(unique(z[,-(1:2)])))
+        })))
+        universe<-genesACSN[genesACSN!=""]
+        size<-length(genesACSN)
+      }
+      else{ # Filter out genes to be removed from analysis
+        genesACSN<- genesACSN<-unique(unlist(lapply(X = ACSNMineR::ACSN_maps,FUN = function(z){
+          return(as.character(unique(z[,-(1:2)])))
+        })))
+        universe<-genesACSN[!(genesACSN %in% c("",Remove_from_universe))]
+        size<-length(genesACSN)
+      }
     }
     else if(universe == "HUGO"){
       ###Total size of approved symbols, from http://www.genenames.org/cgi-bin/statistics, as of October 8th 2015
-      size = 39480
+      if(is.null(Remove_from_universe)){
+        size = 39480
+      }
+      else{ ## Filter out Remove_from_universe
+        size = 39480 - length(Remove_from_universe)
+        if(is.list(maps)){
+          maps<-lapply(maps,FUN = function(df){
+            df[df %in% Remove_from_universe]<-""
+          })
+        }
+        else{
+          maps[maps %in% Remove_from_universe]<-""
+        }
+      }
     }
     
     else if( universe == "map_defined"){
@@ -135,6 +172,10 @@ enrichment<-function(Genes=NULL,
         genesmaps<-unique(as.character(maps[,-(1:2)]))
       }
       genesmap<-as.character(genesmap[genesmap!=""])
+      
+      if(!is.null(Remove_from_universe)){
+        genesmap<-genesmap[!(genesmap %in% Remove_from_universe)]
+      }
       is_in_ACSN<-Genes %in% genesmap
       S<-sum(!is_in_ACSN)
       if(S > 0){ ### removing genes from list, that are not from ACSN
@@ -146,7 +187,7 @@ enrichment<-function(Genes=NULL,
       
     }
     else{
-      stop("Invalid universe input: must be 'HUGO','ACSN','map_defined', or a gene list")
+      stop("Invalid universe input: must be 'HUGO','ACSN','map_defined', or a list of genes as character vector")
     }
     
     ### Length of universe can be changed if "ACSN"
@@ -547,6 +588,8 @@ enrichment<-function(Genes=NULL,
 #' @param min_module_size will remove from the analysis all modules which are (strictly) smaller than threshold
 #' @param universe Universe on which the statistical analysis should be performed. Can be either "HUGO","ACSN" 
 #' ,"map_defined", or a character vector of genes.
+#' @param Remove_from_universe: Default is NULL. A list of genes that should not be considered for enrichment 
+#' (will be removed from input, maps, and universe). The size of universe and map will be updated after removal. 
 #' @param threshold maximal p-value (corrected if correction is enabled) that will be displayed
 #' @param cohort_threshold if TRUE modules will be kept in all samples if at least one sample 
 #' has p-value lower than threshold, otherwise the threshold is applied for each sample independently.
@@ -577,6 +620,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                  statistical_test = "fisher",
                                  min_module_size = 5,
                                  universe = "map_defined",
+                                 Remove_from_universe = NULL,
                                  threshold = 0.05,
                                  cohort_threshold = TRUE,
                                  alternative = "greater"){
@@ -591,6 +635,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                 statistical_test = statistical_test,
                                 min_module_size = min_module_size,
                                 universe = universe,
+                                Remove_from_universe =Remove_from_universe,
                                 threshold =  1)
                    })
     kept_modules<-character() 
@@ -615,6 +660,7 @@ multisample_enrichment<-function(Genes_by_sample=NULL,
                                 statistical_test = statistical_test,
                                 min_module_size = min_module_size,
                                 universe = universe,
+                                Remove_from_universe = Remove_from_universe,
                                 threshold =  threshold)
                    })
     names(result)<-names(Genes_by_sample)
