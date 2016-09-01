@@ -200,13 +200,16 @@ V161          2237                   12 3.735018e-21      2.353061e-19 greater
 %       min_module_size = 5, universe = "map_defined", threshold = 0.05,
 %       alternative = "greater")
 
-The \code{enrichment} function can take up to eight arguments: the gene list (as
+The \code{enrichment} function can take up to nine arguments: the gene list (as
 a character vector), the list of maps that will be used to calculate enrichment
 or depletion, the type of statistical test (either the Fisher exact test or the
-hypergeometric test), the module minimal size for which the calculations will be
-done, the universe, the p-value threshold and the alternative ("greater" for
-calculating over-representation, "less" for depletion and "both" for both
-tests).
+hypergeometric test), the module minimal size for which the calculations will
+be done, the universe, the p-value threshold, the alternative hypothesis
+("greater" for calculating over-representation, "less" for depletion and "both"
+for both tests) and a list of genes that should be removed from the universe
+(option "Remove\_from\_universe"). This option may be useful for instance if we
+know beforehand that a number of genes are not expressed in the samples
+considered.
 
 Only the gene list is mandatory to call the \code{enrichment} function, all the
 other arguments have default values.  The \code{maps} argument can either be a

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.22)  31 AUG 2016 10:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.22)  1 SEP 2016 13:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1536,24 +1536,27 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 6.25204pt on input line 118.
  [2]
-Overfull \hbox (56.90552pt too wide) in paragraph at lines 307--307
+Overfull \hbox (56.90552pt too wide) in paragraph at lines 310--310
  []$[]$ 
  []
 
-[3] <figures/comparison_corrected_unc.pdf, id=123, 505.89pt x 505.89pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[3] <figures/comparison_corrected_unc.pdf, id=124, 505.89pt x 505.89pt>
 File: figures/comparison_corrected_unc.pdf Graphic file (type pdf)
 
 <use figures/comparison_corrected_unc.pdf>
 Package pdftex.def Info: figures/comparison_corrected_unc.pdf used on input lin
-e 336.
+e 339.
 (pdftex.def)             Requested size: 318.67207pt x 318.67378pt.
 
-<figures/comparison_corrected_unc_bars.pdf, id=124, 505.89pt x 505.89pt>
+<figures/comparison_corrected_unc_bars.pdf, id=125, 505.89pt x 505.89pt>
 File: figures/comparison_corrected_unc_bars.pdf Graphic file (type pdf)
 
 <use figures/comparison_corrected_unc_bars.pdf>
 Package pdftex.def Info: figures/comparison_corrected_unc_bars.pdf used on inpu
-t line 345.
+t line 348.
 (pdftex.def)             Requested size: 398.33858pt x 398.34415pt.
 
 
@@ -1564,10 +1567,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: figures/heatmap.pdf Graphic file (type pdf)
 
 <use figures/heatmap.pdf>
-Package pdftex.def Info: figures/heatmap.pdf used on input line 403.
+Package pdftex.def Info: figures/heatmap.pdf used on input line 406.
 (pdftex.def)             Requested size: 318.67207pt x 317.1622pt.
  [5 <./figures/comparison_corrected_unc_bars.pdf>]
-LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 426.
+LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 429.
 
 
 (/env/export/cngstkprd1/v_home/q_unix/bonnet/texlive/2016/texmf-dist/tex/latex/
@@ -1575,7 +1578,7 @@ inconsolata/ts1zi4.fd
 File: ts1zi4.fd 2014/06/22 Fontinst v1.933 font definitions for TS1/zi4.
 )
 LaTeX Font Info:    Font shape `TS1/zi4/m/n' will be
-(Font)              scaled to size 9.18004pt on input line 426.
+(Font)              scaled to size 9.18004pt on input line 429.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `zi4' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1591,7 +1594,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: figures/mainz_acsn.png Graphic file (type png)
 
 <use figures/mainz_acsn.png>
-Package pdftex.def Info: figures/mainz_acsn.png used on input line 599.
+Package pdftex.def Info: figures/mainz_acsn.png used on input line 602.
 (pdftex.def)             Requested size: 318.67207pt x 232.74184pt.
  [8]
 
@@ -1601,7 +1604,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <figures/gbm.pdf, id=223, 845.0471pt x 597.51233pt>
 File: figures/gbm.pdf Graphic file (type pdf)
  <use figures/gbm.pdf>
-Package pdftex.def Info: figures/gbm.pdf used on input line 723.
+Package pdftex.def Info: figures/gbm.pdf used on input line 726.
 (pdftex.def)             Requested size: 318.67207pt x 225.32475pt.
 
 [10] [11 <./figures/gbm.pdf>] (./RJwrapper.bbl (./RJwrapper.brf)
@@ -1622,11 +1625,11 @@ Package rerunfilecheck Info: File `RJwrapper.brf' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 24.
  ) 
 Here is how much of TeX's memory you used:
- 22093 strings out of 493013
- 407630 string characters out of 6118181
+ 22096 strings out of 493013
+ 407657 string characters out of 6118181
  498962 words of memory out of 5000000
  24936 multiletter control sequences out of 15000+600000
- 46760 words of font info for 206 fonts, out of 8000000 for 9000
+ 46919 words of font info for 208 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,12n,56p,615b,628s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/env/export/cngstkprd1/v_home/q_unix/bonnet/texlive/2016/texmf-dist/fonts/en
@@ -1643,7 +1646,7 @@ lic/amsfonts/cm/cmsy10.pfb></env/export/cngstkprd1/v_home/q_unix/bonnet/texlive
 fb></env/export/cngstkprd1/v_home/q_unix/bonnet/texlive/2016/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></env/export/cngstkprd1/v_home/q_unix/bonnet/texli
 ve/2016/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on RJwrapper.pdf (14 pages, 1297657 bytes).
+Output written on RJwrapper.pdf (14 pages, 1297843 bytes).
 PDF statistics:
  393 PDF objects out of 1000 (max. 8388607)
  352 compressed objects within 4 object streams
