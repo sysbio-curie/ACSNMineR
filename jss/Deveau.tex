@@ -481,7 +481,7 @@ eBayes(fit) -> ebayes
 toptable(ebayes, coef=2,n=25000) -> tt
 which(tt$adj < 0.05) -> selection
 rownames(tt[selection,]) -> probe_list
-mget(probe_list, env=hgu133aSYMBOL) -> symbol_list
+mget(probe_list, env = hgu133aSYMBOL) -> symbol_list
 symbol_list <- as.character(symbol_list)
 
 # calculate enrichment in ACSN maps 
@@ -816,6 +816,7 @@ the development of the \pkg{RNaviCell} package.
 \address{
   Paul Deveau\\
   Computational Systems Biology of Cancer, Institut Curie\\
+  Genetics and Biology of Cancers, Institut Curie\\
   26, rue d'Ulm 75248 Paris\\
   France\\
 }
