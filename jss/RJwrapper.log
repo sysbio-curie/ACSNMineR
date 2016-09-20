@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.22)  1 SEP 2016 13:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.22)  20 SEP 2016 08:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1619,7 +1619,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 24.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 24.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 24.
 Package rerunfilecheck Info: File `RJwrapper.out' has not changed.
-(rerunfilecheck)             Checksum: 21B77E1FDB203890BA89D19CB307FEB6;814.
+(rerunfilecheck)             Checksum: 70C2D61D67033ED99B80163296B2DABB;814.
 Package rerunfilecheck Info: File `RJwrapper.brf' has not changed.
 (rerunfilecheck)             Checksum: BBEF7F57AD739890B444B346E9E77DFC;2142.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 24.
@@ -1646,7 +1646,7 @@ lic/amsfonts/cm/cmsy10.pfb></env/export/cngstkprd1/v_home/q_unix/bonnet/texlive
 fb></env/export/cngstkprd1/v_home/q_unix/bonnet/texlive/2016/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></env/export/cngstkprd1/v_home/q_unix/bonnet/texli
 ve/2016/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on RJwrapper.pdf (14 pages, 1297843 bytes).
+Output written on RJwrapper.pdf (14 pages, 1297839 bytes).
 PDF statistics:
  393 PDF objects out of 1000 (max. 8388607)
  352 compressed objects within 4 object streams
