@@ -231,7 +231,7 @@ enrichment<-function(Genes=NULL,
         }
       }
       if(!universe_was_ACSN){
-        size <- length(genesACSN)
+        size <- length(universe)
       }
       maps[[iterator]]<-validmap
     }
